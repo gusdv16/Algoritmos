@@ -121,7 +121,6 @@ public class ListaMovil implements IListaMovil {
             fin = nuevo;
             this.cantelementos = this.cantelementos + 1;
         }
-
     }
 
     //PRE:

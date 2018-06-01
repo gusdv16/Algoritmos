@@ -1,16 +1,48 @@
 package obligatorio;
 
+import static obligatorio.metodos.*;
+
 public class Obligatorio {
 
     public static void main(String[] args) {
         Sistema s = new Sistema();
         Prueba p = new Prueba();
 
-        prueba1(s, p);
+//        prueba1(s, p);
 //        prueba2(s, p);
 //        prueba3(s, p);
 //        prueba4(s, p);
 //        prueba5(s, p);
+        ListaZona lz = new ListaZona();
+
+        lz.agregarInicio("Zona 1");
+        lz.getInicio().getLm().agregarOrd("  Movil 3");
+        lz.getInicio().getLm().agregarOrd("  Mavil 1");
+        lz.getInicio().getLm().agregarOrd("  Movil 1");
+        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 1");
+        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 2");
+        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Cahofer 2");
+        lz.getInicio().getLm().agregarOrd("  Movil 4");
+        lz.getInicio().getLm().agregarOrd("  Movil 2");
+        lz.agregarInicio("Zona 2");
+        lz.getInicio().getLm().agregarOrd("  Movil 20");
+        lz.getInicio().getLm().agregarOrd("  Movil 21");
+        lz.agregarInicio("Zona 3");
+        lz.getInicio().getLm().agregarOrd("  Movil 31");
+        lz.getInicio().getLm().agregarOrd("  Movil 32");
+
+        agregarMovilAZona(lz, "Zona 2", "  Movil 99");
+        mostrarZonasCompleto(lz);
+        System.out.println("\n-----------------");
+        System.out.println("Muevo Zona");
+        System.out.println("-----------------");
+        viaje(lz, "Zona 1", "Zona 2", "  Movil 1");
+        cambiarUbicacion(lz, "Zona 2", "  Movil 1");
+        mostrarZonasCompleto(lz);
+        
+        System.out.println(buscarZonaPorMovil(lz, "  Movil 99").getDato());//z2
+        System.out.println(buscarZonaPorMovil(lz, "  Movil 32").getDato());//z3
+        System.out.println(buscarZonaPorMovil(lz, "  Movil 4").getDato());//z1
 
     }
 

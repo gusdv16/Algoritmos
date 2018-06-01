@@ -4,15 +4,44 @@ import obligatorio.Retorno.Resultado;
 
 public class Sistema implements ISistema {
 
-    
+    public ListaZona Lz;
+    int[][] matrizDeZonas;
+    public ListaMovil Lm;
+
     @Override
     public Retorno crearSistemaEmergencias(int cantzonas) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        if (cantzonas < 0) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La cantidad de ciudades debe ser mayor o igual a 0";
+        } else {
+            Lz = new ListaZona();
+            Lm = new ListaMovil();
+
+            matrizDeZonas = new int[cantzonas][cantzonas];
+
+            for (int i = 0; i < matrizDeZonas.length; i++) {
+                for (int j = 0; j < matrizDeZonas[i].length; j++) {
+                    matrizDeZonas[i][j] = 0;
+                }
+            }
+
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Sistema creado correctamente";
+
+        }
+
+        return ret;
     }
 
     @Override
     public Retorno destruirSistemaEmergencias() {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        ret.resultado = Resultado.OK;
+        ret.valorString = "Sistema destruido correctamente";
+        Lz.vaciar();
+        Lm.vaciar();
+        return ret;
     }
 
     @Override
@@ -57,7 +86,18 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno agregarZona(String zonaNombre) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+//        if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
+//            if (Lz.obtenerElemento(zonaNombre) == null) {
+//                Lz.agregarInicio(zonaNombre);
+//            }
+//        } else {
+//            ret.resultado = Retorno.Resultado.ERROR_1;
+//            ret.valorString = "Se ha superado el limite de zonas";
+//        }
+//        ret.resultado = Retorno.Resultado.OK;
+//        ret.valorString = "la zona se agregó correctamente";
+        return ret;
     }
 
     @Override

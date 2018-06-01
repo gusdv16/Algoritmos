@@ -25,7 +25,7 @@ public interface IlistaZonas {
 
     public void mostrar();
 
-    public NodoZona obtenerElemento(String dato);
+    public NodoListaZona obtenerElemento(String dato);
 
     public int cantElementos();
 }

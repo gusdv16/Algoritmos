@@ -7,12 +7,12 @@ public class ListaZona implements IListaZona {
     private NodoListaZona inicio;
     private NodoListaZona fin;
     private int cantelementos;
-
+    
     //Constructor
     public void Lista() {
         this.inicio = null;
         this.fin = null;
-        this.cantelementos = 0;
+        this.cantelementos = 0;    
     }
 
     //Inicio
@@ -96,6 +96,45 @@ public class ListaZona implements IListaZona {
                 aux = aux.getSig();
             }
         }
+    }
+
+//pre: //pos: devuelve la posicion de la zona segun el nombre que se le pasa por parametro
+    public int obtenerPosicionElemento(String Zona) {
+
+        NodoListaZona aux = this.inicio;
+        int contador = 1;
+        while (aux != null && aux.getDato() != Zona) {
+
+            aux = aux.getSig();
+            ++contador;
+        }
+        if (aux == null) {
+            contador = -1;
+        }
+
+        return contador;
+
+    }
+
+//pre: //pos: devuevle el nombre de la zona segun la posicion que se le pasa por parametro
+    public String BuscarZonaDadaPos(int pos) {
+        int contador = 1;
+        NodoListaZona aux = this.inicio;
+
+        if (pos == 0) {
+            return aux.getDato().toString();
+        } else if (pos > this.cantelementos) {
+            return "No se encuentra la ciudad";
+        } else {
+
+            while (aux != null && contador != pos) {
+                aux = aux.getSig();
+                contador++;
+            }
+        }
+
+        return aux.getDato().toString();
+
     }
 
     /*Variantes agregadas a los metodos basicos.*/
