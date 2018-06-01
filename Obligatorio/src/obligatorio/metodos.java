@@ -34,16 +34,6 @@ public class metodos {
             aux.setSig(pmovil.getSig());
             lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
         }
-
-//        agregarMovilAZona(lz, zonaDestino, movil);
-//        NodoListaZona unazona = lz.obtenerElemento(zonaDestino);
-//        NodoListaMovil mimovil = unazona.getLm().obtenerElemento(movil);
-//        unazona.getLm().moverFinal(mimovil);
-//        lz.obtenerElemento(buscarMovilPorZona(lz,movil)).getLm().borrarElemento(movil);
-        //Movil
-        //si encuentro Movil en sigiente de P
-        //Cambio el puntero al p.siguiente
-        //y el p.siguinete.siguinete a null
     }
 
     //se asume que existen todos los datos
