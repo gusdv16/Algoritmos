@@ -87,16 +87,16 @@ public class Sistema implements ISistema {
     @Override
     public Retorno agregarZona(String zonaNombre) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-//        if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
-//            if (Lz.obtenerElemento(zonaNombre) == null) {
-//                Lz.agregarInicio(zonaNombre);
-//            }
-//        } else {
-//            ret.resultado = Retorno.Resultado.ERROR_1;
-//            ret.valorString = "Se ha superado el limite de zonas";
-//        }
-//        ret.resultado = Retorno.Resultado.OK;
-//        ret.valorString = "la zona se agregó correctamente";
+       // if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
+            if (Lz.obtenerElemento(zonaNombre) == null) {
+                Lz.agregarInicio(zonaNombre);
+         //   }
+        } else {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+            ret.valorString = "La zona ya existe";
+        }
+        ret.resultado = Retorno.Resultado.OK;
+        ret.valorString = "la zona se agregó correctamente";
         return ret;
     }
 
