@@ -1,5 +1,4 @@
 package obligatorio;
-// esto es una prueba
 import obligatorio.IListaMovil;
 
 public class ListaMovil implements IListaMovil {

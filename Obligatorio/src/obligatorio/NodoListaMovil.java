@@ -4,20 +4,12 @@ public class NodoListaMovil {
 
     private Object dato;
     private NodoListaMovil sig;
-    private ListaChofer lch;
+    private boolean Estado;
 
     public NodoListaMovil(Object dato) {
         this.dato = dato;
         this.sig = null;
-        this.lch = new ListaChofer();
-    }
-
-    public ListaChofer getLch() {
-        return lch;
-    }
-
-    public void setCh(ListaChofer lch) {
-        this.lch = lch;
+        this.Estado = true;
     }
 
     public Object getDato() {
@@ -34,6 +26,14 @@ public class NodoListaMovil {
 
     public void setSig(NodoListaMovil sig) {
         this.sig = sig;
+    }
+
+    public boolean isEstado() {
+        return Estado;
+    }
+
+    public void setEstado(boolean Estado) {
+        this.Estado = Estado;
     }
 
 }

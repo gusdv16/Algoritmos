@@ -21,9 +21,6 @@ public class ZonaMovilChofer {
         lz.getInicio().getLm().agregarOrd("  Movil 3");
         lz.getInicio().getLm().agregarOrd("  Movil 1");
         lz.getInicio().getLm().agregarOrd("  Mavil 1");
-        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 1");
-        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 2");
-        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Cahofer 2");
         lz.getInicio().getLm().agregarOrd("  Movil 4");
         lz.getInicio().getLm().agregarOrd("  Movil 2");
         lz.agregarInicio("Zona 2");

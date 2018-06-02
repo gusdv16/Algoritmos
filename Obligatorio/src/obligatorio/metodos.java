@@ -56,14 +56,14 @@ public class metodos {
             System.out.println("\n" + aux.getDato());
             aux.getLm().mostrar();
 
-            NodoListaMovil aux2 = aux.getLm().getInicio();
-            if (aux2.getLch() != null) {
-                while (aux2 != null) {
-                    System.out.println("\n" + aux2.getDato());
-                    aux2.getLch().mostrar();
-                    aux2 = aux2.getSig();
-                }
-            }
+//            NodoListaMovil aux2 = aux.getLm().getInicio();
+//            if (aux2.getLch() != null) {
+//                while (aux2 != null) {
+//                    System.out.println("\n" + aux2.getDato());
+//                    aux2.getLch().mostrar();
+//                    aux2 = aux2.getSig();
+//                }
+//            }
             aux = aux.getSig();
         }
     }

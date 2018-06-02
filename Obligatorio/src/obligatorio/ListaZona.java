@@ -7,12 +7,14 @@ public class ListaZona implements IListaZona {
     private NodoListaZona inicio;
     private NodoListaZona fin;
     private int cantelementos;
+    private int idZona;
     
     //Constructor
     public void Lista() {
         this.inicio = null;
         this.fin = null;
         this.cantelementos = 0;    
+        this.idZona=0;
     }
 
     //Inicio
@@ -65,6 +67,7 @@ public class ListaZona implements IListaZona {
         }
 
         this.cantelementos = this.cantelementos + 1;
+        this.idZona ++;
     }
 
     //PRE:
@@ -149,6 +152,7 @@ public class ListaZona implements IListaZona {
             fin.setSig(nuevo);
             fin = nuevo;
             this.cantelementos = this.cantelementos + 1;
+            this.idZona ++;
         }
 
     }
