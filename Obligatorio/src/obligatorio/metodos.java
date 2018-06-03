@@ -17,18 +17,12 @@ public class metodos {
 
     //se asume que existen todos los datos
     public static void cambiarUbicacion(ListaZona lz, String zonaDestino, String movil) {
-        if (buscarZonaPorMovil(lz, movil) != null) {
-            System.out.println("Encontre: ");
-
-        } else {
-            System.out.println("NO Encontre: ");
-        }
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil));
         NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
         lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
         lz.obtenerElemento(zonaDestino).getLm().setFin(pmovil);
+        
         NodoListaMovil aux = origen.getLm().getInicio();
-
         while (aux.getSig() != pmovil) {
             aux = aux.getSig();
             aux.setSig(pmovil.getSig());
