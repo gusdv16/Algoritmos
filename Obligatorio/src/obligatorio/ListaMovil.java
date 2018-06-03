@@ -189,7 +189,7 @@ public class ListaMovil implements IListaMovil {
         while (aux != null && aux.getDato() != dato) {
             aux = aux.getSig();
         }
-        //encontrÃ© dato o lleguÃ© al final
+        //encontro dato o lleguo al final
         return aux;
     }
 

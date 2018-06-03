@@ -228,7 +228,7 @@ public class ListaZona implements IListaZona {
     }
     //PRE: //POS:
     //PRE: //POS:
-    public Object obtenerElementoPorId(int idZona) {
+    public NodoListaZona obtenerElementoPorId(int idZona) {
         NodoListaZona aux = this.inicio;
         while (aux != null && aux.getIdZona()!= idZona) {
             aux = aux.getSig();

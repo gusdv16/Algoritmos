@@ -47,21 +47,19 @@ public class Sistema implements ISistema {
     @Override
     public Retorno registrarMovil(String movilID, int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-//        if (cantzonas < 0) {
-//            ret.resultado = Resultado.ERROR_1;
-//            ret.valorString = "La cantidad de ciudades debe ser mayor o igual a 0";
-//        } else {
-
-//            Lz.obtenerElemento(zonaID);
-//            Lm.agregarFinal(movilID);
-        
-            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID)).getLm().agregarOrd(movilID);
-
-            ret.resultado = Resultado.OK;
-            ret.valorString = "Sistema creado correctamente";
-
-//        }
-
+        if (Lz.obtenerElementoPorId(zonaID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La Zona no existe";
+        } else {
+            if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID) != null) {
+                ret.resultado = Resultado.ERROR_2;
+                ret.valorString = "Móvil ya existe en el sistema de emergencias";
+            } else {
+                Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().agregarOrd(movilID);
+                ret.resultado = Resultado.OK;
+                ret.valorString = "Movil agregado a zona correctamente";
+            }
+        }
         return ret;
     }
 
@@ -103,10 +101,10 @@ public class Sistema implements ISistema {
     @Override
     public Retorno agregarZona(String zonaNombre) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-       // if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
-            if (Lz.obtenerElemento(zonaNombre) == null) {
-                Lz.agregarFinal(zonaNombre);
-         //   }
+        // if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
+        if (Lz.obtenerElemento(zonaNombre) == null) {
+            Lz.agregarFinal(zonaNombre);
+            //   }
         } else {
             ret.resultado = Retorno.Resultado.ERROR_1;
             ret.valorString = "La zona ya existe";
@@ -119,8 +117,8 @@ public class Sistema implements ISistema {
     @Override
     public Retorno listarZonas() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        
-         NodoListaZona aux = Lz.getInicio();
+
+        NodoListaZona aux = Lz.getInicio();
 
         while (aux != null) {
             System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|\n");
