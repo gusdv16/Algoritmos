@@ -21,12 +21,27 @@ public class metodos {
         NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
         lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
         lz.obtenerElemento(zonaDestino).getLm().setFin(pmovil);
-        
+
         NodoListaMovil aux = origen.getLm().getInicio();
         while (aux.getSig() != pmovil) {
             aux = aux.getSig();
             aux.setSig(pmovil.getSig());
             lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
+        }
+    }
+
+    //se asume que existen todos los datos
+    public static void borrarMovil(ListaZona lz, String movil) {
+        NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil).getDato());
+        NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
+
+        ListaMovil aux = origen.getLm();
+        if (aux.getInicio() == pmovil) {
+            aux.borrarInicio();
+        } else if (aux.getFin() == pmovil) {
+            aux.borrarFin();
+        } else {
+            aux.borrarElemento(movil);
         }
     }
 

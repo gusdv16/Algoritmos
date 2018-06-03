@@ -39,23 +39,22 @@ public class Obligatorio {
 //        viaje(lz, "Zona 1", "Zona 2", "  Movil 1");
 //        cambiarUbicacion(lz, "Zona 2", "  Movil 1");
 //        mostrarZonasCompleto(lz);
-        
+
 //        System.out.println(buscarZonaPorMovil(lz, "  Movil 99").getDato());//z2
 //        System.out.println(buscarZonaPorMovil(lz, "  Movil 32").getDato());//z3
 //        System.out.println(buscarZonaPorMovil(lz, "  Movil 4").getDato());//z1
-
     }
 
     static void prueba1(Sistema s, Prueba p) {
 
-           p.ver(s.crearSistemaEmergencias(3).resultado, Retorno.Resultado.OK, "Se crea el sistema para 3 zonas");
-           p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
-           p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Se intentoagregar Montevideo que ya existe");
-           p.ver(s.agregarZona("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");
-           p.ver(s.agregarZona("La Paloma").resultado, Retorno.Resultado.OK, "Se agrego La Paloma");
-           p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_2, "Se intento agregar Maldonado pero el sistema esta completo");                                
-           p.ver(s.destruirSistemaEmergencias().resultado, Retorno.Resultado.OK, "Se destruye sistema");
-           p.imprimirResultadosPrueba();
+        p.ver(s.crearSistemaEmergencias(3).resultado, Retorno.Resultado.OK, "Se crea el sistema para 3 zonas");
+        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
+        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Se intentoagregar Montevideo que ya existe");
+        p.ver(s.agregarZona("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");
+        p.ver(s.agregarZona("La Paloma").resultado, Retorno.Resultado.OK, "Se agrego La Paloma");
+        p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_2, "Se intento agregar Maldonado pero el sistema esta completo");
+        p.ver(s.destruirSistemaEmergencias().resultado, Retorno.Resultado.OK, "Se destruye sistema");
+        p.imprimirResultadosPrueba();
     }
 
     static void prueba2(Sistema s, Prueba p) {
@@ -67,15 +66,14 @@ public class Obligatorio {
         p.ver(s.agregarZona("Lima").resultado, Retorno.Resultado.OK, "Se ingresa Lima");
         p.ver(s.agregarZona("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");
         p.ver(s.agregarZona("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York");
-   
+
         p.imprimirComentario("INGRESAMOS CIUDAD REPETIDA");
         p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
-        
+
         p.imprimirComentario("INTENTAMOS SOBREPASAR EL LIMITE DE CIUDADES");
         p.ver(s.agregarZona("Buenos Aires").resultado, Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades gestionados por el sistema");
-        
-     
-        p.imprimirResultadosPrueba();  
+
+        p.imprimirResultadosPrueba();
     }
 
     static void prueba3(Sistema s, Prueba p) {
@@ -88,19 +86,21 @@ public class Obligatorio {
         p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
         p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
         p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
-        
+
+        p.ver(s.registrarMovil("PCS124", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS124 a Pocitos");
+        p.ver(s.registrarMovil("PCS1231", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS1231 a Pocitos ");
         p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a Pocitos ");
         p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.ERROR_2, "Agrego movil PCS123 que ya existe en Pocitos ");
         p.ver(s.registrarMovil("PCS123", 20).resultado, Retorno.Resultado.ERROR_1, "Agrego movil PCS123 a zona que no existe ");
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
-//        
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se deshabilita PCS123 que ya estaba deshabilitado");
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
         p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "se habilita movil PCS123");
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
-//        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS123");
-         p.imprimirResultadosPrueba(); 
+        p.ver(s.eliminarMovil("PCS1231").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS1231");
+        p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
+        p.imprimirResultadosPrueba();
     }
 
     static void prueba4(Sistema s, Prueba p) {
