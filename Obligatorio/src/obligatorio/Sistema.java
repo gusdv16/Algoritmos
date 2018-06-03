@@ -1,6 +1,7 @@
 package obligatorio;
 
 import obligatorio.Retorno.Resultado;
+import static obligatorio.metodos.*;
 
 public class Sistema implements ISistema {
 
@@ -57,7 +58,7 @@ public class Sistema implements ISistema {
             } else {
                 Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().agregarOrd(movilID);
                 ret.resultado = Resultado.OK;
-                ret.valorString = "Movil agregado a zona correctamente";
+                ret.valorString = "Móvil agregado a zona correctamente";
             }
         }
         return ret;
@@ -65,7 +66,22 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno deshabilitarMovil(String movilID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
+
+        if (zona.getLm().obtenerElemento(movilID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Móvil no existe en el sistema";
+        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == false) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "Móvil ya esta en estado NO_DISPONIBLE";
+        } else {
+            zona.getLm().obtenerElemento(movilID).setEstado(false);
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Móvil Desabilitado";
+        }
+
+        return ret;
     }
 
     @Override
@@ -122,11 +138,12 @@ public class Sistema implements ISistema {
 
         while (aux != null) {
             System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|\n");
-//            aux.getLm().mostrar();
+            aux.getLm().mostrar();
             aux = aux.getSig();
         }
         System.out.println();
         ret.resultado = Retorno.Resultado.OK;
+        
         return ret;
     }
 

@@ -1,4 +1,5 @@
 package obligatorio;
+
 import obligatorio.IListaMovil;
 
 public class ListaMovil implements IListaMovil {
@@ -101,7 +102,7 @@ public class ListaMovil implements IListaMovil {
         } else {
             NodoListaMovil aux = this.inicio;
             while (aux != null) {
-                System.out.println(aux.getDato());
+                System.out.println(aux.getDato() + " - Estado: " + aux.isEstado());
                 aux = aux.getSig();
             }
         }
