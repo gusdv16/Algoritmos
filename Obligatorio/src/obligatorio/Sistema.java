@@ -46,7 +46,23 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno registrarMovil(String movilID, int zonaID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+//        if (cantzonas < 0) {
+//            ret.resultado = Resultado.ERROR_1;
+//            ret.valorString = "La cantidad de ciudades debe ser mayor o igual a 0";
+//        } else {
+
+//            Lz.obtenerElemento(zonaID);
+//            Lm.agregarFinal(movilID);
+        
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID)).getLm().agregarOrd(movilID);
+
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Sistema creado correctamente";
+
+//        }
+
+        return ret;
     }
 
     @Override
@@ -89,7 +105,7 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
        // if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
             if (Lz.obtenerElemento(zonaNombre) == null) {
-                Lz.agregarInicio(zonaNombre);
+                Lz.agregarFinal(zonaNombre);
          //   }
         } else {
             ret.resultado = Retorno.Resultado.ERROR_1;
@@ -102,7 +118,18 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno listarZonas() {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        
+         NodoListaZona aux = Lz.getInicio();
+
+        while (aux != null) {
+            System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|\n");
+//            aux.getLm().mostrar();
+            aux = aux.getSig();
+        }
+        System.out.println();
+        ret.resultado = Retorno.Resultado.OK;
+        return ret;
     }
 
     @Override

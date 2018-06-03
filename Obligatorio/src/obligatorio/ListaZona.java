@@ -7,14 +7,14 @@ public class ListaZona implements IListaZona {
     private NodoListaZona inicio;
     private NodoListaZona fin;
     private int cantelementos;
-    private int idZona;
+//    private int idZona;
     
     //Constructor
     public void Lista() {
         this.inicio = null;
         this.fin = null;
         this.cantelementos = 0;    
-        this.idZona=0;
+//        this.idZona=0;
     }
 
     //Inicio
@@ -66,8 +66,8 @@ public class ListaZona implements IListaZona {
             this.fin = nuevo;
         }
 
-        this.cantelementos = this.cantelementos + 1;
-        this.idZona ++;
+        this.cantelementos++;
+//        this.idZona ++;
     }
 
     //PRE:
@@ -152,7 +152,7 @@ public class ListaZona implements IListaZona {
             fin.setSig(nuevo);
             fin = nuevo;
             this.cantelementos = this.cantelementos + 1;
-            this.idZona ++;
+//            this.idZona ++;
         }
 
     }
@@ -221,6 +221,16 @@ public class ListaZona implements IListaZona {
     public NodoListaZona obtenerElemento(Object dato) {
         NodoListaZona aux = this.inicio;
         while (aux != null && aux.getDato() != dato) {
+            aux = aux.getSig();
+        }
+        //encontrÃ© dato o lleguÃ© al final
+        return aux;
+    }
+    //PRE: //POS:
+    //PRE: //POS:
+    public Object obtenerElementoPorId(int idZona) {
+        NodoListaZona aux = this.inicio;
+        while (aux != null && aux.getIdZona()!= idZona) {
             aux = aux.getSig();
         }
         //encontrÃ© dato o lleguÃ© al final
