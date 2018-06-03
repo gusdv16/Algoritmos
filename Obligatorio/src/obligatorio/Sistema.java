@@ -86,7 +86,22 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno habilitarMovil(String movilID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
+
+        if (zona.getLm().obtenerElemento(movilID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Móvil no existe en el sistema";
+        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == true) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "Móvil ya esta en estado DISPONIBLE";
+        } else {
+            zona.getLm().obtenerElemento(movilID).setEstado(true);
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Móvil Habilitado";
+        }
+
+        return ret;
     }
 
     @Override

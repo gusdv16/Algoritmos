@@ -98,11 +98,11 @@ public class ListaMovil implements IListaMovil {
     //POS: Recorre y muestra los datos de lista
     public void mostrar() {
         if (this.esVacia()) {
-            System.out.println("Lista es vacía");
+            System.out.println("\tLista es vacía");
         } else {
             NodoListaMovil aux = this.inicio;
             while (aux != null) {
-                System.out.println(aux.getDato() + " - Estado: " + aux.isEstado());
+                System.out.println("\t" + aux.getDato() + " - Estado: " + aux.isEstado());
                 aux = aux.getSig();
             }
         }

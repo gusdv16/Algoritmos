@@ -97,7 +97,8 @@ public class Obligatorio {
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se deshabilita PCS123 que ya estaba deshabilitado");
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
-//        p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "se habilita movil PCS123");
+        p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "se habilita movil PCS123");
+        p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
 //        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS123");
          p.imprimirResultadosPrueba(); 
     }
