@@ -100,6 +100,9 @@ public class Obligatorio {
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
         p.ver(s.eliminarMovil("PCS1231").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS1231");
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
+        p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
+        p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "Muestro datos del movil PCS123");
+        p.ver(s.buscarMovil("PCS1237").resultado, Retorno.Resultado.ERROR_1, "No obtengo ningun dato");
         p.imprimirResultadosPrueba();
     }
 

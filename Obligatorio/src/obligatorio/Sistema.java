@@ -112,7 +112,7 @@ public class Sistema implements ISistema {
         if (zona.getLm().obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
-        } else {     
+        } else {
             borrarMovil(Lz, movilID);
             ret.resultado = Resultado.OK;
             ret.valorString = "Móvil Eliminado";
@@ -123,7 +123,21 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno buscarMovil(String movilID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
+
+        if (zona == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Móvil no existe en el sistema";
+        } else {
+            NodoListaMovil movil = zona.getLm().obtenerElemento(movilID);
+            System.out.println(movil.getDato() + "|Estado: " + movil.isEstado() + "|Zona: " + zona.getDato() + "|#Emergencias: ");
+            
+            System.out.println();
+            ret.resultado = Retorno.Resultado.OK;
+        }
+
+        return ret;
     }
 
     @Override
@@ -170,7 +184,7 @@ public class Sistema implements ISistema {
         }
         System.out.println();
         ret.resultado = Retorno.Resultado.OK;
-        
+
         return ret;
     }
 
