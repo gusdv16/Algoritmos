@@ -103,6 +103,7 @@ public class Obligatorio {
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "Muestro datos del movil PCS123");
         p.ver(s.buscarMovil("PCS1237").resultado, Retorno.Resultado.ERROR_1, "No obtengo ningun dato");
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Lista de Móviles");
         p.imprimirResultadosPrueba();
     }
 

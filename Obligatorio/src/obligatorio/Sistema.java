@@ -51,15 +51,14 @@ public class Sistema implements ISistema {
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona no existe";
+        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID) != null) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "Móvil ya existe en el sistema de emergencias";
         } else {
-            if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID) != null) {
-                ret.resultado = Resultado.ERROR_2;
-                ret.valorString = "Móvil ya existe en el sistema de emergencias";
-            } else {
-                Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().agregarOrd(movilID);
-                ret.resultado = Resultado.OK;
-                ret.valorString = "Móvil agregado a zona correctamente";
-            }
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().agregarOrd(movilID);
+            Lm.agregarOrd(movilID);
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Móvil agregado a zona correctamente";
         }
         return ret;
     }
@@ -132,7 +131,7 @@ public class Sistema implements ISistema {
         } else {
             NodoListaMovil movil = zona.getLm().obtenerElemento(movilID);
             System.out.println(movil.getDato() + "|Estado: " + movil.isEstado() + "|Zona: " + zona.getDato() + "|#Emergencias: ");
-            
+
             System.out.println();
             ret.resultado = Retorno.Resultado.OK;
         }
@@ -142,7 +141,18 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno informeMovil() {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
+        NodoListaMovil aux = Lm.getInicio();
+        while (aux != null) {
+            System.out.println("\t" + aux.getDato() + ";" + aux.isEstado());
+            aux = aux.getSig();
+        }
+
+        System.out.println();
+        ret.resultado = Retorno.Resultado.OK;
+
+        return ret;
     }
 
     @Override
