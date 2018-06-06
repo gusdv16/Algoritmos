@@ -159,7 +159,36 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno informeMovil(int zonaID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        if (Lz.obtenerElementoPorId(zonaID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La Zona no existe";
+        } else {
+
+            NodoListaZona aux = Lz.getInicio();
+            NodoListaMovil aux1 = aux.getLm().getInicio();
+            int movilesDisponibles = 0;
+            String separador = ";";
+
+            while (aux != null && aux.idZona == zonaID) {
+                while (aux1 != null) {
+                    if (aux1.getSig() == null) {
+                        separador = "";
+                    }
+                    System.out.print(aux1.getDato() + separador);
+                    if (aux1.isEstado()) {
+                        movilesDisponibles++;
+                    }
+                    aux1 = aux1.getSig();
+                }
+                System.out.print("|Total Móviles disponibles: " + movilesDisponibles);
+                aux = aux.getSig();
+            }
+            System.out.println();
+            ret.resultado = Retorno.Resultado.OK;
+        }
+
+        return ret;
     }
 
     @Override
