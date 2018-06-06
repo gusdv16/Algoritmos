@@ -92,7 +92,7 @@ public class ListaAbonado implements IListaAbonado {
         } else {
             NodoListaAbonado aux = this.inicio;
             while (aux != null) {
-                System.out.println("\t" + aux.getDato() + " - Estado: " + aux.isEstado());
+                System.out.println("\t" + aux.getDato());
                 aux = aux.getSig();
             }
         }

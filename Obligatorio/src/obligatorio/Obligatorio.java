@@ -144,14 +144,58 @@ public class Obligatorio {
         p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Moviles de Pocitos");
         p.ver(s.informeMovil(4).resultado, Retorno.Resultado.OK, "Moviles de Buceo");
         p.ver(s.informeMovil(40).resultado, Retorno.Resultado.ERROR_1, "No existe Zona");
+        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "No existe Zona");
 
         p.imprimirResultadosPrueba();
     }
 
     static void prueba5(Sistema s, Prueba p) {
-        //p.ver(s.registrarAbonadol(2, "abonadoNombre", "abonadoDireccion," "abonadoTel", 1).resultado, Retorno.Resultado.OK, "Mensaje registrarAbonadol()");
-        p.ver(s.eliminarAbonado(2).resultado, Retorno.Resultado.OK, "Mensaje eliminarAbonado()");
-        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "Mensaje informeAbonadosZona()");
+        p.imprimirComentario("CREAMOS SISTMA PARA 5 ZONAS");
+        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+
+        p.imprimirComentario("INGRESAMOS ZONAS");
+
+        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
+        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
+        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
+        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
+
+        p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a Pocitos ");
+        p.ver(s.registrarMovil("PCS124", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS124 a Pocitos ");
+        p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.ERROR_2, "Agrego movil PCS123 que ya existe en Pocitos ");
+        p.ver(s.registrarMovil("PCS123", 20).resultado, Retorno.Resultado.ERROR_1, "Agrego movil PCS123 a zona que no existe ");
+
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Listado de moviles");
+
+        p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
+        p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se deshabilita PCS123 que ya estaba deshabilitado");
+        p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "se habilita movil PCS123");
+        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS123");
+
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Listado de moviles - se elimino PCS123 ");
+
+        p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.ERROR_1, "Se busca el movil PCS123 que no existe");
+        p.ver(s.buscarMovil("PCS124").resultado, Retorno.Resultado.OK, "Se busca el movil PCS124 que existe");
+        p.ver(s.buscarMovil("PCS999").resultado, Retorno.Resultado.ERROR_1, "Se busca el movil PCS99 que NO existe");
+
+        p.ver(s.registrarMovil("PCS444", 4).resultado, Retorno.Resultado.OK, "Agrego movil BCO444 a Buceo ");
+        p.ver(s.registrarMovil("PCS445", 4).resultado, Retorno.Resultado.OK, "Agrego movil BCO123  en Buceo ");
+
+        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Moviles de Pocitos");
+        p.ver(s.informeMovil(4).resultado, Retorno.Resultado.OK, "Moviles de Buceo");
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Listado de moviles ");
+
+        p.imprimirComentario("Agrego abonados");
+
+        p.ver(s.registrarAbonadol(1, "Juan", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Juan");
+        p.ver(s.registrarAbonadol(2, "Pedro", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Pedro");
+        p.ver(s.registrarAbonadol(3, "Ana", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Ana");
+        p.ver(s.registrarAbonadol(4, "Maria", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Maria");
+        p.ver(s.registrarAbonadol(1, "Juan", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.ERROR_1, "Se agrega Juan que ya existe");
+
+        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
+
         p.imprimirResultadosPrueba();
     }
 }

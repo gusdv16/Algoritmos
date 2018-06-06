@@ -256,7 +256,29 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno informeZonas() {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
+        NodoListaZona aux = Lz.getInicio();
+        NodoListaMovil aux2 = aux.getLm().getInicio();
+        while (aux != null) {
+            int movilesDisponibles = 0;
+            int movilesNoDisponibles = 0;
+            while (aux2 != null) {
+                if (aux2.isEstado()) {
+                    movilesDisponibles++;
+                } else {
+                    movilesNoDisponibles++;
+                }
+                aux2 = aux2.getSig();
+            }
+            System.out.println(aux.getIdZona() + "|" + aux.getDato() + "|MóvilesDisponibles:" + movilesDisponibles + "|MóvilesNoDisponibles:" + movilesNoDisponibles);
+            aux = aux.getSig();
+        }
+
+        System.out.println();
+        ret.resultado = Retorno.Resultado.OK;
+
+        return ret;
     }
 
     @Override

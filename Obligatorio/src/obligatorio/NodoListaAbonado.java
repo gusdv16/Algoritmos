@@ -4,12 +4,14 @@ public class NodoListaAbonado {
 
     private Object dato;
     private NodoListaAbonado sig;
-    private boolean Estado;
-
+    private int abonadoID;
+    private String abonadoNombre;
+    private String abonadoDireccion;
+    private String abonadoTel;
+    
     public NodoListaAbonado(Object dato) {
         this.dato = dato;
         this.sig = null;
-        this.Estado = true;
     }
 
     public Object getDato() {
@@ -28,12 +30,37 @@ public class NodoListaAbonado {
         this.sig = sig;
     }
 
-    public boolean isEstado() {
-        return Estado;
+    public int getAbonadoID() {
+        return abonadoID;
     }
 
-    public void setEstado(boolean Estado) {
-        this.Estado = Estado;
+    public void setAbonadoID(int abonadoID) {
+        this.abonadoID = abonadoID;
     }
+
+    public String getAbonadoNombre() {
+        return abonadoNombre;
+    }
+
+    public void setAbonadoNombre(String abonadoNombre) {
+        this.abonadoNombre = abonadoNombre;
+    }
+
+    public String getAbonadoDireccion() {
+        return abonadoDireccion;
+    }
+
+    public void setAbonadoDireccion(String abonadoDireccion) {
+        this.abonadoDireccion = abonadoDireccion;
+    }
+
+    public String getAbonadoTel() {
+        return abonadoTel;
+    }
+
+    public void setAbonadoTel(String abonadoTel) {
+        this.abonadoTel = abonadoTel;
+    }
+    
 
 }
