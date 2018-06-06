@@ -144,8 +144,10 @@ public class Obligatorio {
         p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Moviles de Pocitos");
         p.ver(s.informeMovil(4).resultado, Retorno.Resultado.OK, "Moviles de Buceo");
         p.ver(s.informeMovil(40).resultado, Retorno.Resultado.ERROR_1, "No existe Zona");
-        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "No existe Zona");
+        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "Muestra el listado de Zonas");
 
+        //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
+        
         p.imprimirResultadosPrueba();
     }
 

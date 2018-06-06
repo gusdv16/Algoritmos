@@ -193,7 +193,11 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno cambiarUbicacion(String movilID, int zonaID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        String zona = Lz.obtenerElementoPorId(zonaID).getDato().toString();
+        cambiarUbicacionZona(Lz, zona, movilID);
+
+        return ret;
     }
 
     @Override

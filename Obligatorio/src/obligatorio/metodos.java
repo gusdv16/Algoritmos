@@ -16,7 +16,7 @@ public class metodos {
     }
 
     //se asume que existen todos los datos
-    public static void cambiarUbicacion(ListaZona lz, String zonaDestino, String movil) {
+    public static void cambiarUbicacionZona(ListaZona lz, String zonaDestino, String movil) {
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil));
         NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
         lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
