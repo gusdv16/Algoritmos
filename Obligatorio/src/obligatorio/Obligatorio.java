@@ -8,9 +8,9 @@ public class Obligatorio {
         Sistema s = new Sistema();
         Prueba p = new Prueba();
 
-//        prueba1(s, p);
+        prueba1(s, p);
 //        prueba2(s, p);
-        prueba3(s, p);
+//        prueba3(s, p);
 //        prueba4(s, p);
 //        prueba5(s, p);
 //        ListaZona lz = new ListaZona();
@@ -49,7 +49,7 @@ public class Obligatorio {
 
         p.ver(s.crearSistemaEmergencias(3).resultado, Retorno.Resultado.OK, "Se crea el sistema para 3 zonas");
         p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
-        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Se intentoagregar Montevideo que ya existe");
+        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Se intento agregar Montevideo que ya existe");
         p.ver(s.agregarZona("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");
         p.ver(s.agregarZona("La Paloma").resultado, Retorno.Resultado.OK, "Se agrego La Paloma");
         p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_2, "Se intento agregar Maldonado pero el sistema esta completo");

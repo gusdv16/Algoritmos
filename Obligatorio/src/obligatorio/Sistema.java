@@ -5,6 +5,7 @@ import static obligatorio.metodos.*;
 
 public class Sistema implements ISistema {
 
+    public int cantZonas;
     public ListaZona Lz;
     int[][] matrizDeZonas;
     public ListaMovil Lm;
@@ -16,6 +17,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La cantidad de ciudades debe ser mayor o igual a 0";
         } else {
+            cantZonas = cantzonas;
             Lz = new ListaZona();
             Lm = new ListaMovil();
 
@@ -168,16 +170,21 @@ public class Sistema implements ISistema {
     @Override
     public Retorno agregarZona(String zonaNombre) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        // if (Lz.getCantelementos()< Lz.getTope() || Lz.getTope() == 0) {
-        if (Lz.obtenerElemento(zonaNombre) == null) {
+        if (cantZonas <= Lz.cantElementos()) {
             Lz.agregarFinal(zonaNombre);
-            //   }
+            ret.resultado = Retorno.Resultado.ERROR_2;
+            ret.valorString = "Se paso la cantidad de zonas del sistema";
         } else {
-            ret.resultado = Retorno.Resultado.ERROR_1;
-            ret.valorString = "La zona ya existe";
+            //se tiene que controlar el id
+            if (Lz.obtenerElemento(zonaNombre) == null) {
+                Lz.agregarFinal(zonaNombre);
+                ret.resultado = Retorno.Resultado.OK;
+                ret.valorString = "la zona se agregó correctamente";
+            } else {
+                ret.resultado = Retorno.Resultado.ERROR_1;
+                ret.valorString = "La zona ya existe";
+            }
         }
-        ret.resultado = Retorno.Resultado.OK;
-        ret.valorString = "la zona se agregó correctamente";
         return ret;
     }
 
