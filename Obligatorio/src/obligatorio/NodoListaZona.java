@@ -4,6 +4,7 @@ public class NodoListaZona {
 
     private Object dato;
     private ListaMovil lm;
+    private ListaAbonado la;
     private NodoListaZona sig;
     private static int id = 1;
     int idZona;
@@ -11,8 +12,17 @@ public class NodoListaZona {
     public NodoListaZona(Object dato) {
         this.dato = dato;
         this.lm = new ListaMovil();
+        this.la = new ListaAbonado();
         this.sig = null;
         idZona = this.id++;
+    }
+
+    public ListaAbonado getLa() {
+        return la;
+    }
+
+    public void setLa(ListaAbonado la) {
+        this.la = la;
     }
 
     public int getIdZona() {
