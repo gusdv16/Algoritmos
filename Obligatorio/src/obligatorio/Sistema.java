@@ -9,6 +9,7 @@ public class Sistema implements ISistema {
     public ListaZona Lz;
     int[][] matrizDeZonas;
     public ListaMovil Lm;
+    public ListaAbonado La;
 
     @Override
     public Retorno crearSistemaEmergencias(int cantzonas) {
@@ -20,6 +21,7 @@ public class Sistema implements ISistema {
             cantZonas = cantzonas;
             Lz = new ListaZona();
             Lm = new ListaMovil();
+            La = new ListaAbonado();
 
             matrizDeZonas = new int[cantzonas][cantzonas];
 
@@ -307,7 +309,20 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno registrarAbonadol(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        if (Lz.obtenerElementoPorId(zonaID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La Zona no existe";
+        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().obtenerElemento(abonadoID) != null) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "Abonado ya existe en el sistema de emergencias";
+        } else {
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().agregarOrd(abonadoID);
+            Lm.agregarOrd(abonadoID);
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Abonado agregado a zona correctamente";
+        }
+        return ret;
     }
 
     @Override

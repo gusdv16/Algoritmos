@@ -11,8 +11,8 @@ public class Obligatorio {
 //        prueba1(s, p);
 //        prueba2(s, p);
 //        prueba3(s, p);
-        prueba4(s, p);
-//        prueba5(s, p);
+//        prueba4(s, p);
+        prueba5(s, p);
 //        ListaZona lz = new ListaZona();
 //
 //        lz.agregarInicio("Zona 1");
@@ -146,8 +146,6 @@ public class Obligatorio {
         p.ver(s.informeMovil(40).resultado, Retorno.Resultado.ERROR_1, "No existe Zona");
         p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "Muestra el listado de Zonas");
 
-        //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
-        
         p.imprimirResultadosPrueba();
     }
 
@@ -194,10 +192,15 @@ public class Obligatorio {
         p.ver(s.registrarAbonadol(2, "Pedro", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Pedro");
         p.ver(s.registrarAbonadol(3, "Ana", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Ana");
         p.ver(s.registrarAbonadol(4, "Maria", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Maria");
-        p.ver(s.registrarAbonadol(1, "Juan", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.ERROR_1, "Se agrega Juan que ya existe");
+        p.ver(s.registrarAbonadol(1, "Juan", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.ERROR_2, "Se agrega Juan que ya existe");
 
         p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
 
+        //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
+        p.imprimirResultadosPrueba();
+    }
+
+    static void prueba6(Sistema s, Prueba p) {
         p.imprimirResultadosPrueba();
     }
 }
