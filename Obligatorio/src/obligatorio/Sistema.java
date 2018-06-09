@@ -9,7 +9,6 @@ public class Sistema implements ISistema {
     public ListaZona Lz;
     int[][] matrizDeZonas;
     public ListaMovil Lm;
-    public ListaAbonado La;
 
     @Override
     public Retorno crearSistemaEmergencias(int cantzonas) {
@@ -21,7 +20,6 @@ public class Sistema implements ISistema {
             cantZonas = cantzonas;
             Lz = new ListaZona();
             Lm = new ListaMovil();
-            La = new ListaAbonado();
 
             matrizDeZonas = new int[cantzonas][cantzonas];
 
@@ -293,19 +291,62 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno registrarChofer(String movilID, String nombre, String cedula) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-    }
+	public Retorno registrarChofer(String movilID, String nombre, String cedula) {
+    	Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
-    @Override
-    public Retorno eliminarChofer(String movilID, String cedula) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-    }
+    	if (Lm.obtenerElemento(movilID) == null) {
+        	ret.resultado = Resultado.ERROR_1;
+        	ret.valorString = "Móvil no existe en el sistema de emergencias";
+    	} else {
+        	Lm.obtenerElemento(movilID).getLch().encolar(cedula, nombre);
+        	ret.resultado = Resultado.OK;
+        	ret.valorString = "chofer agregado correctamente";
+    	}
+    	return ret;
+	}
 
-    @Override
-    public Retorno informeChoferes(String movilID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-    }
+	@Override
+	public Retorno eliminarChofer(String movilID, String cedula) {
+    	Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
+    	if (Lm.obtenerElemento(movilID) == null) {
+        	ret.resultado = Resultado.ERROR_1;
+        	ret.valorString = "Móvil no existe en el sistema";
+    	} else {
+        	Lm.obtenerElemento(movilID).getLch().desencolar(cedula);
+        	ret.resultado = Resultado.OK;
+        	ret.valorString = "Chofer eliminado";
+    	}
+
+    	return ret;
+	}
+
+	@Override
+	public Retorno informeChoferes(String movilID) {
+    	Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+    	if (Lm.obtenerElemento(movilID) == null) {
+        	ret.resultado = Resultado.ERROR_1;
+        	ret.valorString = "no existe el movil en el sistema de emergencias";
+    	} else {
+
+        	NodoListaChofer aux = Lm.getInicio().getLch().getPrimero();
+        	String separador = "|";
+
+        	while (aux != null) {
+            	if (aux.getSiguiente() == null) {
+                	separador = "";
+            	}
+            	System.out.print(aux.getNombre() + ";" + aux.getCedula() + separador);
+            	aux = aux.getSiguiente();
+        	}
+
+        	System.out.println();
+        	ret.resultado = Retorno.Resultado.OK;
+    	}
+
+    	return ret;
+	}
+
 
     @Override
     public Retorno registrarAbonadol(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID) {
@@ -317,8 +358,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Abonado ya existe en el sistema de emergencias";
         } else {
-            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().agregarOrd(abonadoID, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
-            Lm.agregarOrd(abonadoID);
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().encolar(abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
             ret.resultado = Resultado.OK;
             ret.valorString = "Abonado agregado a zona correctamente";
         }
@@ -326,8 +366,21 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno eliminarAbonado(int abonadoID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+    public Retorno eliminarAbonado(int abonadoID) {        
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        NodoListaZona zona = buscarZonaPorAbonado(Lz, abonadoID);
+
+        if (zona == null || zona.getLa().obtenerElemento(abonadoID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Abonado no existe en el sistema";
+        } else {
+//            zona.getLa().borrarElemento(abonadoID);
+            borrarAbonado(Lz, abonadoID);
+            ret.resultado = Resultado.OK;
+            ret.valorString = "Abonado Eliminado";
+        }
+
+        return ret;
     }
 
     @Override
@@ -348,7 +401,7 @@ public class Sistema implements ISistema {
                     if (aux1.getSig() == null) {
                         separador = "";
                     }
-                    System.out.print(aux1.getDato() + separador);
+                    System.out.print(aux1.getAbonadoID() + separador);
                     if (aux1.isEstado()) {
                         abonadosDisponibles++;
                     }
@@ -361,6 +414,7 @@ public class Sistema implements ISistema {
             ret.resultado = Retorno.Resultado.OK;
         }
 
+        mostrarAbonados(Lz);
         return ret;
     }
 
