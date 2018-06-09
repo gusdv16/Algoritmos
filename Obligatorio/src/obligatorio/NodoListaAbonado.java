@@ -2,30 +2,28 @@ package obligatorio;
 
 public class NodoListaAbonado {
 
-    private Object dato;
+    private Object abonadoID;
     private NodoListaAbonado sig;
-    private int abonadoID;
     private String abonadoNombre;
     private String abonadoDireccion;
     private String abonadoTel;
     private boolean Estado;
 
-    public NodoListaAbonado(Object dato, int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
-        this.dato = dato;
+    public NodoListaAbonado(Object dato, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
+        this.abonadoID = dato;
         this.sig = null;
-        this.abonadoID = abonadoID;
         this.abonadoNombre = abonadoNombre;
         this.abonadoDireccion = abonadoDireccion;
         this.abonadoTel = abonadoTel;
         this.Estado = true;
     }
 
-    public Object getDato() {
-        return dato;
+    public Object getAbonadoID() {
+        return abonadoID;
     }
 
-    public void setDato(Object dato) {
-        this.dato = dato;
+    public void setAbonadoID(Object abonadoID) {
+        this.abonadoID = abonadoID;
     }
 
     public NodoListaAbonado getSig() {
@@ -34,14 +32,6 @@ public class NodoListaAbonado {
 
     public void setSig(NodoListaAbonado sig) {
         this.sig = sig;
-    }
-
-    public int getAbonadoID() {
-        return abonadoID;
-    }
-
-    public void setAbonadoID(int abonadoID) {
-        this.abonadoID = abonadoID;
     }
 
     public String getAbonadoNombre() {

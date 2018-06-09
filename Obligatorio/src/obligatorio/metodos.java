@@ -44,6 +44,18 @@ public class metodos {
             aux.borrarElemento(movil);
         }
     }
+    //se asume que existen todos los datos
+    public static void borrarAbonado(ListaZona lz, Object abonadoId) {
+        NodoListaZona origen = lz.obtenerElemento(buscarZonaPorAbonado(lz, abonadoId).getDato());
+        NodoListaAbonado pabonado = origen.getLa().obtenerElemento(abonadoId);
+
+        ListaAbonado aux = origen.getLa();
+        if (aux.getFin() == pabonado) {
+            aux.desencolar();
+        } else {
+            aux.borrarElemento(abonadoId);
+        }
+    }
 
     //se asume que existen todos los datos
     public static NodoListaZona buscarZonaPorMovil(ListaZona lz, String movil) {
@@ -51,6 +63,18 @@ public class metodos {
 
         while (aux != null) {
             if (aux.getLm().obtenerElemento(movil) != null) {
+                return aux;
+            }
+            aux = aux.getSig();
+        }
+        return null;
+    }
+    //se asume que existen todos los datos
+    public static NodoListaZona buscarZonaPorAbonado(ListaZona lz, Object abonadoID) {
+        NodoListaZona aux = lz.getInicio();
+
+        while (aux != null) {
+            if (aux.getLa().obtenerElemento(abonadoID) != null) {
                 return aux;
             }
             aux = aux.getSig();
@@ -72,6 +96,24 @@ public class metodos {
 //                    aux2.getLch().mostrar();
 //                    aux2 = aux2.getSig();
 //                }
+//            }
+            aux = aux.getSig();
+        }
+    }
+    public static void mostrarAbonados(ListaZona lz) {
+        NodoListaZona aux = lz.getInicio();
+
+        while (aux != null) {
+            System.out.println("\n" + aux.getDato());
+//            aux.getLm().mostrar();
+
+            NodoListaAbonado aux2 = aux.getLa().getInicio();
+//            if (aux2.getLch() != null) {
+                while (aux2 != null) {
+                    System.out.println("\n" + aux2.getAbonadoID());
+//                    aux2.getLch().mostrar();
+                    aux2 = aux2.getSig();
+                }
 //            }
             aux = aux.getSig();
         }
