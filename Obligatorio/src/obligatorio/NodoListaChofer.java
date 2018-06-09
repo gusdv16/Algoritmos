@@ -1,30 +1,39 @@
-
 package obligatorio;
 
-public class NodoListaChofer{
-	private Object dato;
-	private NodoListaChofer sig;
+public class NodoListaChofer {
 
-    public NodoListaChofer(Object dato) {
-        this.dato = dato;
-        this.sig = null;
+    Object cedula;
+    String nombre;
+    NodoListaChofer siguiente;
+
+    public NodoListaChofer(Object cedula,String nombre) {
+        this.cedula = cedula;
+        this.siguiente = null;
+        this.nombre=nombre;
     }
 
-    public Object getDato() {
-        return dato;
+    public Object getCedula() {
+        return cedula;
     }
 
-    public void setDato(Object dato) {
-        this.dato = dato;
+    public String getNombre() {
+        return nombre;
     }
 
-    public NodoListaChofer getSig() {
-        return sig;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setSig(NodoListaChofer sig) {
-        this.sig = sig;
+    public void setCedula(Object cedula) {
+        this.cedula = cedula;
     }
 
- 
+    public NodoListaChofer getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(NodoListaChofer siguiente) {
+        this.siguiente = siguiente;
+    }
+
 }

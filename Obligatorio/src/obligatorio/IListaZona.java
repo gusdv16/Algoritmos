@@ -20,4 +20,6 @@ interface IListaZona {
     public void agregarOrd(Object dato);
 
     public NodoListaZona obtenerElemento(Object dato);
+
+    public int cantElementos();
 }
