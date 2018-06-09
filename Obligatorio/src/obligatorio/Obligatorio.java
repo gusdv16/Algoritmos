@@ -12,7 +12,7 @@ public class Obligatorio {
 //        prueba2(s, p);
 //        prueba3(s, p);
 //        prueba4(s, p);
-        prueba5(s, p);
+        prueba3(s, p);
 //        ListaZona lz = new ListaZona();
 //
 //        lz.agregarInicio("Zona 1");

@@ -7,7 +7,7 @@ public class ListaZona implements IListaZona {
     private NodoListaZona inicio;
     private NodoListaZona fin;
     private int cantelementos;
-//    private int idZona;
+//    private int idZona; 
     
     //Constructor
     public void Lista() {

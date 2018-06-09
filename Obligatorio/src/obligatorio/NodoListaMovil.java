@@ -1,15 +1,27 @@
 package obligatorio;
 
+import obligatorio.ListaChofer;
+
 public class NodoListaMovil {
 
     private Object dato;
     private NodoListaMovil sig;
     private boolean Estado;
+    private ListaChofer lch;
 
     public NodoListaMovil(Object dato) {
         this.dato = dato;
         this.sig = null;
         this.Estado = true;
+        this.lch = new ListaChofer();
+    }
+
+    public ListaChofer getLch() {
+        return lch;
+    }
+
+    public void setCh(ListaChofer lch) {
+        this.lch = lch;
     }
 
     public Object getDato() {
