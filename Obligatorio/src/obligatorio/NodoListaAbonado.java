@@ -8,10 +8,16 @@ public class NodoListaAbonado {
     private String abonadoNombre;
     private String abonadoDireccion;
     private String abonadoTel;
-    
-    public NodoListaAbonado(Object dato) {
+    private boolean Estado;
+
+    public NodoListaAbonado(Object dato, int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
         this.dato = dato;
         this.sig = null;
+        this.abonadoID = abonadoID;
+        this.abonadoNombre = abonadoNombre;
+        this.abonadoDireccion = abonadoDireccion;
+        this.abonadoTel = abonadoTel;
+        this.Estado = true;
     }
 
     public Object getDato() {
@@ -61,6 +67,12 @@ public class NodoListaAbonado {
     public void setAbonadoTel(String abonadoTel) {
         this.abonadoTel = abonadoTel;
     }
-    
 
+    public boolean isEstado() {
+        return Estado;
+    }
+
+    public void setEstado(boolean Estado) {
+        this.Estado = Estado;
+    }
 }

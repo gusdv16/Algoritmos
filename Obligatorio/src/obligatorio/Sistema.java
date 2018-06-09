@@ -317,7 +317,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Abonado ya existe en el sistema de emergencias";
         } else {
-            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().agregarOrd(abonadoID);
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().agregarOrd(abonadoID, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
             Lm.agregarOrd(abonadoID);
             ret.resultado = Resultado.OK;
             ret.valorString = "Abonado agregado a zona correctamente";
@@ -332,7 +332,36 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno informeAbonadosZona(int zonaID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        if (Lz.obtenerElementoPorId(zonaID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La Zona no existe";
+        } else {
+            NodoListaZona aux = Lz.getInicio();
+            NodoListaAbonado aux1 = aux.getLa().getInicio();
+            int abonadosDisponibles = 0;
+            String separador = "|";
+
+            while (aux != null && aux.idZona == zonaID) {
+                System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|");
+                while (aux1 != null) {
+                    if (aux1.getSig() == null) {
+                        separador = "";
+                    }
+                    System.out.print(aux1.getDato() + separador);
+                    if (aux1.isEstado()) {
+                        abonadosDisponibles++;
+                    }
+                    aux1 = aux1.getSig();
+                }
+                System.out.print("|Total Abonados disponibles: " + abonadosDisponibles);
+                aux = aux.getSig();
+            }
+            System.out.println();
+            ret.resultado = Retorno.Resultado.OK;
+        }
+
+        return ret;
     }
 
 }

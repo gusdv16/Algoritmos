@@ -55,8 +55,8 @@ public class ListaAbonado implements IListaAbonado {
 
     //PRE: 
     //POS: Agrega un nuevo Nodo al principio de la lista
-    public void agregarInicio(Object dato) {
-        NodoListaAbonado nuevo = new NodoListaAbonado(dato);
+    public void agregarInicio(Object dato, int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
+        NodoListaAbonado nuevo = new NodoListaAbonado(dato, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
         nuevo.setSig(inicio);
         this.inicio = nuevo;
         if (this.fin == null)//estoy insertando el primer nodo
@@ -101,12 +101,12 @@ public class ListaAbonado implements IListaAbonado {
     /*Variantes agregadas a los metodos basicos.*/
     //PRE:
     //POS: Agrega un nuevo Nodo al final de la lista
-    public void agregarFinal(Object dato) {
+    public void agregarFinal(Object dato, int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
         //NodoLista nuevo= new NodoLista(n);
         if (this.esVacia()) {
-            this.agregarInicio(dato); // el agregar inicio suma 1 a cantelementos
+            this.agregarInicio(dato, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel); // el agregar inicio suma 1 a cantelementos
         } else {
-            NodoListaAbonado nuevo = new NodoListaAbonado(dato);
+            NodoListaAbonado nuevo = new NodoListaAbonado(dato, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
             fin.setSig(nuevo);
             fin = nuevo;
             this.cantelementos = this.cantelementos + 1;
@@ -133,14 +133,14 @@ public class ListaAbonado implements IListaAbonado {
 
     //PRE: lista ordenada => mantiena orden
     //POS: inserta nuevo elemento en orden ascendente
-    public void agregarOrd(Object dato) {
+    public void agregarOrd(Object dato, int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
         //lista vacìa o primer elemento es mayor o igual => agrego al ppio
         if (this.esVacia() || (this.inicio.getDato().toString().compareTo(dato.toString()) > 0)) {
-            this.agregarInicio(dato);
+            this.agregarInicio(dato, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
             return;
         }
         if (this.fin.getDato().toString().compareTo(dato.toString()) < 0) {   //ùltimo elemento es menor o igual => agrego al final
-            this.agregarFinal(dato);
+            this.agregarFinal(dato, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
             return;
         }
         NodoListaAbonado aux = this.inicio;
@@ -148,7 +148,7 @@ public class ListaAbonado implements IListaAbonado {
         while (aux.getSig().getDato() != null && dato.toString().compareTo(aux.getSig().getDato().toString()) > 0) {
             aux = aux.getSig();
         }
-        NodoListaAbonado nuevo = new NodoListaAbonado(dato);
+        NodoListaAbonado nuevo = new NodoListaAbonado(dato, abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
         nuevo.setSig(aux.getSig());
         aux.setSig(nuevo);
     }
