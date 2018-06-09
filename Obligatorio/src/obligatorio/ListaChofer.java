@@ -4,33 +4,25 @@ import obligatorio.IListaChofer;
 
 public class ListaChofer implements IListaChofer {
 
-    private NodoListaChofer inicio;
-    private NodoListaChofer fin;
-    private int cantelementos;
+    int maximo;
+    int cantelementos;
+    NodoListaChofer primero;
+    NodoListaChofer ultimo;
 
-    //Constructor
-    public ListaChofer() {
-        this.inicio = null;
-        this.fin = null;
+    // maximo es la cantidad de elementos que soportara la cola
+    public ListaChofer(int maximo) {
+        this.maximo = maximo;
         this.cantelementos = 0;
+        this.primero = null;
+        this.ultimo = null;
     }
 
-    //Inicio
-    public void setInicio(NodoListaChofer i) {
-        inicio = i;
+    public int getMaximo() {
+        return maximo;
     }
 
-    public NodoListaChofer getInicio() {
-        return inicio;
-    }
-
-    //Fin
-    public void setFin(NodoListaChofer f) {
-        fin = f;
-    }
-
-    public NodoListaChofer getFin() {
-        return fin;
+    public void setMaximo(int maximo) {
+        this.maximo = maximo;
     }
 
     public int getCantelementos() {
@@ -41,161 +33,71 @@ public class ListaChofer implements IListaChofer {
         this.cantelementos = cantelementos;
     }
 
-    /**
-     * ************Métodos Básicos******************
-     */
-    /**
-     * ********************************************
-     */
-    //PRE:
-    //POS: Retorna true si la lista no tiene nodos
-    public boolean esVacia() {
-        return (this.inicio == null);
+    public NodoListaChofer getPrimero() {
+        return primero;
     }
 
-    //PRE: 
-    //POS: Agrega un nuevo Nodo al principio de la lista
-    public void agregarInicio(Object dato) {
-        NodoListaChofer nuevo = new NodoListaChofer(dato);
-        nuevo.setSig(inicio);
-        this.inicio = nuevo;
-        if (this.fin == null)//estoy insertando el primer nodo
-        {
-            this.fin = nuevo;
+    public void setPrimero(NodoListaChofer primero) {
+        this.primero = primero;
+    }
+
+    public NodoListaChofer getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoListaChofer ultimo) {
+        this.ultimo = ultimo;
+    }
+
+// implementacion de los metodos de ICola
+    @Override
+    public void encolar(Object cedula, String nombre) {
+        NodoListaChofer nuevo = new NodoListaChofer(cedula, nombre);
+
+        if (this.cantelementos < this.maximo) {
+            if (!this.esVacia()) {
+                this.ultimo.siguiente = nuevo;
+                this.ultimo = nuevo;
+            } else {
+                this.ultimo = nuevo;
+                this.primero = nuevo;
+            }
+            this.cantelementos = this.cantelementos + 1;
         }
-
-        this.cantelementos = this.cantelementos + 1;
     }
 
-    //PRE:
-    //POS: Borra el primer nodo
-    public void borrarInicio() {
+    @Override
+    public void desencolar(Object cedula) {
         if (!this.esVacia()) {
-            this.inicio = this.inicio.getSig();
+            this.primero = this.primero.siguiente;
             this.cantelementos = this.cantelementos - 1;
         }
     }
-    //PRE:
-    //POS: elimina todos los nodos de una lista dada
 
-    public void vaciar() {
-        this.inicio = null;
-        this.fin = null;
-        this.cantelementos = 0;
+    @Override
+    public boolean esVacia() {
+        return (this.primero == null);
     }
 
-    //PRE:
-    //POS: Recorre y muestra los datos de lista
-    public void mostrar() {
-        if (this.esVacia()) {
-            System.out.println("Lista es vacía");
-        } else {
-            NodoListaChofer aux = this.inicio;
-            while (aux != null) {
-                System.out.println(aux.getDato());
-                aux = aux.getSig();
-            }
-        }
-    }
-
-    /*Variantes agregadas a los metodos basicos.*/
-    //PRE:
-    //POS: Agrega un nuevo Nodo al final de la lista
-    public void agregarFinal(Object dato) {
-        //NodoLista nuevo= new NodoLista(n);
-        if (this.esVacia()) {
-            this.agregarInicio(dato); // el agregar inicio suma 1 a cantelementos
-        } else {
-            NodoListaChofer nuevo = new NodoListaChofer(dato);
-            fin.setSig(nuevo);
-            fin = nuevo;
-            this.cantelementos = this.cantelementos + 1;
-        }
+    @Override
+    public boolean esllena() {
+        return (this.cantelementos == this.maximo);
 
     }
 
-    //PRE:
-    //POS: Borra el último nodo
-    public void borrarFin() {
+    @Override
+    public Object frente() {
         if (!this.esVacia()) {
-            if (this.inicio == this.fin) {
-                this.borrarInicio();  // actualiza canelementos
-            } else {
-                NodoListaChofer aux = this.inicio;
-                while (aux.getSig().getSig() != null) {
-                    aux = aux.getSig();
-                }
-                this.fin = aux;
-                this.fin.setSig(null);
-                this.cantelementos = this.cantelementos - 1;
-            }
+            return primero.cedula;
+        } else {
+            return ("Esta vacia:");
         }
+
     }
 
-    //PRE: lista ordenada => mantiena orden
-    //POS: inserta nuevo elemento en orden ascendente
-    public void agregarOrd(Object dato) {
-        //lista vacìa o primer elemento es mayor o igual => agrego al ppio
-        if (this.esVacia() || (this.inicio.getDato().toString().compareTo(dato.toString()) > 0)) {
-            this.agregarInicio(dato);
-            return;
-        }
-        if (this.fin.getDato().toString().compareTo(dato.toString()) < 0) {   //ùltimo elemento es menor o igual => agrego al final
-            this.agregarFinal(dato);
-            return;
-        }
-        NodoListaChofer aux = this.inicio;
-
-        while (aux.getSig().getDato() != null && dato.toString().compareTo(aux.getSig().getDato().toString()) > 0) {
-            aux = aux.getSig();
-        }
-        NodoListaChofer nuevo = new NodoListaChofer(dato);
-        nuevo.setSig(aux.getSig());
-        aux.setSig(nuevo);
-    }
-
-    //PRE: lista ordenada
-    //POS: Borra la primer ocurrencia de un elemento dado
-    public void borrarElemento(Object dato) {   
-        NodoListaChofer anterior = this.getInicio(),aux = this.getInicio();
-        
-        while (aux != null && aux.getDato() != dato) {
-            anterior = aux;
-            aux = aux.getSig();
-        }
-        if (aux != null) {
-            anterior.setSig(aux.getSig());
-        }
-    }
-
-    //PRE: 
-    //POS: Retorna la cantidad de nodos que tiene la lista
-    public int cantElementos() {
+    @Override
+    public int elementos() {
         return this.cantelementos;
-    }
-
-    //PRE: //POS:
-    //PRE: //POS:
-    public NodoListaChofer obtenerElemento(Object dato) {
-        NodoListaChofer aux = this.inicio;
-        while (aux != null && aux.getDato() != dato) {
-            aux = aux.getSig();
-        }
-        //encontrÃ© dato o lleguÃ© al final
-        return aux;
-    }
-
-    /**
-     * *** para resolver en forma recursiva Métodos RECURSIVOS  ****
-     */
-    //PRE:
-    //POS: muestra los datos de la lista en orden de enlace
-    public void mostrarREC(NodoListaChofer l) {
-        if (l != null) {
-            System.out.println(l.getDato());
-            mostrarREC(l.getSig());
-
-        }
     }
 
 }

@@ -8,12 +8,12 @@ public class ListaZona implements IListaZona {
     private NodoListaZona fin;
     private int cantelementos;
 //    private int idZona; 
-    
+
     //Constructor
     public void Lista() {
         this.inicio = null;
         this.fin = null;
-        this.cantelementos = 0;    
+        this.cantelementos = 0;
 //        this.idZona=0;
     }
 
@@ -226,28 +226,16 @@ public class ListaZona implements IListaZona {
         //encontrÃ© dato o lleguÃ© al final
         return aux;
     }
+
     //PRE: //POS:
     //PRE: //POS:
     public NodoListaZona obtenerElementoPorId(int idZona) {
         NodoListaZona aux = this.inicio;
-        while (aux != null && aux.getIdZona()!= idZona) {
+        while (aux != null && aux.getIdZona() != idZona) {
             aux = aux.getSig();
         }
         //encontrÃ© dato o lleguÃ© al final
         return aux;
-    }
-
-    /**
-     * *** para resolver en forma recursiva Métodos RECURSIVOS ****
-     */
-    //PRE:
-    //POS: muestra los datos de la lista en orden de enlace
-    public void mostrarREC(NodoListaZona l) {
-        if (l != null) {
-            System.out.println(l.getDato());
-            mostrarREC(l.getSig());
-
-        }
     }
 
 }

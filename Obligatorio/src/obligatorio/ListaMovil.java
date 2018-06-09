@@ -7,22 +7,13 @@ public class ListaMovil implements IListaMovil {
     private NodoListaMovil inicio;
     private NodoListaMovil fin;
     private int cantelementos;
-    private ListaChofer lc;
+ 
 
     //Constructor
     public ListaMovil() {
         this.inicio = null;
         this.fin = null;
         this.cantelementos = 0;
-        this.lc = new ListaChofer();
-    }
-
-    public ListaChofer getLc() {
-        return lc;
-    }
-
-    public void setLc(ListaChofer lc) {
-        this.lc = lc;
     }
 
     //Inicio
