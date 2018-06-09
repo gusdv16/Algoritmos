@@ -12,7 +12,7 @@ public class Obligatorio {
 //        prueba2(s, p);
 //        prueba3(s, p);
 //        prueba4(s, p);
-        prueba3(s, p);
+        prueba5(s, p);
 //        ListaZona lz = new ListaZona();
 //
 //        lz.agregarInicio("Zona 1");
@@ -192,15 +192,20 @@ public class Obligatorio {
         p.ver(s.registrarAbonadol(2, "Pedro", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Pedro");
         p.ver(s.registrarAbonadol(3, "Ana", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Ana");
         p.ver(s.registrarAbonadol(4, "Maria", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.OK, "Se agrega Maria");
+        p.ver(s.registrarAbonadol(1, "Pablo", " Libertador 1455", "0991114", 10).resultado, Retorno.Resultado.ERROR_1, "No se encuentra zona 10");
         p.ver(s.registrarAbonadol(1, "Juan", " Mercedes 1455", "0991234", 1).resultado, Retorno.Resultado.ERROR_2, "Se agrega Juan que ya existe");
 
         p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
 
-        //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
+        p.ver(s.eliminarAbonado(5).resultado, Retorno.Resultado.ERROR_1, "El abonado 5 no existe en el sistema");
+        p.ver(s.eliminarAbonado(1).resultado, Retorno.Resultado.OK, "Se elimina a Juan");
+        
+        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
         p.imprimirResultadosPrueba();
     }
 
     static void prueba6(Sistema s, Prueba p) {
+        //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
         p.imprimirResultadosPrueba();
     }
 }
