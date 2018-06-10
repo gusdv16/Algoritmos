@@ -173,7 +173,7 @@ public class Obligatorio {
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se deshabilita PCS123 que ya estaba deshabilitado");
         p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "se habilita movil PCS123");
-        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS123");
+        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina movil PCS123");
 
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Listado de moviles - se elimino PCS123 ");
 
@@ -240,6 +240,10 @@ public class Obligatorio {
         p.ver(s.agregarRuta(1, 6, 100).resultado, Retorno.Resultado.ERROR_2, "La zona Destino no existe");
         p.ver(s.agregarRuta(1, 2, 0).resultado, Retorno.Resultado.ERROR_3, "Los minutos son menos de 1");
 
+        p.ver(s.modificarDemora(1, 2, 10).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
+        
+        p.ver(s.movilMasCercano(1).resultado, Retorno.Resultado.OK, "Movil mas cercano");
+        
         p.imprimirResultadosPrueba();
     }
 }

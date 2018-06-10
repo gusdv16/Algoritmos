@@ -269,9 +269,21 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno movilMasCercano(int zonaID
-    ) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+    public Retorno movilMasCercano(int zonaID) {
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
+        int largo = matrizDeZonas.length;
+        int minimo = matrizDeZonas[zonaID][0];
+        for (int i = 0; i < largo; i++) {
+            if (matrizDeZonas[zonaID][i] != 0 && matrizDeZonas[zonaID][i] < minimo) {
+                minimo = matrizDeZonas[zonaID][i];
+            }
+        }
+
+        ret.resultado = Retorno.Resultado.OK;
+        ret.valorString = "Se agrego la ruta.";
+
+        return ret;
     }
 
     @Override
