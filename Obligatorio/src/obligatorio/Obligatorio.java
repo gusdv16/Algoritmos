@@ -13,6 +13,7 @@ public class Obligatorio {
 //        prueba3(s, p);
 //        prueba4(s, p);
         prueba5(s, p);
+//        prueba6(s, p);
 //        ListaZona lz = new ListaZona();
 //
 //        lz.agregarInicio("Zona 1");
@@ -198,26 +199,25 @@ public class Obligatorio {
         p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
 
         p.ver(s.eliminarAbonado(5).resultado, Retorno.Resultado.ERROR_1, "El abonado 5 no existe en el sistema");
-        p.ver(s.eliminarAbonado(1).resultado, Retorno.Resultado.OK, "Se elimina a Juan");
-        
-        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
-        p.imprimirResultadosPrueba();
+        p.ver(s.eliminarAbonado(2).resultado, Retorno.Resultado.OK, "Se elimina a Juan");
+
+        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1 - 2");
+//        p.imprimirResultadosPrueba();
         //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
     }
 
-   static void prueba6(Sistema s, Prueba p) {
-    	p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+    static void prueba6(Sistema s, Prueba p) {
+        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
 
-    	p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
 
-    	p.ver(s.registrarMovil("PCS444", 1).resultado, Retorno.Resultado.OK, "Agrego movil BCO444 a Buceo ");
-    	p.ver(s.registrarChofer("PCS444", "Maria", "1455").resultado, Retorno.Resultado.OK, "Se agrega Maria");
-    	p.ver(s.registrarChofer("PCS444", "Maria2", "1185").resultado, Retorno.Resultado.OK, "Se agrega Maria");
-    	p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
-    	p.ver(s.eliminarChofer("PCS444","1185").resultado, Retorno.Resultado.OK, "Se elimina el puto chofer");
-    	p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
+        p.ver(s.registrarMovil("PCS444", 1).resultado, Retorno.Resultado.OK, "Agrego movil BCO444 a Buceo ");
+        p.ver(s.registrarChofer("PCS444", "Maria", "1455").resultado, Retorno.Resultado.OK, "Se agrega Maria");
+        p.ver(s.registrarChofer("PCS444", "Maria2", "1185").resultado, Retorno.Resultado.OK, "Se agrega Maria");
+        p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
+        p.ver(s.eliminarChofer("PCS444", "1185").resultado, Retorno.Resultado.OK, "Se elimina el puto chofer");
+        p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
 
-    	//p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
-    	p.imprimirResultadosPrueba();
-	}
+        p.imprimirResultadosPrueba();
+    }
 }

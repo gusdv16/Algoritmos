@@ -2,14 +2,14 @@ package obligatorio;
 
 public class NodoListaAbonado {
 
-    private Object abonadoID;
+    private int abonadoID;
     private NodoListaAbonado sig;
     private String abonadoNombre;
     private String abonadoDireccion;
     private String abonadoTel;
     private boolean Estado;
 
-    public NodoListaAbonado(Object dato, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
+    public NodoListaAbonado(int dato, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
         this.abonadoID = dato;
         this.sig = null;
         this.abonadoNombre = abonadoNombre;
@@ -18,11 +18,11 @@ public class NodoListaAbonado {
         this.Estado = true;
     }
 
-    public Object getAbonadoID() {
+    public int getAbonadoID() {
         return abonadoID;
     }
 
-    public void setAbonadoID(Object abonadoID) {
+    public void setAbonadoID(int abonadoID) {
         this.abonadoID = abonadoID;
     }
 
