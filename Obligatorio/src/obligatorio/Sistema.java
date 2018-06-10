@@ -240,21 +240,43 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno agregarRuta(int zonaOrigen, int zonaDestino, int minutosViaje) {
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
+        if (Lz.obtenerElementoPorId(zonaOrigen) == null) {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+            ret.valorString = "La zona origen no existe";
+        } else if (Lz.obtenerElementoPorId(zonaDestino) == null) {
+            ret.resultado = Retorno.Resultado.ERROR_2;
+            ret.valorString = "La zona destino no existe";
+        } else if (minutosViaje < 1) {
+            ret.resultado = Retorno.Resultado.ERROR_3;
+            ret.valorString = "Los minutos son menores a 0";
+        } else {
+            matrizDeZonas[zonaOrigen - 1][zonaDestino - 1] = minutosViaje;
+            matrizDeZonas[zonaDestino - 1][zonaOrigen - 1] = minutosViaje;
+
+            ret.resultado = Retorno.Resultado.OK;
+            ret.valorString = "Se agrego la ruta.";
+        }
+
+        return ret;
+    }
+
+    @Override
+    public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje
+    ) {
         return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
 
     @Override
-    public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
+    public Retorno movilMasCercano(int zonaID
+    ) {
         return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
 
     @Override
-    public Retorno movilMasCercano(int zonaID) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-    }
-
-    @Override
-    public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino) {
+    public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino
+    ) {
         return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
 
@@ -286,12 +308,15 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno zonasEnRadio(int zonaID, int duracionViaje) {
+    public Retorno zonasEnRadio(int zonaID, int duracionViaje
+    ) {
         return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
 
     @Override
-    public Retorno registrarChofer(String movilID, String nombre, String cedula) {
+    public Retorno registrarChofer(String movilID, String nombre,
+            String cedula
+    ) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         if (Lm.obtenerElemento(movilID) == null) {
@@ -306,7 +331,8 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno eliminarChofer(String movilID, String cedula) {
+    public Retorno eliminarChofer(String movilID, String cedula
+    ) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         if (Lm.obtenerElemento(movilID) == null) {
@@ -322,7 +348,8 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno informeChoferes(String movilID) {
+    public Retorno informeChoferes(String movilID
+    ) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
@@ -348,7 +375,10 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno registrarAbonadol(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID) {
+    public Retorno registrarAbonadol(int abonadoID, String abonadoNombre,
+            String abonadoDireccion, String abonadoTel,
+            int zonaID
+    ) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
@@ -365,7 +395,8 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno eliminarAbonado(int abonadoID) {
+    public Retorno eliminarAbonado(int abonadoID
+    ) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         NodoListaZona zona = buscarZonaPorAbonado(Lz, abonadoID);
 
@@ -387,7 +418,8 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno informeAbonadosZona(int zonaID) {
+    public Retorno informeAbonadosZona(int zonaID
+    ) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
