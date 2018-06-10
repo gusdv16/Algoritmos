@@ -272,16 +272,44 @@ public class Sistema implements ISistema {
     public Retorno movilMasCercano(int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
-        int largo = matrizDeZonas.length;
-        int minimo = matrizDeZonas[zonaID][0];
-        for (int i = 0; i < largo; i++) {
-            if (matrizDeZonas[zonaID][i] != 0 && matrizDeZonas[zonaID][i] < minimo) {
-                minimo = matrizDeZonas[zonaID][i];
+        if (Lz.obtenerElementoPorId(zonaID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La Zona no existe";
+        } else {
+            //CUENTO LA CANTIDAD DE MOVILES HABILITADOS QUE HAY EN LA ZONA
+            int cantDisponible = cantidadMovilesDisponibles(Lz, zonaID);
+
+            //SI NO HAY MOVILES HABILITADOS EN LA ZONA BUSCO EN LA ZONA MAS CERCANA
+            if (cantDisponible > 0) {
+                NodoListaMovil movil = MovilDisponible(Lz, zonaID);
+                System.out.println(movil.getDato() + ";0");
+                ret.resultado = Retorno.Resultado.OK;
+                ret.valorString = "Se encontro movil Disponible.";
+            } else {
+                int zonaIDM = zonaID - 1;
+                int largo = matrizDeZonas.length;
+                int duracion = matrizDeZonas[zonaIDM][1];
+                int zonaMasCercana = 1;
+                for (int i = 1; i < largo; i++) {
+                    if (matrizDeZonas[zonaIDM][i] != 0 && matrizDeZonas[zonaIDM][i] < duracion) {
+                        duracion = matrizDeZonas[zonaIDM][i];
+                        zonaMasCercana = i+1;
+                    }
+                }
+
+                int cantDisponibleZonaMasCercana = cantidadMovilesDisponibles(Lz, zonaMasCercana);
+
+                if (cantDisponibleZonaMasCercana > 0) {
+                    NodoListaMovil movil = MovilDisponible(Lz, zonaMasCercana);
+                    System.out.println(movil.getDato() + ";" + duracion);
+                    ret.resultado = Retorno.Resultado.OK;
+                    ret.valorString = "Se encontro movil Disponible.";
+                } else {
+                    ret.resultado = Retorno.Resultado.ERROR_2;
+                    ret.valorString = "No se encontro un movil Disponible.";
+                }
             }
         }
-
-        ret.resultado = Retorno.Resultado.OK;
-        ret.valorString = "Se agrego la ruta.";
 
         return ret;
     }

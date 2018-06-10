@@ -44,6 +44,7 @@ public class metodos {
             aux.borrarElemento(movil);
         }
     }
+
     //se asume que existen todos los datos
     public static void borrarAbonado(ListaZona lz, int abonadoId) {
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorAbonado(lz, abonadoId).getDato());
@@ -69,6 +70,7 @@ public class metodos {
         }
         return null;
     }
+
     //se asume que existen todos los datos
     public static NodoListaZona buscarZonaPorAbonado(ListaZona lz, int abonadoID) {
         NodoListaZona aux = lz.getInicio();
@@ -100,6 +102,57 @@ public class metodos {
             aux = aux.getSig();
         }
     }
+
+    //PRE: La zona debe existir
+    public static int cantidadMovilesDisponibles(ListaZona Lz, int zonaID) {
+        NodoListaZona aux = Lz.getInicio();
+        int movilesDisponibles = 0;
+
+        while (aux != null) {
+            if (aux.idZona == zonaID) {
+                NodoListaMovil aux1 = aux.getLm().getInicio();
+                while (aux1 != null) {
+                    if (aux1.isEstado()) {
+                        movilesDisponibles++;
+                    }
+                    aux1 = aux1.getSig();
+                }
+            }
+            aux = aux.getSig();
+        }
+        return movilesDisponibles;
+    }
+
+    //PRE: La zona debe existir
+    public static NodoListaMovil MovilDisponible(ListaZona Lz, int zonaID) {
+        NodoListaZona aux = Lz.getInicio();
+
+        while (aux != null) {
+            if (aux.idZona == zonaID) {
+                NodoListaMovil aux1 = aux.getLm().getInicio();
+                while (aux1 != null && !aux1.isEstado()) {
+                    aux1 = aux1.getSig();
+                }
+                return aux1;
+            }
+            aux = aux.getSig();
+        }
+        return null;
+    }
+
+    public static void mostrarmapa(int[][] mapa) {
+        int filas = mapa.length;
+        int columnas = mapa[0].length;
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                System.out.print(mapa[i][j] + " - ");
+            }
+            System.out.println();
+        }
+
+    }
+
     public static void mostrarAbonados(ListaZona lz) {
         NodoListaZona aux = lz.getInicio();
 
@@ -109,11 +162,11 @@ public class metodos {
 
             NodoListaAbonado aux2 = aux.getLa().getInicio();
 //            if (aux2.getLch() != null) {
-                while (aux2 != null) {
-                    System.out.println("\n" + aux2.getAbonadoID());
+            while (aux2 != null) {
+                System.out.println("\n" + aux2.getAbonadoID());
 //                    aux2.getLch().mostrar();
-                    aux2 = aux2.getSig();
-                }
+                aux2 = aux2.getSig();
+            }
 //            }
             aux = aux.getSig();
         }
