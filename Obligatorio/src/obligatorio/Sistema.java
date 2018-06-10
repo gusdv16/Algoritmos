@@ -263,9 +263,30 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje
-    ) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+    public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
+        
+        mostrarmapa(matrizDeZonas);
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
+        if (Lz.obtenerElementoPorId(zonaOrigen) == null) {
+            ret.resultado = Retorno.Resultado.ERROR_1;
+            ret.valorString = "La zona origen no existe";
+        } else if (Lz.obtenerElementoPorId(zonaDestino) == null) {
+            ret.resultado = Retorno.Resultado.ERROR_2;
+            ret.valorString = "La zona destino no existe";
+        } else if (minutosViaje < 1) {
+            ret.resultado = Retorno.Resultado.ERROR_3;
+            ret.valorString = "Los minutos son menores a 0";
+        } else {
+            matrizDeZonas[zonaOrigen - 1][zonaDestino - 1] = minutosViaje;
+            matrizDeZonas[zonaDestino - 1][zonaOrigen - 1] = minutosViaje;
+
+            ret.resultado = Retorno.Resultado.OK;
+            ret.valorString = "Se agrego la ruta.";
+        }
+        System.out.println();
+        mostrarmapa(matrizDeZonas);
+        return ret;
     }
 
     @Override
@@ -293,7 +314,7 @@ public class Sistema implements ISistema {
                 for (int i = 1; i < largo; i++) {
                     if (matrizDeZonas[zonaIDM][i] != 0 && matrizDeZonas[zonaIDM][i] < duracion) {
                         duracion = matrizDeZonas[zonaIDM][i];
-                        zonaMasCercana = i+1;
+                        zonaMasCercana = i + 1;
                     }
                 }
 
