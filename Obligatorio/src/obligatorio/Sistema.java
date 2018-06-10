@@ -285,11 +285,49 @@ public class Sistema implements ISistema {
 
         return ret;
     }
+// pre: ninguna distancia puede ser 0
 
     @Override
-    public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino
-    ) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+    public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino) {
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        NodoListaZona orgigen = Lz.obtenerElementoPorId(zonaOrigen);
+        NodoListaZona destino = Lz.obtenerElementoPorId(zonaDestino);
+        
+        if (orgigen != null) {
+            if (destino != null) {
+
+                int columnas = matrizDeZonas[0].length;
+                int duracion = Integer.MAX_VALUE;
+                String escala = "";
+                String camino = "";
+                int escalaNum = 0;
+                
+                for (int i = 0; i < columnas; i++) {
+                    if (matrizDeZonas[zonaOrigen][i] != 0 && matrizDeZonas[zonaDestino][i] != 0 && matrizDeZonas[zonaOrigen][i] + matrizDeZonas[zonaDestino][i] < duracion) {
+                        duracion = matrizDeZonas[zonaOrigen][i] + matrizDeZonas[zonaDestino][i];
+                        escalaNum = i-1;
+                    }
+
+                }
+                escala = Lz.BuscarZonaDadaPos(Lz.cantElementos() - escalaNum);
+                camino = "ir de " + zonaOrigen + " ; " + zonaDestino + " escala en " + escala + " duracion " + duracion;
+
+                System.out.println(camino);
+                if (matrizDeZonas[zonaOrigen][zonaDestino] != 0 && matrizDeZonas[zonaOrigen][zonaDestino] > 0) {
+                    camino = "camino directo " + zonaOrigen + " ; " + zonaDestino + "duracion " + matrizDeZonas[zonaOrigen][zonaDestino];
+
+                }
+                //return camino;
+                ret.resultado = Resultado.OK;
+                ret.valorString = camino;
+            } else {
+                ret.resultado = Resultado.ERROR_3;
+
+            }
+        } else {
+            ret.resultado = Resultado.ERROR_2;
+        }
+        return ret;
     }
 
     @Override
