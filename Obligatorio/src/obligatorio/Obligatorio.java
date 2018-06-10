@@ -12,8 +12,9 @@ public class Obligatorio {
 //        prueba2(s, p);
 //        prueba3(s, p);
 //        prueba4(s, p);
-        prueba5(s, p);
+//        prueba5(s, p);
 //        prueba6(s, p);
+        prueba7(s, p);
 //        ListaZona lz = new ListaZona();
 //
 //        lz.agregarInicio("Zona 1");
@@ -172,7 +173,7 @@ public class Obligatorio {
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se deshabilita PCS123 que ya estaba deshabilitado");
         p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "se habilita movil PCS123");
-        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina mobil PCS123");
+        p.ver(s.eliminarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se elimina movil PCS123");
 
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Listado de moviles - se elimino PCS123 ");
 
@@ -202,7 +203,7 @@ public class Obligatorio {
         p.ver(s.eliminarAbonado(2).resultado, Retorno.Resultado.OK, "Se elimina a Juan");
 
         p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1 - 2");
-//        p.imprimirResultadosPrueba();
+        p.imprimirResultadosPrueba();
         //p.ver(s.cambiarUbicacion("PCS1245", 2).resultado, Retorno.Resultado.OK, "Cambia");
     }
 
@@ -218,6 +219,31 @@ public class Obligatorio {
         p.ver(s.eliminarChofer("PCS444", "1185").resultado, Retorno.Resultado.OK, "Se elimina el puto chofer");
         p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
 
+        p.imprimirResultadosPrueba();
+    }
+
+    static void prueba7(Sistema s, Prueba p) {
+        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        
+        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
+        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
+        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
+        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
+
+        p.ver(s.agregarRuta(1, 2, 10).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
+        p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Parque Rodo");
+        p.ver(s.agregarRuta(1, 4, 8).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Buceo");
+        p.ver(s.agregarRuta(1, 5, 5).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Malvin");
+        
+        p.ver(s.agregarRuta(6, 4, 100).resultado, Retorno.Resultado.ERROR_1, "La zona Origen no existe");
+        p.ver(s.agregarRuta(1, 6, 100).resultado, Retorno.Resultado.ERROR_2, "La zona Destino no existe");
+        p.ver(s.agregarRuta(1, 2, 0).resultado, Retorno.Resultado.ERROR_3, "Los minutos son menos de 1");
+
+        p.ver(s.modificarDemora(1, 2, 10).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
+        
+        p.ver(s.movilMasCercano(1).resultado, Retorno.Resultado.OK, "Movil mas cercano");
+        
         p.imprimirResultadosPrueba();
     }
 }
