@@ -5,11 +5,11 @@ interface IListaAbonado {
     //metodos de la interfaz
     public boolean esVacia();
 
-    public void agregarInicio(Object dato, String abonadoNombre, String abonadoDireccion, String abonadoTel);
+    public void agregarInicio(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel);
 
     public void desencolar();
 
-    public void encolar(Object dato, String abonadoNombre, String abonadoDireccion, String abonadoTel);
+    public void encolar(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel);
 
     public void vaciar();
 
@@ -17,5 +17,5 @@ interface IListaAbonado {
 
     public Object frente();
 
-    public NodoListaAbonado obtenerElemento(Object dato);
+    public NodoListaAbonado obtenerElemento(int abonadoID);
 }

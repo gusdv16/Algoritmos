@@ -45,7 +45,7 @@ public class metodos {
         }
     }
     //se asume que existen todos los datos
-    public static void borrarAbonado(ListaZona lz, Object abonadoId) {
+    public static void borrarAbonado(ListaZona lz, int abonadoId) {
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorAbonado(lz, abonadoId).getDato());
         NodoListaAbonado pabonado = origen.getLa().obtenerElemento(abonadoId);
 
@@ -70,7 +70,7 @@ public class metodos {
         return null;
     }
     //se asume que existen todos los datos
-    public static NodoListaZona buscarZonaPorAbonado(ListaZona lz, Object abonadoID) {
+    public static NodoListaZona buscarZonaPorAbonado(ListaZona lz, int abonadoID) {
         NodoListaZona aux = lz.getInicio();
 
         while (aux != null) {
