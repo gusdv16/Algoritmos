@@ -244,7 +244,8 @@ public class Obligatorio {
 
         p.ver(s.agregarRuta(1, 2, 10).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
         p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Parque Rodo");
-        p.ver(s.agregarRuta(2, 4, 8).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Buceo");
+        p.ver(s.agregarRuta(2, 4, 8).resultado, Retorno.Resultado.OK, "Se crea la ruta Punta Carretas a Buceo");
+        p.ver(s.agregarRuta(3, 4, 7).resultado, Retorno.Resultado.OK, "Se crea la ruta Parque Rodo a Buceo");
         p.ver(s.agregarRuta(1, 5, 4).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Malvin");
 
         p.ver(s.agregarRuta(6, 4, 100).resultado, Retorno.Resultado.ERROR_1, "La zona Origen no existe");
@@ -269,14 +270,15 @@ public class Obligatorio {
 
         p.ver(s.agregarRuta(1, 2, 10).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
         p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Parque Rodo");
-        p.ver(s.agregarRuta(1, 4, 8).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Buceo");
+        p.ver(s.agregarRuta(2, 4, 11).resultado, Retorno.Resultado.OK, "Se crea la ruta Punta Carretas a Buceo");
+        p.ver(s.agregarRuta(3, 4, 7).resultado, Retorno.Resultado.OK, "Se crea la ruta Parque Rodo a Buceo");
         p.ver(s.agregarRuta(1, 5, 5).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Malvin");
 
         p.ver(s.agregarRuta(6, 4, 100).resultado, Retorno.Resultado.ERROR_1, "La zona Origen no existe");
         p.ver(s.agregarRuta(1, 6, 100).resultado, Retorno.Resultado.ERROR_2, "La zona Destino no existe");
         p.ver(s.agregarRuta(1, 2, 0).resultado, Retorno.Resultado.ERROR_3, "Los minutos son menos de 1");
 
-        p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Ruta con una escala");
+        p.ver(s.rutaMasRapida(1, 4).resultado, Retorno.Resultado.OK, "Ruta con una escala");
 
         p.imprimirResultadosPrueba();
     }

@@ -338,10 +338,10 @@ public class Sistema implements ISistema {
     @Override
     public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        NodoListaZona orgigen = Lz.obtenerElementoPorId(zonaOrigen);
+        NodoListaZona origen = Lz.obtenerElementoPorId(zonaOrigen);
         NodoListaZona destino = Lz.obtenerElementoPorId(zonaDestino);
 
-        if (orgigen != null) {
+        if (origen != null) {
             if (destino != null) {
 
                 int columnas = matrizDeZonas[0].length;
@@ -349,20 +349,41 @@ public class Sistema implements ISistema {
                 String escala = "";
                 String camino = "";
                 int escalaNum = 0;
+                int zOrigen = zonaOrigen - 1;
+                int zDestino = zonaDestino - 1;
 
-                for (int i = 0; i < columnas; i++) {
-                    if (matrizDeZonas[zonaOrigen][i] != 0 && matrizDeZonas[zonaDestino][i] != 0 && matrizDeZonas[zonaOrigen][i] + matrizDeZonas[zonaDestino][i] < duracion) {
-                        duracion = matrizDeZonas[zonaOrigen][i] + matrizDeZonas[zonaDestino][i];
-                        escalaNum = i - 1;
+                mostrarmapa(matrizDeZonas);
+                //VERIFICO SI TIENE RUTA DIRECTA
+                if (matrizDeZonas[zOrigen][zDestino] == 0) {
+                    //RECORRO TODAS LAS COLUMNAS
+                    for (int i = 0; i < columnas; i++) {
+                        //VERIFICO RUTAS CONECTADAS AL ORIGEN
+                        if (matrizDeZonas[zOrigen][i] > 0) {
+                            //VERIFICO QUE ZONA CONECTADA A ORIGEN 
+                            //SE CONECTA CON LA DE DESTINO
+                            if (matrizDeZonas[i][zDestino] > 0) {
+                                //BUSCO LA DURACION MAS CORTA
+                                if (matrizDeZonas[zOrigen][i] != 0 && matrizDeZonas[zOrigen][i] < duracion) {
+                                    duracion = matrizDeZonas[zOrigen][i];
+                                    escalaNum = i;
+                                }
+                            }
+                        }
                     }
-
+                    escala = Lz.BuscarZonaDadaPos(Lz.cantElementos() - escalaNum);
+                    camino = "Ir de " + Lz.obtenerElementoPorId(zonaOrigen).getDato() + " a " + Lz.obtenerElementoPorId(zonaDestino).getDato() + "\n";
+                    camino += Lz.obtenerElementoPorId(zonaOrigen).getDato() + ";" + 0 + "|" + Lz.obtenerElementoPorId(escalaNum+1).getDato();
+                    camino += ";" + matrizDeZonas[escalaNum][zDestino];
+                    camino += "|" + Lz.obtenerElementoPorId(zonaDestino).getDato() + ";" + duracion;
+                    camino += "|Demora total: " + (duracion + matrizDeZonas[escalaNum][zDestino]);
+                } else {
+                    duracion = matrizDeZonas[zOrigen][zDestino];
+                    escalaNum = 1;
                 }
-                escala = Lz.BuscarZonaDadaPos(Lz.cantElementos() - escalaNum);
-                camino = "ir de " + zonaOrigen + " ; " + zonaDestino + " escala en " + escala + " duracion " + duracion;
 
                 System.out.println(camino);
-                if (matrizDeZonas[zonaOrigen][zonaDestino] != 0 && matrizDeZonas[zonaOrigen][zonaDestino] > 0) {
-                    camino = "camino directo " + zonaOrigen + " ; " + zonaDestino + "duracion " + matrizDeZonas[zonaOrigen][zonaDestino];
+                if (matrizDeZonas[zOrigen][zDestino] != 0 && matrizDeZonas[zOrigen][zDestino] > 0) {
+                    camino = "camino directo " + zOrigen + " ; " + zDestino + "duracion " + matrizDeZonas[zOrigen][zDestino];
 
                 }
                 //return camino;
