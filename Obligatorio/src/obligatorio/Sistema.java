@@ -265,7 +265,7 @@ public class Sistema implements ISistema {
     @Override
     public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
 
-        mostrarmapa(matrizDeZonas);
+//        mostrarmapa(matrizDeZonas);
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         if (Lz.obtenerElementoPorId(zonaOrigen) == null) {
@@ -285,7 +285,7 @@ public class Sistema implements ISistema {
             ret.valorString = "Se agrego la ruta.";
         }
         System.out.println();
-        mostrarmapa(matrizDeZonas);
+//        mostrarmapa(matrizDeZonas);
         return ret;
     }
 
@@ -510,7 +510,7 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno registrarAbonadol(int abonadoID, String abonadoNombre,
+    public Retorno registrarAbonado(int abonadoID, String abonadoNombre,
             String abonadoDireccion, String abonadoTel,
             int zonaID
     ) {
