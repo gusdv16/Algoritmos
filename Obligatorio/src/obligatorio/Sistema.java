@@ -441,7 +441,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema de emergencias";
         } else {
-            Lm.obtenerElemento(movilID).getLch().agregarInicio(cedula, nombre);
+            Lm.obtenerElemento(movilID).getLch().agregarFinal(cedula, nombre);
             ret.resultado = Resultado.OK;
             ret.valorString = "chofer agregado correctamente";
         }
@@ -458,15 +458,16 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "El chofer no existe";
         } else {
-            NodoListaChofer aux = movil.getLch().getInicio();
-            while (aux.getSiguiente().getSiguiente() != null && aux.getCedula() != cedula) {
-                aux = aux.getSiguiente();
-            }
-            if (aux.getSiguiente() != null) {
-                aux.setSiguiente(aux.getSiguiente().getSiguiente());
-                ret.resultado = Resultado.OK;
-                ret.valorString = "Se elimino el Chofer";
-            }
+            movil.getLch().borrarElemento(cedula);
+//            NodoListaChofer aux = movil.getLch().getInicio();
+//            while (aux.getSiguiente().getSiguiente() != null && aux.getCedula() != cedula) {
+//                aux = aux.getSiguiente();
+//            }
+//            if (aux.getSiguiente() != null) {
+//                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+//                ret.resultado = Resultado.OK;
+//                ret.valorString = "Se elimino el Chofer";
+//            }
         }
 
 //        if (Lm.obtenerElemento(movilID) == null) {
@@ -516,11 +517,12 @@ public class Sistema implements ISistema {
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona no existe";
-        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().obtenerElemento(abonadoID) != null) {
+//        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().obtenerElemento(abonadoID) != null) {
+        } else if (buscarZonaPorAbonado(Lz, abonadoID) != null) {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Abonado ya existe en el sistema de emergencias";
         } else {
-            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().agregarInicio(abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLa().agregarFinal(abonadoID, abonadoNombre, abonadoDireccion, abonadoTel);
             ret.resultado = Resultado.OK;
             ret.valorString = "Abonado agregado a zona correctamente";
         }
@@ -536,15 +538,17 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "El abonado no existe";
         } else {
-            NodoListaAbonado aux = zona.getLa().getInicio();
-            while (aux.getSig().getSig() != null && aux.getAbonadoID() != abonadoID) {
-                aux = aux.getSig();
-            }
-            if (aux.getSig() != null) {
-                aux.setSig(aux.getSig().getSig());
-                ret.resultado = Resultado.OK;
-                ret.valorString = "Se elimino el Abonado";
-            }
+            zona.getLa().borrarElemento(abonadoID);
+            
+//            NodoListaAbonado aux = zona.getLa().getInicio();
+//            while (aux.getSig().getSig() != null && aux.getAbonadoID() != abonadoID) {
+//                aux = aux.getSig();
+//            }
+//            if (aux.getSig() != null) {
+//                aux.setSig(aux.getSig().getSig());
+//                ret.resultado = Resultado.OK;
+//                ret.valorString = "Se elimino el Abonado";
+//            }
         }
         return ret;
     }
