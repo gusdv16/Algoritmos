@@ -7,54 +7,25 @@ public class Obligatorio {
     public static void main(String[] args) {
         Sistema s = new Sistema();
         Prueba p = new Prueba();
+//        prueba1(s, p);
+//        prueba2(s, p);
+//        prueba3(s, p);
+//        prueba4(s, p);
+//        prueba5(s, p);
+//        prueba6(s, p);
+//        prueba7(s, p);
+//        prueba8(s, p);
         prueba9(s, p);
-        //        prueba1(s, p);
-                //        prueba2(s, p);
-                //        prueba3(s, p);
-                //        prueba4(s, p);
-                //        prueba5(s, p);
-                //        prueba6(s, p);
-                //        prueba7(s, p);
-                //        prueba8(s, p);
-                //        ListaZona lz = new ListaZona();
-                //
-                //        lz.agregarInicio("Zona 1");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 3");
-                //        lz.getInicio().getLm().agregarOrd("  Mavil 1");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 1");
-                ////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 1");
-                ////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 2");
-                ////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Cahofer 2");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 4");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 2");
-                //        lz.agregarInicio("Zona 2");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 20");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 21");
-                //        lz.agregarInicio("Zona 3");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 31");
-                //        lz.getInicio().getLm().agregarOrd("  Movil 32");
-                //
-                //        agregarMovilAZona(lz, "Zona 2", "  Movil 99");
-                //        mostrarZonasCompleto(lz);
-                //        System.out.println("\n-----------------");
-                //        System.out.println("Muevo Zona");
-                //        System.out.println("-----------------");
-                //        viaje(lz, "Zona 1", "Zona 2", "  Movil 1");
-                //        cambiarUbicacion(lz, "Zona 2", "  Movil 1");
-                //        mostrarZonasCompleto(lz);
-                //        System.out.println(buscarZonaPorMovil(lz, "  Movil 99").getDato());//z2
-                //        System.out.println(buscarZonaPorMovil(lz, "  Movil 32").getDato());//z3
-                //        System.out.println(buscarZonaPorMovil(lz, "  Movil 4").getDato());//z1
     }
 
     static void prueba1(Sistema s, Prueba p) {
 
         p.ver(s.crearSistemaEmergencias(3).resultado, Retorno.Resultado.OK, "Se crea el sistema para 3 zonas");
         p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
-        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Se intento agregar Montevideo que ya existe");
+        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_2, "Se intento agregar Montevideo que ya existe");
         p.ver(s.agregarZona("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");
         p.ver(s.agregarZona("La Paloma").resultado, Retorno.Resultado.OK, "Se agrego La Paloma");
-        p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_2, "Se intento agregar Maldonado pero el sistema esta completo");
+        p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_1, "Se intento agregar Maldonado pero el sistema esta completo");
         p.ver(s.destruirSistemaEmergencias().resultado, Retorno.Resultado.OK, "Se destruye sistema");
         p.imprimirResultadosPrueba();
     }
@@ -68,11 +39,11 @@ public class Obligatorio {
         p.ver(s.agregarZona("Lima").resultado, Retorno.Resultado.OK, "Se ingresa Lima");
         p.ver(s.agregarZona("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");
         p.imprimirComentario("INGRESAMOS CIUDAD REPETIDA");
-        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
+        p.ver(s.agregarZona("Montevideo").resultado, Retorno.Resultado.ERROR_2, "Montevideo ya existe");
         p.ver(s.agregarZona("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York");
 
         p.imprimirComentario("INTENTAMOS SOBREPASAR EL LIMITE DE CIUDADES");
-        p.ver(s.agregarZona("Buenos Aires").resultado, Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades gestionados por el sistema");
+        p.ver(s.agregarZona("Buenos Aires").resultado, Retorno.Resultado.ERROR_1, "Se sobrepasa el límite de ciudades gestionados por el sistema");
 
         p.imprimirResultadosPrueba();
     }

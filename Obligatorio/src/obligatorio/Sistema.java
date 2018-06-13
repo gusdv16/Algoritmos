@@ -205,7 +205,7 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (cantZonas <= Lz.cantElementos()) {
             Lz.agregarFinal(zonaNombre);
-            ret.resultado = Retorno.Resultado.ERROR_2;
+            ret.resultado = Retorno.Resultado.ERROR_1;
             ret.valorString = "Se paso la cantidad de zonas del sistema";
         } else {
             //se tiene que controlar el id
@@ -214,7 +214,7 @@ public class Sistema implements ISistema {
                 ret.resultado = Retorno.Resultado.OK;
                 ret.valorString = "la zona se agregó correctamente";
             } else {
-                ret.resultado = Retorno.Resultado.ERROR_1;
+                ret.resultado = Retorno.Resultado.ERROR_2;
                 ret.valorString = "La zona ya existe";
             }
         }
