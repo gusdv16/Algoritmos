@@ -4,12 +4,12 @@ import obligatorio.IListaAbonado;
 
 public class ListaAbonado implements IListaAbonado {
 
-    private NodoListaAbonado inicio;
+   private NodoListaAbonado inicio;
     private NodoListaAbonado fin;
     private int cantelementos;
 
     //Constructor
-    public ListaAbonado() {
+    public void ListaAbonado() {
         this.inicio = null;
         this.fin = null;
         this.cantelementos = 0;
@@ -55,8 +55,8 @@ public class ListaAbonado implements IListaAbonado {
 
     //PRE: 
     //POS: Agrega un nuevo Nodo al principio de la lista
-    public void agregarInicio(int id, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
-        NodoListaAbonado nuevo = new NodoListaAbonado(id, abonadoNombre, abonadoDireccion, abonadoTel);
+    public void agregarInicio(int dato, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
+        NodoListaAbonado nuevo = new NodoListaAbonado(dato,abonadoNombre, abonadoDireccion, abonadoTel);
         nuevo.setSig(inicio);
         this.inicio = nuevo;
         if (this.fin == null)//estoy insertando el primer nodo
@@ -64,12 +64,12 @@ public class ListaAbonado implements IListaAbonado {
             this.fin = nuevo;
         }
 
-        this.cantelementos++;
+        this.cantelementos = this.cantelementos + 1;
     }
 
     //PRE:
     //POS: Borra el primer nodo
-    public void desencolar() {
+    public void borrarInicio() {
         if (!this.esVacia()) {
             this.inicio = this.inicio.getSig();
             this.cantelementos = this.cantelementos - 1;
@@ -88,41 +88,56 @@ public class ListaAbonado implements IListaAbonado {
     //POS: Recorre y muestra los datos de lista
     public void mostrar() {
         if (this.esVacia()) {
-            System.out.println("\tLista es vacía");
+            System.out.println("Lista es vacía");
         } else {
             NodoListaAbonado aux = this.inicio;
             while (aux != null) {
-                System.out.println("\t" + aux.getAbonadoID());
+                System.out.println(aux.getAbonadoID()+aux.getAbonadoNombre()+aux.getAbonadoDireccion()+aux.getAbonadoTel());
                 aux = aux.getSig();
             }
         }
     }
 
-    /*Variantes agregadas a los metodos basicos.*/
+  
     //PRE:
     //POS: Agrega un nuevo Nodo al final de la lista
-    public void encolar(int id, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
+    public void agregarFinal(int dato, String abonadoNombre, String abonadoDireccion, String abonadoTel) {
         //NodoLista nuevo= new NodoLista(n);
         if (this.esVacia()) {
-            this.agregarInicio(id, abonadoNombre, abonadoDireccion, abonadoTel); // el agregar inicio suma 1 a cantelementos
+            this.agregarInicio(dato,abonadoNombre,abonadoDireccion,abonadoTel); // el agregar inicio suma 1 a cantelementos
         } else {
-            NodoListaAbonado nuevo = new NodoListaAbonado(id, abonadoNombre, abonadoDireccion, abonadoTel);
+            NodoListaAbonado nuevo = new NodoListaAbonado(dato,abonadoNombre,abonadoDireccion,abonadoTel);
             fin.setSig(nuevo);
             fin = nuevo;
-            this.cantelementos++;
+            this.cantelementos = this.cantelementos + 1;
+        }
+
+    }
+
+    //PRE:
+    //POS: Borra el último nodo
+    public void borrarFin() {
+        if (!this.esVacia()) {
+            if (this.inicio == this.fin) {
+                this.borrarInicio();  // actualiza canelementos
+            } else {
+                NodoListaAbonado aux = this.inicio;
+                while (aux.getSig().getSig()!= null) {
+                    aux = aux.getSig();
+                }
+                this.fin = aux;
+                this.fin.setSig(null);
+                this.cantelementos = this.cantelementos - 1;
+            }
         }
     }
 
-    public Object frente() {
-        return fin.getAbonadoID();
-    }
-
-    //PRE:
+   //PRE:
     //POS: Borra la primer ocurrencia de un elemento dado
-    public void borrarElemento(int id) {
+    public void borrarElemento(int dato) {
         NodoListaAbonado anterior = this.getInicio(), aux = this.getInicio();
 
-        while (aux != null && aux.getAbonadoID() != id) {
+        while (aux != null && aux.getAbonadoID()!= dato) {
             anterior = aux;
             aux = aux.getSig();
         }
@@ -137,15 +152,26 @@ public class ListaAbonado implements IListaAbonado {
         return this.cantelementos;
     }
 
-    //PRE: listadoble ordenada, el elemento N debe existir
-    //POS: Borra la primer ocurrencia de un elemento int
-    public NodoListaAbonado obtenerElemento(int id) {
+    //PRE: //POS:
+    //PRE: //POS:
+    public NodoListaAbonado obtenerElemento(int dato) {
         NodoListaAbonado aux = this.inicio;
-        while (aux != null && aux.getAbonadoID() != id) {
+        while (aux != null && aux.getAbonadoID()!= dato) {
             aux = aux.getSig();
         }
-        //encontro dato o lleguo al final
+        //encontrÃ© dato o lleguÃ© al final
         return aux;
     }
 
+    //PRE:
+    //POS: muestra los datos de la lista en orden de enlace
+    public void mostrarREC(NodoListaChofer l) {
+        if (l != null) {
+            System.out.println(l.getCedula());
+            mostrarREC(l.getSiguiente());
+
+        }
+    }
+
+  
 }

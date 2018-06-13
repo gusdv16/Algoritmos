@@ -52,7 +52,7 @@ public class metodos {
 
         ListaAbonado aux = origen.getLa();
         if (aux.getFin() == pabonado) {
-            aux.desencolar();
+            aux.borrarElemento(abonadoId);
         } else {
             aux.borrarElemento(abonadoId);
         }

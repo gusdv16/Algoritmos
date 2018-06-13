@@ -7,45 +7,44 @@ public class Obligatorio {
     public static void main(String[] args) {
         Sistema s = new Sistema();
         Prueba p = new Prueba();
-
-//        prueba1(s, p);
-//        prueba2(s, p);
-//        prueba3(s, p);
-//        prueba4(s, p);
-//        prueba5(s, p);
-//        prueba6(s, p);
-//        prueba7(s, p);
-        prueba8(s, p);
-//        ListaZona lz = new ListaZona();
-//
-//        lz.agregarInicio("Zona 1");
-//        lz.getInicio().getLm().agregarOrd("  Movil 3");
-//        lz.getInicio().getLm().agregarOrd("  Mavil 1");
-//        lz.getInicio().getLm().agregarOrd("  Movil 1");
-////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 1");
-////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 2");
-////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Cahofer 2");
-//        lz.getInicio().getLm().agregarOrd("  Movil 4");
-//        lz.getInicio().getLm().agregarOrd("  Movil 2");
-//        lz.agregarInicio("Zona 2");
-//        lz.getInicio().getLm().agregarOrd("  Movil 20");
-//        lz.getInicio().getLm().agregarOrd("  Movil 21");
-//        lz.agregarInicio("Zona 3");
-//        lz.getInicio().getLm().agregarOrd("  Movil 31");
-//        lz.getInicio().getLm().agregarOrd("  Movil 32");
-//
-//        agregarMovilAZona(lz, "Zona 2", "  Movil 99");
-//        mostrarZonasCompleto(lz);
-//        System.out.println("\n-----------------");
-//        System.out.println("Muevo Zona");
-//        System.out.println("-----------------");
-//        viaje(lz, "Zona 1", "Zona 2", "  Movil 1");
-//        cambiarUbicacion(lz, "Zona 2", "  Movil 1");
-//        mostrarZonasCompleto(lz);
-
-//        System.out.println(buscarZonaPorMovil(lz, "  Movil 99").getDato());//z2
-//        System.out.println(buscarZonaPorMovil(lz, "  Movil 32").getDato());//z3
-//        System.out.println(buscarZonaPorMovil(lz, "  Movil 4").getDato());//z1
+        prueba9(s, p);
+        //        prueba1(s, p);
+                //        prueba2(s, p);
+                //        prueba3(s, p);
+                //        prueba4(s, p);
+                //        prueba5(s, p);
+                //        prueba6(s, p);
+                //        prueba7(s, p);
+                //        prueba8(s, p);
+                //        ListaZona lz = new ListaZona();
+                //
+                //        lz.agregarInicio("Zona 1");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 3");
+                //        lz.getInicio().getLm().agregarOrd("  Mavil 1");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 1");
+                ////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 1");
+                ////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Chofer 2");
+                ////        lz.getInicio().getLm().getInicio().getLch().agregarOrd("    Cahofer 2");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 4");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 2");
+                //        lz.agregarInicio("Zona 2");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 20");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 21");
+                //        lz.agregarInicio("Zona 3");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 31");
+                //        lz.getInicio().getLm().agregarOrd("  Movil 32");
+                //
+                //        agregarMovilAZona(lz, "Zona 2", "  Movil 99");
+                //        mostrarZonasCompleto(lz);
+                //        System.out.println("\n-----------------");
+                //        System.out.println("Muevo Zona");
+                //        System.out.println("-----------------");
+                //        viaje(lz, "Zona 1", "Zona 2", "  Movil 1");
+                //        cambiarUbicacion(lz, "Zona 2", "  Movil 1");
+                //        mostrarZonasCompleto(lz);
+                //        System.out.println(buscarZonaPorMovil(lz, "  Movil 99").getDato());//z2
+                //        System.out.println(buscarZonaPorMovil(lz, "  Movil 32").getDato());//z3
+                //        System.out.println(buscarZonaPorMovil(lz, "  Movil 4").getDato());//z1
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -281,5 +280,21 @@ public class Obligatorio {
         p.ver(s.rutaMasRapida(1, 4).resultado, Retorno.Resultado.OK, "Ruta con una escala");
 
         p.imprimirResultadosPrueba();
+    }
+
+    private static void prueba9(Sistema s, Prueba p) {
+        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+
+        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+
+        p.ver(s.registrarMovil("PCS444", 1).resultado, Retorno.Resultado.OK, "Agrego movil BCO444 a Buceo ");
+        p.ver(s.registrarChofer("PCS444", "Maria", "1455").resultado, Retorno.Resultado.OK, "Se agrega Maria");
+        p.ver(s.registrarChofer("PCS444", "Maria2", "1185").resultado, Retorno.Resultado.OK, "Se agrega Maria2");
+        p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
+        p.ver(s.eliminarChofer("PCS444", "1185").resultado, Retorno.Resultado.OK, "Se elimina el puto chofer");
+        p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
+
+        p.imprimirResultadosPrueba();
+
     }
 }
