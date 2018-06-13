@@ -44,7 +44,7 @@ public interface ISistema {
 
     Retorno informeChoferes(String movilID);
 
-    Retorno registrarAbonadol(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID);
+    Retorno registrarAbonado(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID);
 
     Retorno eliminarAbonado(int abonadoID);
 
