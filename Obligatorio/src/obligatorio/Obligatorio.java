@@ -14,8 +14,7 @@ public class Obligatorio {
 //        prueba5(s, p);
 //        prueba6(s, p);
 //        prueba7(s, p);
-//        prueba8(s, p);
-        prueba9(s, p);
+        prueba8(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -229,31 +228,7 @@ public class Obligatorio {
         p.imprimirResultadosPrueba();
     }
 
-    static void prueba8(Sistema s, Prueba p) {
-        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
-
-        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
-        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
-        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
-        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
-        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
-
-        p.ver(s.agregarRuta(1, 2, 10).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
-        p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Parque Rodo");
-        p.ver(s.agregarRuta(2, 4, 11).resultado, Retorno.Resultado.OK, "Se crea la ruta Punta Carretas a Buceo");
-        p.ver(s.agregarRuta(3, 4, 7).resultado, Retorno.Resultado.OK, "Se crea la ruta Parque Rodo a Buceo");
-        p.ver(s.agregarRuta(1, 5, 5).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Malvin");
-
-        p.ver(s.agregarRuta(6, 4, 100).resultado, Retorno.Resultado.ERROR_1, "La zona Origen no existe");
-        p.ver(s.agregarRuta(1, 6, 100).resultado, Retorno.Resultado.ERROR_2, "La zona Destino no existe");
-        p.ver(s.agregarRuta(1, 2, 0).resultado, Retorno.Resultado.ERROR_3, "Los minutos son menos de 1");
-
-        p.ver(s.rutaMasRapida(1, 4).resultado, Retorno.Resultado.OK, "Ruta con una escala");
-
-        p.imprimirResultadosPrueba();
-    }
-
-    private static void prueba9(Sistema s, Prueba p) {
+    private static void prueba8(Sistema s, Prueba p) {
         p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
 
         p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");

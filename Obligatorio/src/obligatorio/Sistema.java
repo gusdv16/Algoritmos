@@ -372,7 +372,7 @@ public class Sistema implements ISistema {
                     }
                     escala = Lz.BuscarZonaDadaPos(Lz.cantElementos() - escalaNum);
                     camino = "Ir de " + Lz.obtenerElementoPorId(zonaOrigen).getDato() + " a " + Lz.obtenerElementoPorId(zonaDestino).getDato() + "\n";
-                    camino += Lz.obtenerElementoPorId(zonaOrigen).getDato() + ";" + 0 + "|" + Lz.obtenerElementoPorId(escalaNum+1).getDato();
+                    camino += Lz.obtenerElementoPorId(zonaOrigen).getDato() + ";" + 0 + "|" + Lz.obtenerElementoPorId(escalaNum + 1).getDato();
                     camino += ";" + matrizDeZonas[escalaNum][zDestino];
                     camino += "|" + Lz.obtenerElementoPorId(zonaDestino).getDato() + ";" + duracion;
                     camino += "|Demora total: " + (duracion + matrizDeZonas[escalaNum][zDestino]);
@@ -450,18 +450,34 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno eliminarChofer(String movilID, String cedula
-    ) {
+    public Retorno eliminarChofer(String movilID, String cedula) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
-        if (Lm.obtenerElemento(movilID) == null) {
+        NodoListaMovil movil = buscarMovilPorChofer(Lm, cedula);
+        
+        if (movil == null) {
             ret.resultado = Resultado.ERROR_1;
-            ret.valorString = "Móvil no existe en el sistema";
+            ret.valorString = "El chofer no existe";
         } else {
-            Lm.obtenerElemento(movilID).getLch().borrarElemento(cedula);
-            ret.resultado = Resultado.OK;
-            ret.valorString = "Chofer eliminado";
+            NodoListaChofer aux = movil.getLch().getInicio();
+            while (aux.getSiguiente().getSiguiente() != null && aux.getCedula()!= cedula) {
+                aux = aux.getSiguiente();
+            }
+            if (aux.getSiguiente() != null) {
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+                ret.resultado = Resultado.OK;
+                ret.valorString = "Se elimino el Chofer";
+            }
         }
+        
+//        if (Lm.obtenerElemento(movilID) == null) {
+//            ret.resultado = Resultado.ERROR_1;
+//            ret.valorString = "Móvil no existe en el sistema";
+//        } else {
+//            Lm.obtenerElemento(movilID).getLch().borrarElemento(cedula);
+//            ret.resultado = Resultado.OK;
+//            ret.valorString = "Chofer eliminado";
+//        }
 
         return ret;
     }
@@ -514,8 +530,7 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno eliminarAbonado(int abonadoID
-    ) {
+    public Retorno eliminarAbonado(int abonadoID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         NodoListaZona zona = buscarZonaPorAbonado(Lz, abonadoID);
 

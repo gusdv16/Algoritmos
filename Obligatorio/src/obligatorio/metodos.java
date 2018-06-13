@@ -70,6 +70,18 @@ public class metodos {
         }
         return null;
     }
+    //se asume que existen todos los datos
+    public static NodoListaMovil buscarMovilPorChofer(ListaMovil lm, String chofer) {
+        NodoListaMovil aux = lm.getInicio();
+
+        while (aux != null) {
+            if (aux.getLch().obtenerElemento(chofer) != null) {
+                return aux;
+            }
+            aux = aux.getSig();
+        }
+        return null;
+    }
 
     //se asume que existen todos los datos
     public static NodoListaZona buscarZonaPorAbonado(ListaZona lz, int abonadoID) {
