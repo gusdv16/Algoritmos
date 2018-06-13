@@ -13,7 +13,7 @@ public class NodoListaMovil {
         this.dato = dato;
         this.sig = null;
         this.Estado = true;
-        this.lch = new ListaChofer(3);
+        this.lch = new ListaChofer();
     }
 
     public ListaChofer getLch() {

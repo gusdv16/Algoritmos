@@ -3,16 +3,20 @@ package obligatorio;
 interface IListaChofer {
 
     //metodos de la interfaz
-    public void encolar(Object cedula, String nombre);
-
-    public void desencolar(Object cedula);
-
     public boolean esVacia();
 
-    public boolean esllena();
+    public void agregarInicio(Object dato, String nombre);
 
-    public Object frente();
+    public void borrarInicio();
 
-    public int elementos();
+    public void agregarFinal(Object dato, String nombre);
+
+    public void borrarFin();
+
+    public void vaciar();
+
+    public void mostrar();
+
+    public NodoListaChofer obtenerElemento(Object dato);
 
 }
