@@ -13,7 +13,7 @@ public class Sistema implements ISistema {
     @Override
     public Retorno crearSistemaEmergencias(int cantzonas) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        if (cantzonas < 0) {
+        if (cantzonas <= 0) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La cantidad de ciudades debe ser mayor o igual a 0";
         } else {
@@ -53,7 +53,8 @@ public class Sistema implements ISistema {
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona no existe";
-        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID) != null) {
+//        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID) != null) {
+        } else if (Lm.obtenerElemento(movilID) != null) {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Móvil ya existe en el sistema de emergencias";
         } else {
@@ -204,7 +205,7 @@ public class Sistema implements ISistema {
     public Retorno agregarZona(String zonaNombre) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (cantZonas <= Lz.cantElementos()) {
-            Lz.agregarFinal(zonaNombre);
+//            Lz.agregarFinal(zonaNombre);
             ret.resultado = Retorno.Resultado.ERROR_1;
             ret.valorString = "Se paso la cantidad de zonas del sistema";
         } else {
@@ -433,9 +434,7 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno registrarChofer(String movilID, String nombre,
-            String cedula
-    ) {
+    public Retorno registrarChofer(String movilID, String nombre, String cedula) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         if (Lm.obtenerElemento(movilID) == null) {
@@ -454,13 +453,13 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         NodoListaMovil movil = buscarMovilPorChofer(Lm, cedula);
-        
+
         if (movil == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "El chofer no existe";
         } else {
             NodoListaChofer aux = movil.getLch().getInicio();
-            while (aux.getSiguiente().getSiguiente() != null && aux.getCedula()!= cedula) {
+            while (aux.getSiguiente().getSiguiente() != null && aux.getCedula() != cedula) {
                 aux = aux.getSiguiente();
             }
             if (aux.getSiguiente() != null) {
@@ -469,7 +468,7 @@ public class Sistema implements ISistema {
                 ret.valorString = "Se elimino el Chofer";
             }
         }
-        
+
 //        if (Lm.obtenerElemento(movilID) == null) {
 //            ret.resultado = Resultado.ERROR_1;
 //            ret.valorString = "Móvil no existe en el sistema";
@@ -478,7 +477,6 @@ public class Sistema implements ISistema {
 //            ret.resultado = Resultado.OK;
 //            ret.valorString = "Chofer eliminado";
 //        }
-
         return ret;
     }
 

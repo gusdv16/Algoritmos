@@ -234,7 +234,7 @@ public class ListaZona implements IListaZona {
         while (aux != null && aux.getIdZona() != idZona) {
             aux = aux.getSig();
         }
-        //encontrÃ© dato o lleguÃ© al final
+        
         return aux;
     }
 
