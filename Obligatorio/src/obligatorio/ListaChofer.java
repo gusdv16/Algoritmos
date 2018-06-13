@@ -137,12 +137,18 @@ public class ListaChofer implements IListaChofer {
     public void borrarElemento(Object dato) {
         NodoListaChofer anterior = this.getInicio(), aux = this.getInicio();
 
-        while (aux != null && aux.getCedula()!= dato) {
-            anterior = aux;
-            aux = aux.getSiguiente();
-        }
-        if (aux != null) {
-            anterior.setSiguiente(aux.getSiguiente());
+        if (aux.getCedula()== dato) {
+            borrarInicio();
+        } else if (this.getFin().getCedula() == dato) {
+            borrarFin();
+        } else {
+            while (aux != null && aux.getCedula() != dato) {
+                anterior = aux;
+                aux = aux.getSiguiente();
+            }
+            if (aux != null) {
+                anterior.setSiguiente(aux.getSiguiente());
+            }
         }
     }
 

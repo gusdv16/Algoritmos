@@ -14,8 +14,8 @@ public class Obligatorio {
 //        prueba5(s, p);
 //        prueba6(s, p);
 //        prueba7(s, p);
-//        prueba8(s, p);
-        pruebax(s, p);
+        prueba8(s, p);
+//        pruebax(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -171,7 +171,7 @@ public class Obligatorio {
         p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1");
 
         p.ver(s.eliminarAbonado(5).resultado, Retorno.Resultado.ERROR_1, "El abonado 5 no existe en el sistema");
-        p.ver(s.eliminarAbonado(2).resultado, Retorno.Resultado.OK, "Se elimina a Juan");
+        p.ver(s.eliminarAbonado(1).resultado, Retorno.Resultado.OK, "Se elimina a Juan");
 
         p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "abonados de zona 1 - 2");
         p.imprimirResultadosPrueba();
@@ -237,6 +237,7 @@ public class Obligatorio {
         p.ver(s.registrarMovil("PCS444", 1).resultado, Retorno.Resultado.OK, "Agrego movil BCO444 a Buceo ");
         p.ver(s.registrarChofer("PCS444", "Maria", "1455").resultado, Retorno.Resultado.OK, "Se agrega Maria");
         p.ver(s.registrarChofer("PCS444", "Maria2", "1185").resultado, Retorno.Resultado.OK, "Se agrega Maria2");
+        p.ver(s.registrarChofer("PCS444", "Maria3", "007").resultado, Retorno.Resultado.OK, "Se agrega Maria2");
         p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
         p.ver(s.eliminarChofer("PCS444", "1185").resultado, Retorno.Resultado.OK, "Se elimina el puto chofer");
         p.ver(s.informeChoferes("PCS444").resultado, Retorno.Resultado.OK, "Informe de choferes para el movil PCS444");
