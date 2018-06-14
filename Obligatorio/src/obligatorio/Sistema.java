@@ -230,7 +230,7 @@ public class Sistema implements ISistema {
 
         while (aux != null) {
             System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|\n");
-            aux.getLm().mostrar();
+
             aux = aux.getSig();
         }
         System.out.println();

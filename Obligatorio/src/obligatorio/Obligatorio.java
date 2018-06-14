@@ -7,14 +7,14 @@ public class Obligatorio {
     public static void main(String[] args) {
         Sistema s = new Sistema();
         Prueba p = new Prueba();
-//        prueba1(s, p);
+        prueba1(s, p);
 //        prueba2(s, p);
 //        prueba3(s, p);
 //        prueba4(s, p);
 //        prueba5(s, p);
 //        prueba6(s, p);
 //        prueba7(s, p);
-        prueba8(s, p);
+//        prueba8(s, p);
 //        pruebax(s, p);
     }
 
@@ -26,8 +26,12 @@ public class Obligatorio {
         p.ver(s.agregarZona("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");
         p.ver(s.agregarZona("La Paloma").resultado, Retorno.Resultado.OK, "Se agrego La Paloma");
         p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_1, "Se intento agregar Maldonado pero el sistema esta completo");
+        
+        p.ver(s.listarZonas().resultado,Retorno.Resultado.OK,"listo las zonas");
+        p.ver(s.informeZonas().resultado,Retorno.Resultado.OK,"mostramos zonas");
         p.ver(s.destruirSistemaEmergencias().resultado, Retorno.Resultado.OK, "Se destruye sistema");
         p.imprimirResultadosPrueba();
+        
     }
 
     static void prueba2(Sistema s, Prueba p) {
