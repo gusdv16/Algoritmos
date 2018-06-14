@@ -15,19 +15,25 @@ public class metodos {
         lz.obtenerElemento(zonaOrigen).getLm().borrarElemento(movil);
     }
 
+//    //se asume que existen todos los datos
+//    public static void cambiarUbicacionZona(ListaZona lz, String zonaDestino, String movil) {
+//        NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil));
+//        NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
+//        lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
+//        lz.obtenerElemento(zonaDestino).getLm().setFin(pmovil);
+//
+//        NodoListaMovil aux = origen.getLm().getInicio();
+//        while (aux.getSig() != pmovil) {
+//            aux = aux.getSig();
+//            aux.setSig(pmovil.getSig());
+//            lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
+//        }
+//    }
     //se asume que existen todos los datos
     public static void cambiarUbicacionZona(ListaZona lz, String zonaDestino, String movil) {
-        NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil));
-        NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
-        lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
-        lz.obtenerElemento(zonaDestino).getLm().setFin(pmovil);
 
-        NodoListaMovil aux = origen.getLm().getInicio();
-        while (aux.getSig() != pmovil) {
-            aux = aux.getSig();
-            aux.setSig(pmovil.getSig());
-            lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
-        }
+        agregarMovilAZona(lz, zonaDestino, movil);
+        borrarMovil(lz, movil);
     }
 
     //se asume que existen todos los datos
@@ -70,6 +76,7 @@ public class metodos {
         }
         return null;
     }
+
     //se asume que existen todos los datos
     public static NodoListaMovil buscarMovilPorChofer(ListaMovil lm, String chofer) {
         NodoListaMovil aux = lm.getInicio();

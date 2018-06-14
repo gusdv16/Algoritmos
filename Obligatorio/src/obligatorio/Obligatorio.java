@@ -7,7 +7,7 @@ public class Obligatorio {
     public static void main(String[] args) {
         Sistema s = new Sistema();
         Prueba p = new Prueba();
-        prueba1(s, p);
+//        prueba1(s, p);
 //        prueba2(s, p);
 //        prueba3(s, p);
 //        prueba4(s, p);
@@ -16,6 +16,7 @@ public class Obligatorio {
 //        prueba7(s, p);
 //        prueba8(s, p);
 //        pruebax(s, p);
+        prueba9(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -26,12 +27,12 @@ public class Obligatorio {
         p.ver(s.agregarZona("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");
         p.ver(s.agregarZona("La Paloma").resultado, Retorno.Resultado.OK, "Se agrego La Paloma");
         p.ver(s.agregarZona("Maldonado").resultado, Retorno.Resultado.ERROR_1, "Se intento agregar Maldonado pero el sistema esta completo");
-        
-        p.ver(s.listarZonas().resultado,Retorno.Resultado.OK,"listo las zonas");
-        p.ver(s.informeZonas().resultado,Retorno.Resultado.OK,"mostramos zonas");
+
+        p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "listo las zonas");
+        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "mostramos zonas");
         p.ver(s.destruirSistemaEmergencias().resultado, Retorno.Resultado.OK, "Se destruye sistema");
         p.imprimirResultadosPrueba();
-        
+
     }
 
     static void prueba2(Sistema s, Prueba p) {
@@ -594,5 +595,29 @@ public class Obligatorio {
         //
         p.imprimirResultadosPrueba();
 
+    }
+
+    static void prueba9(Sistema s, Prueba p) {
+        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+
+        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
+        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
+        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
+        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
+
+        p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a Pocitos");
+
+        p.ver(s.registrarMovil("PCS124", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS124 a Pocitos");
+
+        p.ver(s.registrarMovil("PCS125", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS125 a Pocitos");
+
+        p.ver(s.registrarMovil("PCS520", 5).resultado, Retorno.Resultado.OK, "Agrego movil PCS520 a Malvin");
+
+        p.ver(s.registrarMovil("PCS521", 5).resultado, Retorno.Resultado.OK, "Agrego movil PCS521 a Malvin");
+
+        p.ver(s.cambiarUbicacion("PCS521", 2).resultado, Retorno.Resultado.OK, "CAMBIO LA UBICACION DEL AUTO A PUNTA CARRETAS");
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "muestro el informe movil");
+        p.imprimirResultadosPrueba();
     }
 }
