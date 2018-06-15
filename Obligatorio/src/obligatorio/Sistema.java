@@ -58,7 +58,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Móvil ya existe en el sistema de emergencias";
         } else {
-            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().agregarOrd(movilID);
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().agregarFinal(movilID);
             Lm.agregarOrd(movilID);
             ret.resultado = Resultado.OK;
             ret.valorString = "Móvil agregado a zona correctamente";
@@ -405,8 +405,8 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         NodoListaZona aux = Lz.getInicio();
-        NodoListaMovil aux2 = aux.getLm().getInicio();
         while (aux != null) {
+            NodoListaMovil aux2 = aux.getLm().getInicio();
             int movilesDisponibles = 0;
             int movilesNoDisponibles = 0;
             while (aux2 != null) {
