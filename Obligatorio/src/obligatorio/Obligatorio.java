@@ -615,9 +615,11 @@ public class Obligatorio {
         p.ver(s.registrarMovil("PCS520", 5).resultado, Retorno.Resultado.OK, "Agrego movil PCS520 a Malvin");
 
         p.ver(s.registrarMovil("PCS521", 5).resultado, Retorno.Resultado.OK, "Agrego movil PCS521 a Malvin");
+        p.ver(s.registrarMovil("PCSPrueba", 4).resultado, Retorno.Resultado.OK, "Agrego movil PCS520 a buceo");
 
-        p.ver(s.cambiarUbicacion("PCS521", 2).resultado, Retorno.Resultado.OK, "CAMBIO LA UBICACION DEL AUTO A PUNTA CARRETAS");
+//        p.ver(s.cambiarUbicacion("PCS521", 2).resultado, Retorno.Resultado.OK, "CAMBIO LA UBICACION DEL AUTO A PUNTA CARRETAS");
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "muestro el informe movil");
+        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "muestro el informe zonas");
         p.imprimirResultadosPrueba();
     }
 }
