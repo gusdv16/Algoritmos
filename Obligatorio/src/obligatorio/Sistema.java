@@ -31,7 +31,6 @@ public class Sistema implements ISistema {
 
             ret.resultado = Resultado.OK;
             ret.valorString = "Sistema creado correctamente";
-
         }
 
         return ret;
@@ -44,6 +43,14 @@ public class Sistema implements ISistema {
         ret.valorString = "Sistema destruido correctamente";
         Lz.vaciar();
         Lm.vaciar();
+        cantZonas = 0;
+
+        for (int i = 0; i < matrizDeZonas.length; i++) {
+            for (int j = 0; j < matrizDeZonas[i].length; j++) {
+                matrizDeZonas[i][j] = 0;
+            }
+        }
+
         return ret;
     }
 
@@ -53,7 +60,6 @@ public class Sistema implements ISistema {
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona no existe";
-//        } else if (Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID) != null) {
         } else if (Lm.obtenerElemento(movilID) != null) {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Móvil ya existe en el sistema de emergencias";
