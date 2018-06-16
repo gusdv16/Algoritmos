@@ -503,9 +503,19 @@ public class Obligatorio {
     
     static void prueba10(Sistema s, Prueba p) {
         p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
-        p.ver(s.agregarZona("Zona 1").resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
-        p.ver(s.registrarMovil("MOMO1", 1).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        p.ver(s.agregarZona("Zona 1").resultado, Retorno.Resultado.OK, "Se crea la zona 1");
+        p.ver(s.agregarZona("Zona 2").resultado, Retorno.Resultado.OK, "Se crea la zona 2");
+        p.ver(s.registrarMovil("MOMO1", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 1");
+        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Info m 1.");
+        p.ver(s.informeMovil(2).resultado, Retorno.Resultado.OK, "Info M 2");
+        p.ver(s.cambiarUbicacion("MOMO1", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
+//        //p.ver(s.viaje(1, 2, "MOMO1").resultado, Retorno.Resultado.OK, "Viaja ...");
+        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Info m 1.....");
+        p.ver(s.informeMovil(2).resultado, Retorno.Resultado.OK, "Info M 2.....");
+//        p.ver(s.deshabilitarMovil("MOMO1").resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         
-        p.imprimirResultadosPrueba();
+        
+        
+//        p.imprimirResultadosPrueba();
     }
 }

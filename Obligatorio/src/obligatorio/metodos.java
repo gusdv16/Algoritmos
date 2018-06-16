@@ -10,9 +10,22 @@ public class metodos {
     }
 
     //se asume que existen todos los datos
-    public static void viaje(ListaZona lz, String zonaOrigen, String zonaDestino, String movil) {
-        agregarMovilAZona(lz, zonaDestino, movil);
-        lz.obtenerElemento(zonaOrigen).getLm().borrarElemento(movil);
+    public static void viaje1(ListaZona lz, String zonaOrigen, String zonaDestino, String movil) {
+//        agregarMovilAZona(lz, zonaDestino, movil);
+//        lz.obtenerElemento(zonaOrigen).getLm().borrarElemento(movil);
+
+        NodoListaZona origen = lz.obtenerElemento(zonaOrigen);
+        NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
+        lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
+        lz.obtenerElemento(zonaDestino).getLm().setFin(pmovil);
+        NodoListaMovil aux = origen.getLm().getInicio();
+
+        while (aux.getSig() != pmovil) {
+            aux = aux.getSig();
+        }
+
+        aux.setSig(pmovil.getSig());
+        lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
     }
 
 //    //se asume que existen todos los datos
@@ -31,7 +44,6 @@ public class metodos {
 //    }
     //se asume que existen todos los datos
     public static void cambiarUbicacionZona(ListaZona lz, String zonaDestino, String movil) {
-
         agregarMovilAZona(lz, zonaDestino, movil);
         borrarMovil(lz, movil);
     }
