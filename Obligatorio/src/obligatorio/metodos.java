@@ -2,14 +2,14 @@ package obligatorio;
 
 public class metodos {
 
-    //AGREGA UN MOVIL EN UNA ZONA
-    //Asumimos que existe la zona
+    //Pos:AGREGA UN MOVIL EN UNA ZONA
+    //Pre:Asumimos que existe la zona
     public static void agregarMovilAZona(ListaZona lz, String Zona, String movil) {
         NodoListaZona unazona = lz.obtenerElemento(Zona);
         unazona.getLm().agregarOrd(movil);
     }
 
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
     public static void viaje(ListaZona lz, String zonaOrigen, String zonaDestino, String movil) {
         agregarMovilAZona(lz, zonaDestino, movil);
         lz.obtenerElemento(zonaOrigen).getLm().borrarElemento(movil);
@@ -29,14 +29,16 @@ public class metodos {
 //            lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
 //        }
 //    }
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
+    //pos:se cambia el movil de zona
     public static void cambiarUbicacionZona(ListaZona lz, String zonaDestino, String movil) {
 
         agregarMovilAZona(lz, zonaDestino, movil);
         borrarMovil(lz, movil);
     }
 
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
+    // pos:se borra el movil que le pasamos de la lista de la zona que le pasamos
     public static void borrarMovil(ListaZona lz, String movil) {
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil).getDato());
         NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
@@ -51,7 +53,8 @@ public class metodos {
         }
     }
 
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
+    //pos:borra el elemento abonado que le pasas por parametro
     public static void borrarAbonado(ListaZona lz, int abonadoId) {
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorAbonado(lz, abonadoId).getDato());
         NodoListaAbonado pabonado = origen.getLa().obtenerElemento(abonadoId);
@@ -64,7 +67,8 @@ public class metodos {
         }
     }
 
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
+    //pos: devuelve la zona donde se encuentra el movil que le pasas por parametro
     public static NodoListaZona buscarZonaPorMovil(ListaZona lz, String movil) {
         NodoListaZona aux = lz.getInicio();
 
@@ -77,7 +81,8 @@ public class metodos {
         return null;
     }
 
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
+    //pos: lo mismo que el anterior pero trae el movil que tiene el chofer
     public static NodoListaMovil buscarMovilPorChofer(ListaMovil lm, String chofer) {
         NodoListaMovil aux = lm.getInicio();
 
@@ -90,7 +95,8 @@ public class metodos {
         return null;
     }
 
-    //se asume que existen todos los datos
+    //pre:se asume que existen todos los datos
+    //pos: lo mismo que los dos anteriores pero esta es la zona donde esta el abonado lo que te devuelve
     public static NodoListaZona buscarZonaPorAbonado(ListaZona lz, int abonadoID) {
         NodoListaZona aux = lz.getInicio();
 
@@ -102,7 +108,8 @@ public class metodos {
         }
         return null;
     }
-
+//pre: la zona que se le pasa existe
+    //pos: muestra todas las zonas existentes
     public static void mostrarZonasCompleto(ListaZona lz) {
         NodoListaZona aux = lz.getInicio();
 
@@ -123,6 +130,7 @@ public class metodos {
     }
 
     //PRE: La zona debe existir
+    //post:retorna la cantidad de moviles que estan disponible para la zona que le pasas por parametro
     public static int cantidadMovilesDisponibles(ListaZona Lz, int zonaID) {
         NodoListaZona aux = Lz.getInicio();
         int movilesDisponibles = 0;
@@ -143,6 +151,7 @@ public class metodos {
     }
 
     //PRE: La zona debe existir
+    //pos: devuelve un movil disponible para la zona que esta como parametro 
     public static NodoListaMovil MovilDisponible(ListaZona Lz, int zonaID) {
         NodoListaZona aux = Lz.getInicio();
 
@@ -158,7 +167,8 @@ public class metodos {
         }
         return null;
     }
-
+//pre: la matriz existe o sea el mapa existe
+    //pos: te imprime en pantalla la matriz
     public static void mostrarmapa(int[][] mapa) {
         int filas = mapa.length;
         int columnas = mapa[0].length;
@@ -171,7 +181,9 @@ public class metodos {
         }
 
     }
-
+//pre:la lista zona es existente
+    //pos: muestra en pantalla los abonados en esa zona
+    
     public static void mostrarAbonados(ListaZona lz) {
         NodoListaZona aux = lz.getInicio();
 
