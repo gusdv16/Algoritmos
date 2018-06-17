@@ -10,9 +10,22 @@ public class metodos {
     }
 
     //se asume que existen todos los datos
-    public static void viaje(ListaZona lz, String zonaOrigen, String zonaDestino, String movil) {
-        agregarMovilAZona(lz, zonaDestino, movil);
-        lz.obtenerElemento(zonaOrigen).getLm().borrarElemento(movil);
+    public static void viaje1(ListaZona lz, String zonaOrigen, String zonaDestino, String movil) {
+//        agregarMovilAZona(lz, zonaDestino, movil);
+//        lz.obtenerElemento(zonaOrigen).getLm().borrarElemento(movil);
+
+        NodoListaZona origen = lz.obtenerElemento(zonaOrigen);
+        NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
+        lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(pmovil);
+        lz.obtenerElemento(zonaDestino).getLm().setFin(pmovil);
+        NodoListaMovil aux = origen.getLm().getInicio();
+
+        while (aux.getSig() != pmovil) {
+            aux = aux.getSig();
+        }
+
+        aux.setSig(pmovil.getSig());
+        lz.obtenerElemento(zonaDestino).getLm().getFin().setSig(null);
     }
 
 //    //se asume que existen todos los datos
@@ -31,9 +44,59 @@ public class metodos {
 //    }
     //se asume que existen todos los datos
     public static void cambiarUbicacionZona(ListaZona lz, String zonaDestino, String movil) {
-
         agregarMovilAZona(lz, zonaDestino, movil);
         borrarMovil(lz, movil);
+    }
+
+    //se asume que existen todos los datos
+    public static ListaMovil ordenarMoviles(ListaMovil listaMoviles) {
+        ListaMovil listaMovilesOrdenada = new ListaMovil();
+        NodoListaMovil aux = listaMoviles.getInicio().getSig();
+        NodoListaMovil aux1 = listaMoviles.getInicio();
+
+        while (aux != null) {
+            while (aux1 != null) {
+                if (aux.getDato().toString().compareTo(aux1.getDato().toString()) != 0) {
+                    if (aux.getDato().toString().compareTo(aux1.getDato().toString()) > 0) {
+                        NodoListaMovil aux3 = aux1;
+                        aux1 = aux;
+                        aux = aux3;
+                        listaMovilesOrdenada.agregarFinal(aux.getDato());
+                    } else {
+                        listaMovilesOrdenada.agregarInicio(aux.getDato());
+                    }
+                }
+                //listaMovilesOrdenada = listaMovilesOrdenada.
+                aux1 = aux1.getSig();
+            }
+            aux = aux.getSig();
+        }
+
+//        while (aux != null) {
+//            while (aux1 != null) {
+//                if (listaMoviles.getDato().toString().compareTo(aux1.getDato().toString()) > 0) {
+//                    listaMovilesOrdenada.setDato(aux1.getDato());
+//                } else {
+//                    listaMovilesOrdenada.setDato(listaMoviles.getDato());
+//                }
+//                listaMovilesOrdenada = listaMovilesOrdenada.getSig();
+//                aux1 = aux1.getSig();
+//            }            
+//            aux = aux.getSig();
+//        }
+//        while (aux != null) {
+//            while (aux1 != null) {
+//                if (listaMoviles.getDato().toString().compareTo(aux1.getDato().toString()) > 0) {
+//                    listaMovilesOrdenada.setDato(aux1.getDato());
+//                } else {
+//                    listaMovilesOrdenada.setDato(listaMoviles.getDato());
+//                }
+//                listaMovilesOrdenada = listaMovilesOrdenada.getSig();
+//                aux1 = aux1.getSig();
+//            }
+//            listaMoviles.setSig(listaMoviles);
+//        }
+        return listaMovilesOrdenada;
     }
 
     //se asume que existen todos los datos
