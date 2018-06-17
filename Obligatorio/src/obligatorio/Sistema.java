@@ -91,7 +91,7 @@ public class Sistema implements ISistema {
         } else if (zona.getLm().obtenerElemento(movilID).isEstado() == false) {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Móvil ya esta en estado NO_DISPONIBLE";
-        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == false) {
+        } else if (zona.getLm().obtenerElemento(movilID).getViaje() > 0) {
             ret.resultado = Resultado.ERROR_3;
             ret.valorString = "El Móvil esta asignado a un viaje";
         } else {
@@ -116,6 +116,9 @@ public class Sistema implements ISistema {
         } else if (zona.getLm().obtenerElemento(movilID).isEstado() == true) {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Móvil ya esta en estado DISPONIBLE";
+        } else if (zona.getLm().obtenerElemento(movilID).getViaje() > 0) {
+            ret.resultado = Resultado.ERROR_3;
+            ret.valorString = "El Móvil esta asignado a un viaje";
         } else {
             zona.getLm().obtenerElemento(movilID).setEstado(true);
             ret.resultado = Resultado.OK;
@@ -504,18 +507,18 @@ public class Sistema implements ISistema {
         if (duracionViaje <= 0) {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "La duracion del viaje es menor o igual a 0";
-        }else{
-            String aux="";
-         for (int j = 0; j < matrizDeZonas[zonaID-1].length; j++) {
-                    
-             if(matrizDeZonas[zonaID-1][j]>0 && matrizDeZonas[zonaID-1][j]<=duracionViaje){
-                 if(j < matrizDeZonas[zonaID-1].length-1){
-             aux="|";      
+        } else {
+            String aux = "";
+            for (int j = 0; j < matrizDeZonas[zonaID - 1].length; j++) {
+
+                if (matrizDeZonas[zonaID - 1][j] > 0 && matrizDeZonas[zonaID - 1][j] <= duracionViaje) {
+                    if (j < matrizDeZonas[zonaID - 1].length - 1) {
+                        aux = "|";
                     }
-              System.out.print((j+1)+";"+matrizDeZonas[zonaID-1][j]+aux);
-             }
+                    System.out.print((j + 1) + ";" + matrizDeZonas[zonaID - 1][j] + aux);
                 }
-        ret.resultado = Resultado.OK;
+            }
+            ret.resultado = Resultado.OK;
         }
         return ret;
     }
@@ -688,6 +691,5 @@ public class Sistema implements ISistema {
         }
         return ret;
     }
-
 
 }
