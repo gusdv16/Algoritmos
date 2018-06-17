@@ -49,6 +49,53 @@ public class metodos {
     }
 
     //se asume que existen todos los datos
+    public static ListaMovil ordenarMoviles(ListaMovil listaMoviles) {
+        ListaMovil listaMovilesOrdenada = new ListaMovil();
+        NodoListaMovil aux = listaMoviles.getInicio().getSig();
+        NodoListaMovil aux1 = listaMoviles.getInicio();
+
+        while (aux != null) {
+            while (aux1 != null) {
+                if (aux1.getDato().toString().compareTo(aux.getDato().toString()) > 0) {
+                    NodoListaMovil aux3 = aux1;
+                    aux1=aux;
+                    aux=aux3;
+                    listaMovilesOrdenada.agregarFinal(aux);
+                }
+                //listaMovilesOrdenada = listaMovilesOrdenada.
+                aux1 = aux1.getSig();
+            }
+            aux = aux.getSig();
+        }
+
+//        while (aux != null) {
+//            while (aux1 != null) {
+//                if (listaMoviles.getDato().toString().compareTo(aux1.getDato().toString()) > 0) {
+//                    listaMovilesOrdenada.setDato(aux1.getDato());
+//                } else {
+//                    listaMovilesOrdenada.setDato(listaMoviles.getDato());
+//                }
+//                listaMovilesOrdenada = listaMovilesOrdenada.getSig();
+//                aux1 = aux1.getSig();
+//            }            
+//            aux = aux.getSig();
+//        }
+//        while (aux != null) {
+//            while (aux1 != null) {
+//                if (listaMoviles.getDato().toString().compareTo(aux1.getDato().toString()) > 0) {
+//                    listaMovilesOrdenada.setDato(aux1.getDato());
+//                } else {
+//                    listaMovilesOrdenada.setDato(listaMoviles.getDato());
+//                }
+//                listaMovilesOrdenada = listaMovilesOrdenada.getSig();
+//                aux1 = aux1.getSig();
+//            }
+//            listaMoviles.setSig(listaMoviles);
+//        }
+        return listaMovilesOrdenada;
+    }
+
+    //se asume que existen todos los datos
     public static void borrarMovil(ListaZona lz, String movil) {
         NodoListaZona origen = lz.obtenerElemento(buscarZonaPorMovil(lz, movil).getDato());
         NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);

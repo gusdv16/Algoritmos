@@ -181,7 +181,10 @@ public class Sistema implements ISistema {
 
             while (aux != null) {
                 if (aux.idZona == zonaID) {
-                    NodoListaMovil aux1 = aux.getLm().getInicio();
+//                    NodoListaMovil aux1 = aux.getLm().getInicio();
+                    ListaMovil aux0 = ordenarMoviles(aux.getLm());
+                    NodoListaMovil aux1 = aux0.getInicio();
+
                     while (aux1 != null) {
                         if (aux1.getSig() == null) {
                             separador = "";
@@ -496,8 +499,7 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno informeChoferes(String movilID
-    ) {
+    public Retorno informeChoferes(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
