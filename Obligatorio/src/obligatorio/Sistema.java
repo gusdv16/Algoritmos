@@ -664,36 +664,29 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    @Override
-    public Retorno viaje(int zonaOrigen, int zonaDestino, String movil) {
+    @Override public Retorno viaje(int zonaDestino) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
-        if (Lz.obtenerElementoPorId(zonaOrigen) == null) {
+        if (Lz.obtenerElementoPorId(zonaDestino) == null) {
             ret.resultado = Resultado.ERROR_1;
-            ret.valorString = "La Zona Origen no existe";
-        } else if (Lz.obtenerElementoPorId(zonaDestino) == null) {
-            ret.resultado = Resultado.ERROR_2;
             ret.valorString = "La Zona Destino no existe";
-        } else if (Lm.obtenerElemento(movil) == null) {
-            ret.resultado = Resultado.ERROR_2;
-            ret.valorString = "El movil no existe";
         } else {
-            NodoListaZona origen = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaOrigen).getDato());
-            NodoListaZona destino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaDestino).getDato());
-            NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
-            destino.getLm().setFin(pmovil);
-            destino.getLm().getFin().setSig(pmovil);
-            NodoListaMovil aux = origen.getLm().getInicio();
 
-            while (aux.getSig() != pmovil) {
+            NodoListaZona destino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaDestino).getDato());
+
+            NodoListaMovil aux = destino.getLm().getInicio();
+
+            while (aux.getSig() != null && !aux.isEstado()) {
                 aux = aux.getSig();
             }
 
-            aux.setSig(pmovil.getSig());
-            destino.getLm().getFin().setSig(null);
+            aux.setViaje(zonaDestino);
+
             ret.resultado = Retorno.Resultado.OK;
+            ret.valorString = "Se agrego el movil a un viaje";
         }
         return ret;
     }
+
 
 }
