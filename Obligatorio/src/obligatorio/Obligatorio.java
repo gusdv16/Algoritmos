@@ -13,11 +13,11 @@ public class Obligatorio {
 //        prueba4(s, p);
 //        prueba5(s, p);
 //        prueba6(s, p);
-//        prueba7(s, p);
+        prueba7(s, p);
 //        prueba8(s, p);
 //        prueba9(s, p);
 //        pruebax(s, p);
-        prueba10(s, p);
+//        prueba10(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -228,10 +228,10 @@ public class Obligatorio {
         p.ver(s.agregarRuta(1, 6, 100).resultado, Retorno.Resultado.ERROR_2, "La zona Destino no existe");
         p.ver(s.agregarRuta(1, 2, 0).resultado, Retorno.Resultado.ERROR_3, "Los minutos son menos de 1");
 
-        p.ver(s.modificarDemora(1, 2, 18).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
+//        p.ver(s.modificarDemora(1, 2, 18).resultado, Retorno.Resultado.OK, "Se crea la ruta Pocitos a Punta Carretas");
 
         p.ver(s.movilMasCercano(1).resultado, Retorno.Resultado.OK, "Movil mas cercano");
-
+        p.ver(s.zonasEnRadio(1, 11).resultado, Retorno.Resultado.OK, "yo que se");
         p.imprimirResultadosPrueba();
     }
 
@@ -522,4 +522,6 @@ public class Obligatorio {
         
 //        p.imprimirResultadosPrueba();
     }
+    
+    
 }
