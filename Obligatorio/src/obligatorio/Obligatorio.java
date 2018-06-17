@@ -514,6 +514,7 @@ public class Obligatorio {
         p.ver(s.cambiarUbicacion("MOMO1", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
 //        //p.ver(s.viaje(1, 2, "MOMO1").resultado, Retorno.Resultado.OK, "Viaja ...");
 //        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Info m 1.....");
+//        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
         p.ver(s.informeMovil(2).resultado, Retorno.Resultado.OK, "Info M 2.....");
 //        p.ver(s.deshabilitarMovil("MOMO1").resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         

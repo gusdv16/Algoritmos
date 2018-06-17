@@ -56,11 +56,15 @@ public class metodos {
 
         while (aux != null) {
             while (aux1 != null) {
-                if (aux1.getDato().toString().compareTo(aux.getDato().toString()) > 0) {
-                    NodoListaMovil aux3 = aux1;
-                    aux1=aux;
-                    aux=aux3;
-                    listaMovilesOrdenada.agregarFinal(aux);
+                if (aux.getDato().toString().compareTo(aux1.getDato().toString()) != 0) {
+                    if (aux.getDato().toString().compareTo(aux1.getDato().toString()) > 0) {
+                        NodoListaMovil aux3 = aux1;
+                        aux1 = aux;
+                        aux = aux3;
+                        listaMovilesOrdenada.agregarFinal(aux.getDato());
+                    } else {
+                        listaMovilesOrdenada.agregarInicio(aux.getDato());
+                    }
                 }
                 //listaMovilesOrdenada = listaMovilesOrdenada.
                 aux1 = aux1.getSig();
