@@ -10,6 +10,8 @@ public class Sistema implements ISistema {
     int[][] matrizDeZonas;
     public ListaMovil Lm;
 
+    //pre:
+    //post: damos de alta el sistema
     @Override
     public Retorno crearSistemaEmergencias(int cantzonas) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -36,6 +38,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:damos de baja el sistema, limpiamos las listas y enviamos el mensaje de que fue correcta su destruccion
     @Override
     public Retorno destruirSistemaEmergencias() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -54,6 +58,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: agregamos un movil a las listas LM y LZ
     @Override
     public Retorno registrarMovil(String movilID, int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -72,6 +78,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: Ponemos en Estado = false al movil
     @Override
     public Retorno deshabilitarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -95,6 +103,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: ponemos en estado=true a los moviles
     @Override
     public Retorno habilitarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -115,6 +125,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+    //pre:
+    //post: quitamos de la lista el movil
     @Override
     public Retorno eliminarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -132,6 +144,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: te devuelve en pantalla los datos del movil que le pasas como parametro
     @Override
     public Retorno buscarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -151,6 +165,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:se devuelve en pantalla los datos todos los moviles existentes 
     @Override
     public Retorno informeMovil() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -167,6 +183,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: devuelve en pantalla los moviles que se encuentran disponibles en la zona que se le pasa por parametro y cantidad de disponibles que tiene
     @Override
     public Retorno informeMovil(int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -234,6 +252,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:se crea una zona en el sistema
     @Override
     public Retorno agregarZona(String zonaNombre) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -255,6 +275,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: se muestra en pantalla las zonas que existen. estan ordenadas por id ascendentemente 
     @Override
     public Retorno listarZonas() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -272,6 +294,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:se agrega una Ruta de viaje 
     @Override
     public Retorno agregarRuta(int zonaOrigen, int zonaDestino, int minutosViaje) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -296,6 +320,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: cambia los valores de la ruta del viaje
     @Override
     public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
 
@@ -323,6 +349,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:muestra en pantalla el movil mas cercano a zona que le pasas por parametro y el tiempo de demora 
     @Override
     public Retorno movilMasCercano(int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -369,6 +397,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:se le pasa dos zonas por parametro y te devuleve en pantalla la ruta mas rapida o sea la de menor duracion
     @Override
     public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -433,6 +463,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:muestra en pantalla todas las zonas detalladamente
     @Override
     public Retorno informeZonas() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -466,6 +498,8 @@ public class Sistema implements ISistema {
         return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
 
+//pre:
+    //post: se da de alta un chofer en el sistema al cual se le asigna un movil
     @Override
     public Retorno registrarChofer(String movilID, String nombre, String cedula) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -481,6 +515,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:se elimina el chofer cuya cedula es la que le pasas del movil que se le pasa como parametro
     @Override
     public Retorno eliminarChofer(String movilID, String cedula) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -498,6 +534,9 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre: los moviles tienen choferes asignados si o si
+    //post:devuelve en pantalla los datos del chofer para el movil que le pasamos como parametro. si hay moviles sin chofer muestra " "
+//    no es la idea de la realidad por eso la pre
     @Override
     public Retorno informeChoferes(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -524,6 +563,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post:se da de alta el abonado para una determinada zona que le pasas por parametro
     @Override
     public Retorno registrarAbonado(int abonadoID, String abonadoNombre,
             String abonadoDireccion, String abonadoTel,
@@ -545,6 +586,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:
+    //post: se elimina el abonado que se indico por parametro
     @Override
     public Retorno eliminarAbonado(int abonadoID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -561,6 +604,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+//pre:no existe un abonado en mas de una zona
+    //post:muestra en pantalla todos los abonados existentes en la zona que se le pasa por parametro. si hay una zona que no hay abonados muuestra ""
     @Override
     public Retorno informeAbonadosZona(int zonaID
     ) {
