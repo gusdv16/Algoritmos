@@ -491,11 +491,33 @@ public class Sistema implements ISistema {
 
         return ret;
     }
+//pre:
+    //pos: devuelve en pantalla un listado con las zonas y su duracion de viaje en el rango que le pasas de duracion de viaje como parametro
 
     @Override
-    public Retorno zonasEnRadio(int zonaID, int duracionViaje
-    ) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+    public Retorno zonasEnRadio(int zonaID, int duracionViaje) {
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        if (Lz.obtenerElementoPorId(zonaID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "La Zona no existe";
+        }
+        if (duracionViaje <= 0) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "La duracion del viaje es menor o igual a 0";
+        }else{
+            String aux="";
+         for (int j = 0; j < matrizDeZonas[zonaID-1].length; j++) {
+                    
+             if(matrizDeZonas[zonaID-1][j]>0 && matrizDeZonas[zonaID-1][j]<=duracionViaje){
+                 if(j < matrizDeZonas[zonaID-1].length-1){
+             aux="|";      
+                    }
+              System.out.print((j+1)+";"+matrizDeZonas[zonaID-1][j]+aux);
+             }
+                }
+        ret.resultado = Resultado.OK;
+        }
+        return ret;
     }
 
 //pre:
@@ -643,35 +665,29 @@ public class Sistema implements ISistema {
     }
 
     @Override
-    public Retorno viaje(int zonaOrigen, int zonaDestino, String movil) {
+    public Retorno viaje(int zonaDestino) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
-        if (Lz.obtenerElementoPorId(zonaOrigen) == null) {
+        if (Lz.obtenerElementoPorId(zonaDestino) == null) {
             ret.resultado = Resultado.ERROR_1;
-            ret.valorString = "La Zona Origen no existe";
-        } else if (Lz.obtenerElementoPorId(zonaDestino) == null) {
-            ret.resultado = Resultado.ERROR_2;
             ret.valorString = "La Zona Destino no existe";
-        } else if (Lm.obtenerElemento(movil) == null) {
-            ret.resultado = Resultado.ERROR_2;
-            ret.valorString = "El movil no existe";
         } else {
-            NodoListaZona origen = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaOrigen).getDato());
-            NodoListaZona destino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaDestino).getDato());
-            NodoListaMovil pmovil = origen.getLm().obtenerElemento(movil);
-            destino.getLm().setFin(pmovil);
-            destino.getLm().getFin().setSig(pmovil);
-            NodoListaMovil aux = origen.getLm().getInicio();
 
-            while (aux.getSig() != pmovil) {
+            NodoListaZona destino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaDestino).getDato());
+
+            NodoListaMovil aux = destino.getLm().getInicio();
+
+            while (aux.getSig() != null && !aux.isEstado()) {
                 aux = aux.getSig();
             }
 
-            aux.setSig(pmovil.getSig());
-            destino.getLm().getFin().setSig(null);
+            aux.setViaje(zonaDestino);
+
             ret.resultado = Retorno.Resultado.OK;
+            ret.valorString = "Se agrego el movil a un viaje";
         }
         return ret;
     }
+
 
 }

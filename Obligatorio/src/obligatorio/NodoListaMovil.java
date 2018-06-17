@@ -7,12 +7,15 @@ public class NodoListaMovil {
     private Object dato;
     private NodoListaMovil sig;
     private boolean Estado;
+    private int Viaje;
+
     private ListaChofer lch;
 
     public NodoListaMovil(Object dato) {
         this.dato = dato;
         this.sig = null;
         this.Estado = true;
+        this.Viaje = 0;
         this.lch = new ListaChofer();
     }
 
@@ -38,6 +41,14 @@ public class NodoListaMovil {
 
     public void setSig(NodoListaMovil sig) {
         this.sig = sig;
+    }
+
+    public int getViaje() {
+        return Viaje;
+    }
+
+    public void setViaje(int Viaje) {
+        this.Viaje = Viaje;
     }
 
     public boolean isEstado() {
