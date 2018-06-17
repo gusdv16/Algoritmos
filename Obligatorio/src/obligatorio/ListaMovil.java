@@ -159,12 +159,27 @@ public class ListaMovil implements IListaMovil {
     public void borrarElemento(Object dato) {
         NodoListaMovil anterior = this.getInicio(), aux = this.getInicio();
 
-        while (aux != null && aux.getDato() != dato) {
-            anterior = aux;
-            aux = aux.getSig();
-        }
-        if (aux != null) {
-            anterior.setSig(aux.getSig());
+//        while (aux != null && aux.getDato() != dato) {
+//            anterior = aux;
+//            aux = aux.getSig();
+//        }
+//        if (aux != null) {
+//            anterior.setSig(aux.getSig());
+//        }
+
+
+        if (aux.getDato()== dato) {
+            borrarInicio();
+        } else if (this.getFin().getDato() == dato) {
+            borrarFin();
+        } else {
+            while (aux != null && aux.getDato() != dato) {
+                anterior = aux;
+                aux = aux.getSig();
+            }
+            if (aux != null) {
+                anterior.setSig(aux.getSig());
+            }
         }
     }
 
