@@ -50,5 +50,5 @@ public interface ISistema {
 
     Retorno informeAbonadosZona(int zonaID);
     
-    Retorno viaje(int zonaOrigen, int zonaDestino, String movil);
+    Retorno viaje(int zonaDestino);
 }

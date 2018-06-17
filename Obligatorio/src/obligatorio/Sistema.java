@@ -664,7 +664,8 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-    @Override public Retorno viaje(int zonaDestino) {
+    @Override
+    public Retorno viaje(int zonaDestino) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         if (Lz.obtenerElementoPorId(zonaDestino) == null) {
