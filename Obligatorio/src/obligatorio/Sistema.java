@@ -117,6 +117,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "Móvil ya esta en estado DISPONIBLE";
         } else if (zona.getLm().obtenerElemento(movilID).getViaje() > 0) {
+            //NUNCA LLEGA A ESTE ERROR PORQUE NO PUEDE ESTAR DE VIAJE SI ESTA DESHABILITADO
             ret.resultado = Resultado.ERROR_3;
             ret.valorString = "El Móvil esta asignado a un viaje";
         } else {
@@ -242,11 +243,7 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "El movil no existe";
         } else {
-//            NodoListaZona zonaOrigen = buscarZonaPorMovil(Lz, movilID);
-//            borrarMovil(Lz, movilID);
-
             listaMovilesOrigen.borrarElemento(movilID);
-//            listaMovilesDestino.agregarFinal(Lm.obtenerElemento(movilID));
             listaMovilesDestino.agregarFinal(movilID);
             ret.resultado = Resultado.OK;
             ret.valorString = "Se cambio de zona";
@@ -261,7 +258,6 @@ public class Sistema implements ISistema {
     public Retorno agregarZona(String zonaNombre) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (cantZonas <= Lz.cantElementos()) {
-//            Lz.agregarFinal(zonaNombre);
             ret.resultado = Retorno.Resultado.ERROR_1;
             ret.valorString = "Se paso la cantidad de zonas del sistema";
         } else {
@@ -327,7 +323,6 @@ public class Sistema implements ISistema {
     //post: cambia los valores de la ruta del viaje
     @Override
     public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
-
 //        mostrarmapa(matrizDeZonas);
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
@@ -509,13 +504,14 @@ public class Sistema implements ISistema {
             ret.valorString = "La duracion del viaje es menor o igual a 0";
         } else {
             String aux = "";
+            int cont = 0;
             for (int j = 0; j < matrizDeZonas[zonaID - 1].length; j++) {
-
                 if (matrizDeZonas[zonaID - 1][j] > 0 && matrizDeZonas[zonaID - 1][j] <= duracionViaje) {
-                    if (j < matrizDeZonas[zonaID - 1].length - 1) {
+                    cont++;
+                    if (cont > 1) {
                         aux = "|";
                     }
-                    System.out.print((j + 1) + ";" + matrizDeZonas[zonaID - 1][j] + aux);
+                    System.out.print(aux + (j + 1) + ";" + matrizDeZonas[zonaID - 1][j]);
                 }
             }
             ret.resultado = Resultado.OK;
