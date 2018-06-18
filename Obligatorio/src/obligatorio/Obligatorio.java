@@ -505,9 +505,19 @@ public class Obligatorio {
         p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         p.ver(s.agregarZona("Zona 1").resultado, Retorno.Resultado.OK, "Se crea la zona 1");
         p.ver(s.agregarZona("Zona 2").resultado, Retorno.Resultado.OK, "Se crea la zona 2");
+        p.ver(s.agregarZona("Zona 3").resultado, Retorno.Resultado.OK, "Se crea la zona 3");
         p.ver(s.registrarMovil("MOMO1", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 1");
         p.ver(s.registrarMovil("MOMO2", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 2");
         p.ver(s.registrarMovil("MOMO0", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 0");
+        p.ver(s.registrarMovil("MOMO3", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 3");
+        p.ver(s.registrarMovil("MOMO4", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 4");
+        p.ver(s.registrarMovil("MOMO5", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 5");
+        p.ver(s.registrarMovil("MOMO6", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 6");
+        p.ver(s.registrarMovil("Z1OMO4", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 4");
+        p.ver(s.registrarMovil("Z1OMO5", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 5");
+        p.ver(s.registrarMovil("Z1OMO6", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 6");
+        p.ver(s.registrarMovil("Z3OMO16", 3).resultado, Retorno.Resultado.OK, "Se crea el movil 16");
+        p.ver(s.deshabilitarMovil("Z3OMO16").resultado, Retorno.Resultado.OK, "Se deshabilita el movil Z3OMO16");
         p.ver(s.deshabilitarMovil("MOMO0").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
 //        p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
 

@@ -175,10 +175,29 @@ public class Sistema implements ISistema {
     @Override
     public Retorno informeMovil() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        NodoListaZona aux = Lz.getInicio();
+        int cont = 0;
 
-        NodoListaMovil aux = Lm.getInicio();
         while (aux != null) {
-            System.out.println("\t" + aux.getDato() + ";" + aux.isEstado());
+            NodoListaMovil aux1 = aux.getLm().getInicio();
+            while (aux1 != null) {
+                String separador = "";
+                cont++;
+                if (cont > 1) {
+                    separador = ";";
+                }
+                String estado = "DISPONIBLE";
+                if (!aux1.isEstado()) {
+                    estado = "NO DISPONIBLE";
+                }
+                System.out.print(separador + aux1.getDato() + ";" + estado);
+                aux1 = aux1.getSig();
+            }
+            if (cont > 0) {
+                System.out.print(";" + aux.getDato());
+                System.out.print("|");
+            }
+            cont = 0;
             aux = aux.getSig();
         }
 
