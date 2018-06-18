@@ -141,6 +141,7 @@ public class Sistema implements ISistema {
             ret.valorString = "Móvil no existe en el sistema";
         } else {
             borrarMovil(Lz, movilID);
+            Lm.borrarElemento(movilID);
             ret.resultado = Resultado.OK;
             ret.valorString = "Móvil Eliminado";
         }
@@ -489,9 +490,9 @@ public class Sistema implements ISistema {
 
         return ret;
     }
-//pre:
-    //pos: devuelve en pantalla un listado con las zonas y su duracion de viaje en el rango que le pasas de duracion de viaje como parametro
 
+    //pre:
+    //pos: devuelve en pantalla un listado con las zonas y su duracion de viaje en el rango que le pasas de duracion de viaje como parametro
     @Override
     public Retorno zonasEnRadio(int zonaID, int duracionViaje) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
@@ -519,7 +520,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-//pre:
+    //pre:
     //post: se da de alta un chofer en el sistema al cual se le asigna un movil
     @Override
     public Retorno registrarChofer(String movilID, String nombre, String cedula) {

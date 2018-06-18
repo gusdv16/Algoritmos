@@ -13,11 +13,11 @@ public class Obligatorio {
 //        prueba4(s, p);
 //        prueba5(s, p);
 //        prueba6(s, p);
-        prueba7(s, p);
+//        prueba7(s, p);
 //        prueba8(s, p);
 //        prueba9(s, p);
 //        pruebax(s, p);
-//        prueba10(s, p);
+        prueba10(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -518,10 +518,12 @@ public class Obligatorio {
         p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
 
         p.ver(s.deshabilitarMovil("MOMO1").resultado, Retorno.Resultado.ERROR_3, "No se deshabilita el movil MOMO2 porque esta de viaje");
+        
+        //p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
+        p.ver(s.eliminarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Borro MOMO2");
+        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
 
         p.imprimirResultadosPrueba();
-    }
-
-    
-    
+    }  
 }
