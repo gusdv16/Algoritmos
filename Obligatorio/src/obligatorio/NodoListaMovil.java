@@ -8,6 +8,7 @@ public class NodoListaMovil {
     private NodoListaMovil sig;
     private boolean Estado;
     private int Viaje;
+    private int Emergencias;
 
     private ListaChofer lch;
 
@@ -16,6 +17,7 @@ public class NodoListaMovil {
         this.sig = null;
         this.Estado = true;
         this.Viaje = 0;
+        this.Emergencias = 0;
         this.lch = new ListaChofer();
     }
 
@@ -58,5 +60,14 @@ public class NodoListaMovil {
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
     }
+
+    public int getEmergencias() {
+        return Emergencias;
+    }
+
+    public void setEmergencias(int Emergencias) {
+        this.Emergencias = Emergencias;
+    }
+    
 
 }

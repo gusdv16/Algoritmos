@@ -149,7 +149,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-//pre:
+    //pre:
     //post: te devuelve en pantalla los datos del movil que le pasas como parametro
     @Override
     public Retorno buscarMovil(String movilID) {
@@ -161,7 +161,7 @@ public class Sistema implements ISistema {
             ret.valorString = "Móvil no existe en el sistema";
         } else {
             NodoListaMovil movil = zona.getLm().obtenerElemento(movilID);
-            System.out.println(movil.getDato() + "|Estado: " + movil.isEstado() + "|Zona: " + zona.getDato() + "|#Emergencias: ");
+            System.out.println(movil.getDato() + "|Estado: " + movil.isEstado() + "|Zona: " + zona.getDato() + "|#Emergencias: " + movil.getEmergencias());
 
             System.out.println();
             ret.resultado = Retorno.Resultado.OK;
@@ -672,16 +672,17 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona Destino no existe";
         } else {
-
             NodoListaZona destino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaDestino).getDato());
-
             NodoListaMovil aux = destino.getLm().getInicio();
 
-            while (aux.getSig() != null && !aux.isEstado()) {
+            while (aux.getSig() != null && !aux.isEstado() || aux.getViaje() > 0) {
                 aux = aux.getSig();
             }
 
-            aux.setViaje(zonaDestino);
+            if (aux.getSig() != null) {
+                aux.setViaje(zonaDestino);
+                aux.setEmergencias(aux.getEmergencias() + 1);
+            }
 
             ret.resultado = Retorno.Resultado.OK;
             ret.valorString = "Se agrego el movil a un viaje";

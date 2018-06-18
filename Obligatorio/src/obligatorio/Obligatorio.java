@@ -509,19 +509,23 @@ public class Obligatorio {
         p.ver(s.registrarMovil("MOMO2", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 2");
         p.ver(s.registrarMovil("MOMO0", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 0");
         p.ver(s.deshabilitarMovil("MOMO0").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
-        p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
+//        p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
 
         p.ver(s.cambiarUbicacion("MOMO1", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
         p.ver(s.informeMovil(2).resultado, Retorno.Resultado.OK, "Info M 2.....");
 
         p.ver(s.viaje(10).resultado, Retorno.Resultado.ERROR_1, "No existe zona");
         p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
+        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
+        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
 
         p.ver(s.deshabilitarMovil("MOMO1").resultado, Retorno.Resultado.ERROR_3, "No se deshabilita el movil MOMO2 porque esta de viaje");
         
         //p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
+        p.ver(s.buscarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Busco MOMO2");
         p.ver(s.eliminarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Borro MOMO2");
+        
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
 
         p.imprimirResultadosPrueba();
