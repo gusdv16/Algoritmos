@@ -550,6 +550,18 @@ public class Obligatorio {
         p.ver(s.registrarChofer("Z3OMO16", "Chofer 1", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
         p.ver(s.registrarChofer("Z3OMO16", "Chofer 2", "2222222").resultado, Retorno.Resultado.OK, "registrarChofer");
         p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
+        
+        p.ver(s.cambiarUbicacion("Z3OMO16", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
+        p.ver(s.eliminarChofer("Z3OMO16", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
+        p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
+        
+        p.ver(s.registrarAbonado(111, "Abonado 1", "Dir 1", "Tel 1", 1).resultado, Retorno.Resultado.OK, "registrarAbonado");
+        p.ver(s.registrarAbonado(222, "Abonado 2", "Dir 2", "Tel 2", 1).resultado, Retorno.Resultado.OK, "registrarAbonado");
+        p.ver(s.registrarAbonado(333, "Abonado 3", "Dir 3", "Tel 3", 3).resultado, Retorno.Resultado.OK, "registrarAbonado");
+        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "informeAbonadosZona");
+        p.ver(s.informeAbonadosZona(3).resultado, Retorno.Resultado.OK, "informeAbonadosZona");
+        
+        
         p.imprimirResultadosPrueba();
     }  
 }

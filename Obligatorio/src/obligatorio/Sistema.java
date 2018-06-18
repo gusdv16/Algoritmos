@@ -511,7 +511,7 @@ public class Sistema implements ISistema {
                         separador = "|";
                     }
                     cont++;
-                    rutas+= separador + (j + 1) + ";" + matrizDeZonas[aux.getIdZona() - 1][j];
+                    rutas += separador + (j + 1) + ";" + matrizDeZonas[aux.getIdZona() - 1][j];
                 }
             }
 
@@ -598,9 +598,8 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
-            ret.valorString = "no existe el movil en el sistema de emergencias";
+            ret.valorString = "No existe el movil en el sistema de emergencias";
         } else {
-
             NodoListaChofer aux = Lm.obtenerElemento(movilID).getLch().getInicio();
             String separador = "|";
 
@@ -660,7 +659,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-//pre:no existe un abonado en mas de una zona
+    //pre:no existe un abonado en mas de una zona
     //post:muestra en pantalla todos los abonados existentes en la zona que se le pasa por parametro. si hay una zona que no hay abonados muuestra ""
     @Override
     public Retorno informeAbonadosZona(int zonaID
@@ -671,30 +670,32 @@ public class Sistema implements ISistema {
             ret.valorString = "La Zona no existe";
         } else {
             NodoListaZona aux = Lz.getInicio();
-            NodoListaAbonado aux1 = aux.getLa().getInicio();
             int abonadosDisponibles = 0;
             String separador = "|";
 
-            while (aux != null && aux.idZona == zonaID) {
-                System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|");
-                while (aux1 != null) {
-                    if (aux1.getSig() == null) {
-                        separador = "";
+            while (aux != null) {
+                if (aux.idZona == zonaID) {
+                    NodoListaAbonado aux1 = aux.getLa().getInicio();
+                    System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|");
+                    while (aux1 != null) {
+                        if (aux1.getSig() == null) {
+                            separador = "";
+                        }
+                        System.out.print(aux1.getAbonadoID() + separador);
+                        if (aux1.isEstado()) {
+                            abonadosDisponibles++;
+                        }
+                        aux1 = aux1.getSig();
                     }
-                    System.out.print(aux1.getAbonadoID() + separador);
-                    if (aux1.isEstado()) {
-                        abonadosDisponibles++;
-                    }
-                    aux1 = aux1.getSig();
+                    System.out.print("|Total Abonados disponibles: " + abonadosDisponibles);
                 }
-                System.out.print("|Total Abonados disponibles: " + abonadosDisponibles);
                 aux = aux.getSig();
             }
             System.out.println();
             ret.resultado = Retorno.Resultado.OK;
         }
 
-        mostrarAbonados(Lz);
+        //mostrarAbonados(Lz);
         return ret;
     }
 
