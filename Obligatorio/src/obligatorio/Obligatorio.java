@@ -547,6 +547,9 @@ public class Obligatorio {
         p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Más rapida");
         p.ver(s.zonasEnRadio(1, 20).resultado, Retorno.Resultado.OK, "Más rapida");
         p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "Más rapida");
+        p.ver(s.registrarChofer("Z3OMO16", "Chofer 1", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
+        p.ver(s.registrarChofer("Z3OMO16", "Chofer 2", "2222222").resultado, Retorno.Resultado.OK, "registrarChofer");
+        p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
         p.imprimirResultadosPrueba();
     }  
 }

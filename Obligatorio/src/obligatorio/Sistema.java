@@ -601,7 +601,7 @@ public class Sistema implements ISistema {
             ret.valorString = "no existe el movil en el sistema de emergencias";
         } else {
 
-            NodoListaChofer aux = Lm.getInicio().getLch().getInicio();
+            NodoListaChofer aux = Lm.obtenerElemento(movilID).getLch().getInicio();
             String separador = "|";
 
             while (aux != null) {
