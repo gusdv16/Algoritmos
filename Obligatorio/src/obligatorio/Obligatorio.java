@@ -543,6 +543,10 @@ public class Obligatorio {
         p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Borro MOMO2");
         p.ver(s.agregarRuta(3, 2, 7).resultado, Retorno.Resultado.OK, "Borro MOMO2");
         p.ver(s.mostrarmapa().resultado, Retorno.Resultado.OK, "Borro MOMO2");
+        p.ver(s.movilMasCercano(3).resultado, Retorno.Resultado.OK, "Más cercano");
+        p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Más rapida");
+        p.ver(s.zonasEnRadio(1, 20).resultado, Retorno.Resultado.OK, "Más rapida");
+        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "Más rapida");
         p.imprimirResultadosPrueba();
     }  
 }

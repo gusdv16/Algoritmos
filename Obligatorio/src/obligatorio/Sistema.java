@@ -223,7 +223,6 @@ public class Sistema implements ISistema {
 
             while (aux != null) {
                 if (aux.idZona == zonaID) {
-//                    NodoListaMovil aux1 = aux.getLm().getInicio();
                     ListaMovil aux0 = ordenarMoviles(aux.getLm());
                     NodoListaMovil aux1 = aux0.getInicio();
 
@@ -370,7 +369,7 @@ public class Sistema implements ISistema {
         return ret;
     }
 
-//pre:
+    //pre:
     //post:muestra en pantalla el movil mas cercano a zona que le pasas por parametro y el tiempo de demora 
     @Override
     public Retorno movilMasCercano(int zonaID) {
@@ -502,7 +501,21 @@ public class Sistema implements ISistema {
                 }
                 aux2 = aux2.getSig();
             }
-            System.out.println(aux.getIdZona() + "|" + aux.getDato() + "|MóvilesDisponibles:" + movilesDisponibles + "|MóvilesNoDisponibles:" + movilesNoDisponibles);
+
+            String separador = "";
+            String rutas = "";
+            int cont = 0;
+            for (int j = 0; j < matrizDeZonas[aux.getIdZona() - 1].length; j++) {
+                if (matrizDeZonas[aux.getIdZona() - 1][j] > 0) {
+                    if (cont > 0) {
+                        separador = "|";
+                    }
+                    cont++;
+                    rutas+= separador + (j + 1) + ";" + matrizDeZonas[aux.getIdZona() - 1][j];
+                }
+            }
+
+            System.out.println(aux.getIdZona() + "|" + rutas + "|MóvilesDisponibles:" + movilesDisponibles + "|MóvilesNoDisponibles:" + movilesNoDisponibles);
             aux = aux.getSig();
         }
 
