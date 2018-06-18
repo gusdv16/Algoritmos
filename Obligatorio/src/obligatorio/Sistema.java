@@ -348,7 +348,6 @@ public class Sistema implements ISistema {
     //post: cambia los valores de la ruta del viaje
     @Override
     public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
-//        mostrarmapa(matrizDeZonas);
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
         if (Lz.obtenerElementoPorId(zonaOrigen) == null) {
@@ -368,7 +367,6 @@ public class Sistema implements ISistema {
             ret.valorString = "Se agrego la ruta.";
         }
         System.out.println();
-//        mostrarmapa(matrizDeZonas);
         return ret;
     }
 
@@ -439,7 +437,6 @@ public class Sistema implements ISistema {
                 int zOrigen = zonaOrigen - 1;
                 int zDestino = zonaDestino - 1;
 
-//                mostrarmapa(matrizDeZonas);
                 //VERIFICO SI TIENE RUTA DIRECTA
                 if (matrizDeZonas[zOrigen][zDestino] == 0) {
                     //RECORRO TODAS LAS COLUMNAS
