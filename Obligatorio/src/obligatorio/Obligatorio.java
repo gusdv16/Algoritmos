@@ -538,6 +538,7 @@ public class Obligatorio {
         
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
 
+        p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Borro MOMO2");
         p.imprimirResultadosPrueba();
     }  
 }

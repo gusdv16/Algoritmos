@@ -299,13 +299,18 @@ public class Sistema implements ISistema {
     @Override
     public Retorno listarZonas() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-
         NodoListaZona aux = Lz.getInicio();
+        int cont = 0;
+        String separador = "";
 
         while (aux != null) {
-            System.out.print(aux.getIdZona() + ";" + aux.getDato() + "|\n");
+            if (cont > 0) {
+                separador = "|";
+            }
+            System.out.print(separador + aux.getIdZona() + ";" + aux.getDato() + "\n");
 
             aux = aux.getSig();
+            cont++;
         }
         System.out.println();
         ret.resultado = Retorno.Resultado.OK;
