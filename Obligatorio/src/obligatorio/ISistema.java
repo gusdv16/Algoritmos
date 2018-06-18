@@ -49,6 +49,8 @@ public interface ISistema {
     Retorno eliminarAbonado(int abonadoID);
 
     Retorno informeAbonadosZona(int zonaID);
-    
+
     Retorno viaje(int zonaDestino);
+
+    Retorno mostrarmapa();
 }

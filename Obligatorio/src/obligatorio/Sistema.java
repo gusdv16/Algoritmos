@@ -439,7 +439,7 @@ public class Sistema implements ISistema {
                 int zOrigen = zonaOrigen - 1;
                 int zDestino = zonaDestino - 1;
 
-                mostrarmapa(matrizDeZonas);
+//                mostrarmapa(matrizDeZonas);
                 //VERIFICO SI TIENE RUTA DIRECTA
                 if (matrizDeZonas[zOrigen][zDestino] == 0) {
                     //RECORRO TODAS LAS COLUMNAS
@@ -714,4 +714,19 @@ public class Sistema implements ISistema {
         return ret;
     }
 
+    @Override
+    public Retorno mostrarmapa() {
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        ret.resultado = Retorno.Resultado.OK;
+        int filas = matrizDeZonas.length;
+        int columnas = matrizDeZonas[0].length;
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                System.out.print(matrizDeZonas[i][j] + " - ");
+            }
+            System.out.println();
+        }
+        return ret;
+    }
 }
