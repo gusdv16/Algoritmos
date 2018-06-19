@@ -264,6 +264,8 @@ public class Sistema implements ISistema {
         } else {
             listaMovilesOrigen.borrarElemento(movilID);
             listaMovilesDestino.agregarFinal(movilID);
+            Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID).setViaje(0);
+            
             ret.resultado = Resultado.OK;
             ret.valorString = "Se cambio de zona";
         }
