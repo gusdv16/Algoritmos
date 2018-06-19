@@ -85,7 +85,7 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
 
-        if (zona.getLm().obtenerElemento(movilID) == null) {
+        if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
         } else if (zona.getLm().obtenerElemento(movilID).isEstado() == false) {
@@ -104,13 +104,13 @@ public class Sistema implements ISistema {
     }
 
 //pre:
-    //post: ponemos en estado=true a los moviles
+    //post: ponemos en estado=true a los moviles si no estan disponibles
     @Override
     public Retorno habilitarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
 
-        if (zona.getLm().obtenerElemento(movilID) == null) {
+        if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
         } else if (zona.getLm().obtenerElemento(movilID).isEstado() == true) {
@@ -134,9 +134,9 @@ public class Sistema implements ISistema {
     @Override
     public Retorno eliminarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
+        //NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
 
-        if (zona.getLm().obtenerElemento(movilID) == null) {
+        if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
         } else {
@@ -255,6 +255,7 @@ public class Sistema implements ISistema {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
         ListaMovil listaMovilesOrigen = buscarZonaPorMovil(Lz, movilID).getLm();
         ListaMovil listaMovilesDestino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm();
+        
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona Origen no existe";

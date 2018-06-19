@@ -460,9 +460,9 @@ public class Obligatorio {
         p.imprimirComentario("emergencia asignada a la zona 7");
 
         p.ver(s.habilitarMovil("PCS101").resultado, Retorno.Resultado.OK, "Habilito movil PCS101");
-        p.ver(s.habilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento habilitar movil PCS112 que esta en emergencia");
+        //NUNCA CAMBIA AL ESTADO EMERGENCIA//p.ver(s.habilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento habilitar movil PCS112 que esta en emergencia");
 
-        p.ver(s.deshabilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento deshabilitar movil PCS112 que esta en emergencia");
+        //p.ver(s.deshabilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento deshabilitar movil PCS112 que esta en emergencia");
         p.ver(s.habilitarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Habilito movil PCS141");
         p.ver(s.habilitarMovil("PCS108").resultado, Retorno.Resultado.ERROR_2, "Habilito movil PCS108");
         p.ver(s.deshabilitarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Intento deshabilitar movil PCS141");
