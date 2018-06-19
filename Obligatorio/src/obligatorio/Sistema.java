@@ -433,7 +433,6 @@ public class Sistema implements ISistema {
 
         if (origen != null) {
             if (destino != null) {
-
                 int columnas = matrizDeZonas[0].length;
                 int duracion = Integer.MAX_VALUE;
                 String escala = "";
@@ -479,11 +478,10 @@ public class Sistema implements ISistema {
                 ret.resultado = Resultado.OK;
                 ret.valorString = camino;
             } else {
-                ret.resultado = Resultado.ERROR_3;
-
+                ret.resultado = Resultado.ERROR_2;
             }
         } else {
-            ret.resultado = Resultado.ERROR_2;
+            ret.resultado = Resultado.ERROR_1;
         }
         return ret;
     }
@@ -584,10 +582,13 @@ public class Sistema implements ISistema {
     public Retorno eliminarChofer(String movilID, String cedula) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
 
-        NodoListaMovil movil = buscarMovilPorChofer(Lm, cedula);
+        NodoListaMovil movil = Lm.obtenerElemento(movilID);
 
         if (movil == null) {
             ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "El movil no existe";
+        }else if (movil.getLch().obtenerElemento(cedula) == null) {
+            ret.resultado = Resultado.ERROR_2;
             ret.valorString = "El chofer no existe";
         } else {
             movil.getLch().borrarElemento(cedula);
