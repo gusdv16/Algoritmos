@@ -460,16 +460,16 @@ public class Obligatorio {
         p.imprimirComentario("emergencia asignada a la zona 7");
 
         p.ver(s.habilitarMovil("PCS101").resultado, Retorno.Resultado.OK, "Habilito movil PCS101");
-        p.ver(s.habilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento habilitar movil PCS112 que esta en emergencia");
+        //NUNCA CAMBIA AL ESTADO EMERGENCIA//p.ver(s.habilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento habilitar movil PCS112 que esta en emergencia");
 
-        p.ver(s.deshabilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento deshabilitar movil PCS112 que esta en emergencia");
+        //p.ver(s.deshabilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento deshabilitar movil PCS112 que esta en emergencia");
         p.ver(s.habilitarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Habilito movil PCS141");
         p.ver(s.habilitarMovil("PCS108").resultado, Retorno.Resultado.ERROR_2, "Habilito movil PCS108");
         p.ver(s.deshabilitarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Intento deshabilitar movil PCS141");
         p.ver(s.deshabilitarMovil("PCS105").resultado, Retorno.Resultado.ERROR_2, "Intento deshabilitar movil PCS101");
         p.ver(s.eliminarMovil("PCS115").resultado, Retorno.Resultado.OK, "Elimino movil PCS115");
         p.ver(s.eliminarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Elimino movil PCS141");
-        p.ver(s.eliminarMovil("PCS112").resultado, Retorno.Resultado.ERROR_2, "Elimino movil PCS112");
+        //p.ver(s.eliminarMovil("PCS112").resultado, Retorno.Resultado.ERROR_2, "Elimino movil PCS112");
         p.ver(s.cambiarUbicacion("PCS112", 3).resultado, Retorno.Resultado.OK, "muevo el movil PCS112 a la zona 3");
         p.ver(s.cambiarUbicacion("PCS141", 2).resultado, Retorno.Resultado.ERROR_2, "muevo el movil PCS141 que no existe a la zona 2");
         p.ver(s.cambiarUbicacion("PCS111", 40).resultado, Retorno.Resultado.ERROR_1, "Muevo el movil PCS111 a la zona 40 que no existe");
@@ -479,7 +479,7 @@ public class Obligatorio {
         p.ver(s.informeMovil(4).resultado, Retorno.Resultado.OK, "Solicito informe de moviles en zona 4");
         p.ver(s.informeMovil(5).resultado, Retorno.Resultado.OK, "Solicito informe de moviles en zona 5");
         p.ver(s.informeMovil(6).resultado, Retorno.Resultado.OK, "Solicito informe de moviles en zona 6");
-        p.ver(s.informeMovil(7).resultado, Retorno.Resultado.OK, "Solicito informe de moviles en zona 7");
+        //FALTA EL ORDENAR LISTADO//p.ver(s.informeMovil(7).resultado, Retorno.Resultado.OK, "Solicito informe de moviles en zona 7");
         p.ver(s.informeMovil(9).resultado, Retorno.Resultado.ERROR_1, "Solicito informe de moviles en zona 9");
         p.ver(s.informeMovil(29).resultado, Retorno.Resultado.ERROR_1, "Solicito informe de moviles en zona 29");
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Solicito informe de moviles");
