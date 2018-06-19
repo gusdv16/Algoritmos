@@ -134,9 +134,12 @@ public class Sistema implements ISistema {
     @Override
     public Retorno eliminarMovil(String movilID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        //NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
+        NodoListaZona zona = buscarZonaPorMovil(Lz, movilID);
 
         if (Lm.obtenerElemento(movilID) == null) {
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Móvil no existe en el sistema";
+        }else if (zona.getLm().obtenerElemento(movilID).getEmergencias() > 0) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
         } else {
@@ -253,9 +256,7 @@ public class Sistema implements ISistema {
     @Override
     public Retorno cambiarUbicacion(String movilID, int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        ListaMovil listaMovilesOrigen = buscarZonaPorMovil(Lz, movilID).getLm();
-        ListaMovil listaMovilesDestino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm();
-        
+
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona Origen no existe";
@@ -263,10 +264,12 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_2;
             ret.valorString = "El movil no existe";
         } else {
+            ListaMovil listaMovilesOrigen = buscarZonaPorMovil(Lz, movilID).getLm();
+            ListaMovil listaMovilesDestino = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm();
             listaMovilesOrigen.borrarElemento(movilID);
             listaMovilesDestino.agregarFinal(movilID);
             Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID).setViaje(0);
-            
+
             ret.resultado = Resultado.OK;
             ret.valorString = "Se cambio de zona";
         }
