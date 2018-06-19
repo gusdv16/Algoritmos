@@ -16,8 +16,8 @@ public class Obligatorio {
 //        prueba7(s, p);
 //        prueba8(s, p);
 //        prueba9(s, p);
-//        pruebax(s, p);
-        prueba10(s, p);
+        pruebax(s, p);
+//        prueba10(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {

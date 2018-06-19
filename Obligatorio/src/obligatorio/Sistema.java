@@ -533,23 +533,24 @@ public class Sistema implements ISistema {
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona no existe";
-        }
-        if (duracionViaje <= 0) {
-            ret.resultado = Resultado.ERROR_2;
-            ret.valorString = "La duracion del viaje es menor o igual a 0";
         } else {
-            String aux = "";
-            int cont = 0;
-            for (int j = 0; j < matrizDeZonas[zonaID - 1].length; j++) {
-                if (matrizDeZonas[zonaID - 1][j] > 0 && matrizDeZonas[zonaID - 1][j] <= duracionViaje) {
-                    cont++;
-                    if (cont > 1) {
-                        aux = "|";
+            if (duracionViaje <= 0) {
+                ret.resultado = Resultado.ERROR_2;
+                ret.valorString = "La duracion del viaje es menor o igual a 0";
+            } else {
+                String aux = "";
+                int cont = 0;
+                for (int j = 0; j < matrizDeZonas[zonaID - 1].length; j++) {
+                    if (matrizDeZonas[zonaID - 1][j] > 0 && matrizDeZonas[zonaID - 1][j] <= duracionViaje) {
+                        cont++;
+                        if (cont > 1) {
+                            aux = "|";
+                        }
+                        System.out.print(aux + (j + 1) + ";" + matrizDeZonas[zonaID - 1][j]);
                     }
-                    System.out.print(aux + (j + 1) + ";" + matrizDeZonas[zonaID - 1][j]);
                 }
+                ret.resultado = Resultado.OK;
             }
-            ret.resultado = Resultado.OK;
         }
         return ret;
     }
