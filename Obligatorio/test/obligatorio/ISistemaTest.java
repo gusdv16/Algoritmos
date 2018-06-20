@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package obligatorio;
 
 import org.junit.After;
@@ -50,8 +45,6 @@ public class ISistemaTest {
 
     @Test
     public void testRegistrarMovil() {
-        sis = new Sistema();
-        sis.crearSistemaEmergencias(2);
         assertEquals(Retorno.Resultado.ERROR_1, sis.registrarMovil("MAN1891",1).resultado);
         sis.agregarZona("Zona 1");
         assertEquals(Retorno.Resultado.OK, sis.registrarMovil("MAN1891",2).resultado);

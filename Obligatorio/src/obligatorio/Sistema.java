@@ -88,12 +88,12 @@ public class Sistema implements ISistema {
         if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
-        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == false) {
-            ret.resultado = Resultado.ERROR_2;
-            ret.valorString = "Móvil ya esta en estado NO_DISPONIBLE";
         } else if (zona.getLm().obtenerElemento(movilID).getViaje() > 0) {
             ret.resultado = Resultado.ERROR_3;
             ret.valorString = "El Móvil esta asignado a un viaje";
+        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == false) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "Móvil ya esta en estado NO_DISPONIBLE";
         } else {
             zona.getLm().obtenerElemento(movilID).setEstado(false);
             ret.resultado = Resultado.OK;
@@ -113,13 +113,13 @@ public class Sistema implements ISistema {
         if (Lm.obtenerElemento(movilID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "Móvil no existe en el sistema";
-        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == true) {
-            ret.resultado = Resultado.ERROR_2;
-            ret.valorString = "Móvil ya esta en estado DISPONIBLE";
         } else if (zona.getLm().obtenerElemento(movilID).getViaje() > 0) {
             //NUNCA LLEGA A ESTE ERROR PORQUE NO PUEDE ESTAR DE VIAJE SI ESTA DESHABILITADO
             ret.resultado = Resultado.ERROR_3;
             ret.valorString = "El Móvil esta asignado a un viaje";
+        } else if (zona.getLm().obtenerElemento(movilID).isEstado() == true) {
+            ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "Móvil ya esta en estado DISPONIBLE";
         } else {
             zona.getLm().obtenerElemento(movilID).setEstado(true);
             ret.resultado = Resultado.OK;
@@ -225,7 +225,7 @@ public class Sistema implements ISistema {
             String separador = ";";
 
             while (aux != null) {
-                if (aux.idZona == zonaID) {
+                if (aux.idZona == zonaID && aux.getLm().cantElementos() > 0) {
                     ListaMovil aux0 = ordenarMoviles(aux.getLm());
                     NodoListaMovil aux1 = aux0.getInicio();
 
@@ -725,6 +725,7 @@ public class Sistema implements ISistema {
             NodoListaMovil aux = Lz.obtenerElemento(Lz.obtenerElementoPorId(zonaID).getDato()).getLm().obtenerElemento(movilID);
             if (aux.isEstado() || aux.getViaje() == 0) {
                 aux.setViaje(zonaID);
+                aux.setEstado(false);
                 aux.setEmergencias(aux.getEmergencias() + 1);
             }
             ret.resultado = Resultado.OK;
