@@ -16,6 +16,14 @@ public class ISistemaTest {
     ISistema sis;
     Retorno ret;
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
     @Before
     public void setUp() throws Exception {
         sis = new Sistema();
@@ -29,417 +37,694 @@ public class ISistemaTest {
 
     @Test
     public void testCrearSistemaEmergencias() {
-        sis = new Sistema();
-        assertEquals(Retorno.Resultado.ERROR_1, sis.crearSistemaEmergencias(-5).resultado);
-        assertEquals(Retorno.Resultado.ERROR_1, sis.crearSistemaEmergencias(-1).resultado);
         assertEquals(Retorno.Resultado.ERROR_1, sis.crearSistemaEmergencias(0).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.crearSistemaEmergencias(1).resultado);
-        sis = new Sistema();
-        assertEquals(Retorno.Resultado.OK, sis.crearSistemaEmergencias(5).resultado);
+
+        assertEquals(Retorno.Resultado.OK, sis.crearSistemaEmergencias(7).resultado);
+
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Pocitos").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Punta Carretas").resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_2, sis.agregarZona("Punta Carretas").resultado);
+
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Parque Rodo").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Buceo").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Malvin").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Colon").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Centro").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.agregarZona("Ciudad Vieja").resultado);
+        //
+        assertEquals(Retorno.Resultado.OK, sis.listarZonas().resultado.OK);
+        //
+
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(1, 4, 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(2, 4, 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(2, 3, 5).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(3, 5, 7).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(4, 5, 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(3, 6, 8).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(7, 5, 3).resultado);
+
+        //mostrar mapa
+        assertEquals(Retorno.Resultado.ERROR_1, sis.agregarRuta(10, 5, 3).resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.agregarRuta(1, 45, 3).resultado);
+        assertEquals(Retorno.Resultado.ERROR_3, sis.agregarRuta(1, 6, 0).resultado);
+
+        //
+        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(1, 4, 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(2, 4, 5).resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.modificarDemora(8, 4, 5).resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.modificarDemora(1, 9, 5).resultado);
+        assertEquals(Retorno.Resultado.ERROR_3, sis.modificarDemora(1, 4, 0).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(1, 4, 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(2, 4, 3).resultado);
+
+        //mostrar mapa
+        //
+        assertEquals(Retorno.Resultado.OK, sis.rutaMasRapida(1, 4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.rutaMasRapida(1, 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.rutaMasRapida(2, 5).resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_2, sis.rutaMasRapida(9, 4).resultado);
+        assertEquals(Retorno.Resultado.ERROR_3, sis.rutaMasRapida(1, 9).resultado);
+        //
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS101", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS102", 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS103", 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS104", 4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS105", 5).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS106", 6).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS108", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS109", 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS110", 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS111", 4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS112", 5).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS113", 6).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS115", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("PCS116", 2).resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarMovil("PCS117", 9).resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.registrarMovil("PCS116", 3).resultado);
+        //
+
+        assertEquals(Retorno.Resultado.OK, sis.informeZonas().resultado);
+        //
+
+        assertEquals(Retorno.Resultado.OK, sis.zonasEnRadio(1, 6).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.zonasEnRadio(2, 8).resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_1, sis.zonasEnRadio(9, 8).resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.zonasEnRadio(2, 0).resultado);
+        //
+
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS101", "Alberto Pedrosa", "1.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS102", "Esteban Gonzalez", "2.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS103", "Laura Martinez", "3.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS104", "Jacinto Lodeiro", "4.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS105", "Martin Jackson", "5.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS106", "Maria Ruiz", "6.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS108", "Hermenegildo Diaz", "7.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS109", "Patricia Beltran", "8.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS110", "Marcelo Micino", "9.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS111", "Jorge Gentile", "4.154.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS112", "Anibal Feldman", "4.254.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS113", "Leonardo Madrigal", "4.354.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS115", "Leandro Silvera", "4.454.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS116", "Lucia Olivera", "4.554.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS101", "Carlos Larrañaga", "4.654.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS101", "Sebastian Vazquez", "4.754.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS101", "Pablo Rossi", "4.854.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS102", "Susana Rivera", "4.954.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS102", "Bruno Perez", "4.504.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("PCS103", "Luis Suarez", "4.514.89-1").resultado);
+        //choferes con error
+
+        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarChofer("PCS125", "Luis Suarez", "4.514.19-1").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarChofer("PCS143", "Luis Suarez", "4.514.29-1").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarChofer("PCS153", "Luis Suarez", "4.514.89-1").resultado);
+        //
+        assertEquals(Retorno.Resultado.OK, sis.eliminarChofer("PCS101", "4.854.89-1").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.eliminarChofer("PCS102", "4.504.89-1").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarChofer("PCS152", "4.504.89-1").resultado);
+        //
+        assertEquals(Retorno.Resultado.OK, sis.informeChoferes("PCS101").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeChoferes("PCS102").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeChoferes("PCS103").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeChoferes("PCS104").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.informeChoferes("PCS134").resultado);
+        //
+
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(2, "Alberto Pedrosa", "Cuareim 1134", "24001115", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(3, "ACIEN ZURUTA ROSA MARIA", "Paraguay 1134", "24001115", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(4, "ALBUSAC TAMARGO DANIEL", "Avenida Italia 1134", "24001115", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(5, "ALONSO BECERRA JOSE", "Carlos Quijano 1134", "24001115", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(6, "AMAT MENA SUSANA", "Canelones 1134", "24001115", 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(7, "AMATE GARRIDO IRENE", "Maldonado 1134", "24001115", 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(8, "APARICIO GARCIA MAGDALENA", "Cibils 1134", "24001115", 4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(9, "BENAYAS PEREZ NATALIA", "8 de octubre 1134", "24001115", 5).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(10, "BERNABE CASANOVA FRANCISCO CESAR", "Joanico 1134", "24001115", 6).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(11, "BERNAL RUIZ ENCARNACION", "Arrieta 1134", "24001115", 7).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(12, "CACERES CONTRERAS MARIA DEL MAR", "Boulevard Artigas 1134", "24001115", 7).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(13, "CAMPOS VIQUE MARIA BELEN", "Itapeby 1134", "24001115", 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(14, "CARREÑO NAVARRO MONICA", "Gustavo Gallinal 1134", "24001115", 2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(15, "CARRERA BENITEZ SUSANA", "Convencion 1134", "24001115", 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(16, "CASAS GARCIA MARIA ESPERANZA", "Rio Negro 1134", "24001115", 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(17, "CASTELLS GALLEGO MARAI DEL TISCAR", "Durazno 1134", "24001115", 4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(18, "CASTILLO ALARCON ISABEL", "Andes 1134", "24001115", 4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(19, "CASTILLO GALDEANO ELENA MARIA", "Rincon 1134", "24001115", 4).resultado);
+        
+        assertEquals(Retorno.Resultado.OK, sis.eliminarAbonado(15).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.eliminarAbonado(5).resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarAbonado(35).resultado);
+        //
+
+        assertEquals(Retorno.Resultado.OK, sis.informeAbonadosZona(1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeAbonadosZona(2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeAbonadosZona(3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeAbonadosZona(4).resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_1, sis.informeAbonadosZona(34).resultado);
+
+        //
+        assertEquals(Retorno.Resultado.OK, sis.deshabilitarMovil("PCS101").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.deshabilitarMovil("PCS105").resultado);
+
+        //UDF.ViajeEmergencia(7);
+        assertEquals(Retorno.Resultado.OK, sis.viaje("PCS112", 3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.habilitarMovil("PCS101").resultado);
+        //NUNCA CAMBIA AL ESTADO EMERGENCIA
+        assertEquals(Retorno.Resultado.ERROR_3, sis.habilitarMovil("PCS112").resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_3, sis.deshabilitarMovil("PCS112").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.habilitarMovil("PCS141").resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.habilitarMovil("PCS108").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.deshabilitarMovil("PCS141").resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.deshabilitarMovil("PCS105").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.eliminarMovil("PCS115").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarMovil("PCS141").resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.eliminarMovil("PCS112").resultado);
+        assertEquals(Retorno.Resultado.OK, sis.cambiarUbicacion("PCS112", 3).resultado);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.cambiarUbicacion("PCS141", 2).resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.cambiarUbicacion("PCS111", 40).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(5).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(6).resultado);
+        //FALTA EL ORDENAR LISTADO//
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil(7).resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.informeMovil(9).resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.informeMovil(29).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.informeMovil().resultado);
+
+        assertEquals(Retorno.Resultado.OK, sis.buscarMovil("PCS112").resultado);
+
+        assertEquals(Retorno.Resultado.ERROR_1, sis.buscarMovil("PCS132").resultado);
+
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(2).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(3).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(4).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(5).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(6).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.movilMasCercano(7).resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.movilMasCercano(9).resultado);
     }
 
+    /**
+     * Test of destruirSistemaEmergencias method, of class ISistema.
+     */
     @Test
     public void testDestruirSistemaEmergencias() {
-        assertEquals(Retorno.Resultado.OK, sis.destruirSistemaEmergencias().resultado);
+        System.out.println("destruirSistemaEmergencias");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.destruirSistemaEmergencias();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of registrarMovil method, of class ISistema.
+     */
     @Test
     public void testRegistrarMovil() {
-        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarMovil("MAN1891",1).resultado);
-        sis.agregarZona("Zona 1");
-        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("MAN1891",2).resultado);
-        sis.agregarZona("Zona 2");
-        assertEquals(Retorno.Resultado.ERROR_2, sis.registrarMovil("MAN1891", 2).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("MUS0001", 2).resultado);
+        System.out.println("registrarMovil");
+        String movilID = "";
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.registrarMovil(movilID, zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of deshabilitarMovil method, of class ISistema.
+     */
     @Test
     public void testDeshabilitarMovil() {
-        sis.agregarZona("Zona 1");
-        assertEquals(Retorno.Resultado.ERROR_1, sis.deshabilitarMovil("MAN1891").resultado);
-        sis.registrarMovil("MAN1891", 1);
-        assertEquals(Retorno.Resultado.OK, sis.deshabilitarMovil("MAN1891").resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.deshabilitarMovil("MAN1891").resultado);
+        System.out.println("deshabilitarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.deshabilitarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of habilitarMovil method, of class ISistema.
+     */
     @Test
     public void testHabilitarMovil() {
-        sis.agregarZona("Zona 1");
-        assertEquals(Retorno.Resultado.ERROR_1, sis.habilitarMovil("MAN1891").resultado);
-        sis.registrarMovil("MAN1891", 1);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.habilitarMovil("MAN1891").resultado);
-        sis.deshabilitarMovil("MAN1891");
-        assertEquals(Retorno.Resultado.OK, sis.habilitarMovil("MAN1891").resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.habilitarMovil("MAN1891").resultado);
-
+        System.out.println("habilitarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.habilitarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of eliminarMovil method, of class ISistema.
+     */
     @Test
     public void testEliminarMovil() {
-        sis.agregarZona("Zona 1");
-        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarMovil("MAN1891").resultado);
-        sis.registrarMovil("MAN1891", 1);
-        assertEquals(Retorno.Resultado.OK, sis.eliminarMovil("MAN1891").resultado);
-        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarMovil("MAN1891").resultado);
+        System.out.println("eliminarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.eliminarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of buscarMovil method, of class ISistema.
+     */
     @Test
     public void testBuscarMovil() {
-        sis.agregarZona("Zona 1");
-        assertEquals(Retorno.Resultado.ERROR_1, sis.buscarMovil("MAN1891").resultado);
-        sis.registrarMovil("MAN1891", 1);
-
-        ret = sis.buscarMovil("MAN1891");
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("MAN1891"));
-        assertTrue(ret.valorString.contains("Estado: DISPONIBLE"));
-        assertTrue(ret.valorString.contains("Zona: Zona 1"));
-
-        sis.deshabilitarMovil("MAN1891");
-        ret = sis.buscarMovil("MAN1891");
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("MAN1891"));
-        assertTrue(ret.valorString.contains("Estado: NO_DISPONIBLE"));
-        assertTrue(ret.valorString.contains("Zona: Zona 1"));
+        System.out.println("buscarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.buscarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of informeMovil method, of class ISistema.
+     */
     @Test
-    public void testInformeMovil() {
-        sis.agregarZona("Zona 1");
-        sis.agregarZona("Zona 2");
-        sis.agregarZona("Zona 3");
-        sis.agregarZona("Zona 4");
-        sis.registrarMovil("MATADOR0011", 1);
-        sis.registrarMovil("CEBOLLA0007", 3);
-        sis.registrarMovil("MAN1891", 1);
-        sis.registrarMovil("LUCHO0009", 2);
-
-        ret = sis.informeMovil();
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        boolean estaOrdenado = ret.valorString
-                .equals("CEBOLLA0007;DISPONIBLE;Zona 3|LUCHO0009;DISPONIBLE;Zona 2|MAN1891;DISPONIBLE;Zona 1|MATADOR0011;DISPONIBLE;Zona 1")
-                || ret.valorString.equals(
-                        "MATADOR0011;DISPONIBLE;Zona 1|MAN1891;DISPONIBLE;Zona 1|LUCHO0009;DISPONIBLE;Zona 2|CEBOLLA0007;DISPONIBLE;Zona 3");
-        assertTrue(estaOrdenado);
-
-        sis.deshabilitarMovil("CEBOLLA0007");
-        ret = sis.informeMovil();
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        estaOrdenado = ret.valorString
-                .equals("CEBOLLA0007;NO_DISPONIBLE;Zona 3|LUCHO0009;DISPONIBLE;Zona 2|MAN1891;DISPONIBLE;Zona 1|MATADOR0011;DISPONIBLE;Zona 1")
-                || ret.valorString.equals(
-                        "MATADOR0011;DISPONIBLE;Zona 1|MAN1891;DISPONIBLE;Zona 1|LUCHO0009;DISPONIBLE;Zona 2|CEBOLLA0007;NO_ISPONIBLE;Zona 3");
-        assertTrue(estaOrdenado);
-
+    public void testInformeMovil_0args() {
+        System.out.println("informeMovil");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeMovil();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of informeMovil method, of class ISistema.
+     */
     @Test
-    public void testInformeMovilInt() {
-        sis.agregarZona("Zona 1");
-        sis.agregarZona("Zona 2");
-        sis.agregarZona("Zona 3");
-        sis.agregarZona("Zona 4");
-        sis.registrarMovil("MATADOR0011", 1);
-        sis.registrarMovil("CEBOLLA0007", 3);
-        sis.registrarMovil("MAN1891", 1);
-        sis.registrarMovil("GOD0003", 1);
-        sis.registrarMovil("MUS0001", 1);
-        sis.registrarMovil("LUCHO0009", 2);
-
-        ret = sis.informeMovil(1);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("GOD0003;MAN1891;MATADOR0011;MUS0001|Total móviles disponibles: 4", ret.valorString);
-
-        sis.deshabilitarMovil("CEBOLLA0007");
-        sis.deshabilitarMovil("GOD0003");
-        ret = sis.informeMovil(1);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("GOD0003;MAN1891;MATADOR0011;MUS0001|Total móviles disponibles: 3", ret.valorString);
+    public void testInformeMovil_int() {
+        System.out.println("informeMovil");
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeMovil(zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of cambiarUbicacion method, of class ISistema.
+     */
     @Test
     public void testCambiarUbicacion() {
-        assertEquals(Retorno.Resultado.ERROR_1, sis.cambiarUbicacion("MAN1891", 1).resultado);
-        sis.agregarZona("Zona 1");
-        sis.agregarZona("Zona 2");
-        sis.agregarZona("Zona 3");
-        sis.agregarZona("Zona 4");
-        assertEquals(Retorno.Resultado.ERROR_2, sis.cambiarUbicacion("MAN1891", 1).resultado);
-        sis.registrarMovil("MAN1891", 1);
-        assertEquals(Retorno.Resultado.OK, sis.cambiarUbicacion("MAN1891", 2).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.cambiarUbicacion("MAN1891", 3).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.cambiarUbicacion("MAN1891", 4).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.cambiarUbicacion("MAN1891", 3).resultado);
+        System.out.println("cambiarUbicacion");
+        String movilID = "";
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.cambiarUbicacion(movilID, zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of agregarZona method, of class ISistema.
+     */
     @Test
     public void testAgregarZona() {
-        sis = new Sistema();
-        sis.crearSistemaEmergencias(4);
-        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Zona 1").resultado);
-        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Zona 2").resultado);
-        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Zona 3").resultado);
-        assertEquals(Retorno.Resultado.OK, sis.agregarZona("Zona 4 Ultima!").resultado);
-        assertEquals(Retorno.Resultado.ERROR_1, sis.agregarZona("Zona 5").resultado);
+        System.out.println("agregarZona");
+        String zonaNombre = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.agregarZona(zonaNombre);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of listarZonas method, of class ISistema.
+     */
     @Test
     public void testListarZonas() {
-        ret = sis.listarZonas();
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("", ret.valorString);
-
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-        ret = sis.listarZonas();
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("1;Zona unoh|2;Zona doh|3;Zona treh|4;Zona kuatroh", ret.valorString);
+        System.out.println("listarZonas");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.listarZonas();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of agregarRuta method, of class ISistema.
+     */
     @Test
     public void testAgregarRuta() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.agregarRuta(5, 1, 10).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.agregarRuta(1, 5, 10).resultado);
-        assertEquals(Retorno.Resultado.ERROR_3, sis.agregarRuta(1, 2, 0).resultado);
-        assertEquals(Retorno.Resultado.ERROR_3, sis.agregarRuta(1, 2, -1).resultado);
-        assertEquals(Retorno.Resultado.ERROR_3, sis.agregarRuta(1, 2, -5).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(1, 2, 10).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.agregarRuta(1, 3, 10).resultado);
+        System.out.println("agregarRuta");
+        int zonaOrigen = 0;
+        int zonaDestino = 0;
+        int minutosViaje = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.agregarRuta(zonaOrigen, zonaDestino, minutosViaje);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of modificarDemora method, of class ISistema.
+     */
     @Test
     public void testModificarDemora() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        sis.agregarRuta(1, 2, 10);
-        sis.agregarRuta(1, 3, 10);
-        assertEquals(Retorno.Resultado.ERROR_1, sis.modificarDemora(5, 1, 10).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.modificarDemora(1, 5, 10).resultado);
-        assertEquals(Retorno.Resultado.ERROR_3, sis.modificarDemora(1, 2, 0).resultado);
-        assertEquals(Retorno.Resultado.ERROR_3, sis.modificarDemora(1, 2, -1).resultado);
-        assertEquals(Retorno.Resultado.ERROR_3, sis.modificarDemora(1, 2, -5).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(1, 2, 10).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(1, 2, 18).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.modificarDemora(3, 1, 15).resultado);
-
+        System.out.println("modificarDemora");
+        int zonaOrigen = 0;
+        int zonaDestino = 0;
+        int minutosViaje = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.modificarDemora(zonaOrigen, zonaDestino, minutosViaje);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of movilMasCercano method, of class ISistema.
+     */
     @Test
     public void testMovilMasCercano() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        sis.registrarMovil("CEBOLLA0007", 3);
-
-        sis.agregarRuta(1, 2, 10);
-        sis.agregarRuta(1, 3, 15);
-        sis.agregarRuta(1, 4, 20);
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.movilMasCercano(5).resultado);
-        assertEquals(Retorno.Resultado.ERROR_1, sis.movilMasCercano(6).resultado);
-
-        ret = sis.movilMasCercano(1);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("CEBOLLA0007;15", ret.valorString);
-        sis.registrarMovil("LUCHO0009", 2);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("LUCHO0009;10", ret.valorString);
-        sis.registrarMovil("MATADOR0011", 1);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("MATADOR0011;0", ret.valorString);
-
+        System.out.println("movilMasCercano");
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.movilMasCercano(zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of rutaMasRapida method, of class ISistema.
+     */
     @Test
     public void testRutaMasRapida() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.rutaMasRapida(5, 1).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.rutaMasRapida(1, 5).resultado);
-
-        sis.agregarRuta(1, 2, 10);
-        sis.agregarRuta(1, 3, 15);
-        sis.agregarRuta(2, 4, 10);
-        sis.agregarRuta(3, 4, 4);
-
-        ret = sis.rutaMasRapida(1, 2);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("Zona unoh;0|Zona doh;10"));
-        assertTrue(ret.valorString.contains("Demora total: 10"));
-
-        ret = sis.rutaMasRapida(1, 4);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("Zona unoh;0|Zona treh;15|Zona kuatroh;4"));
-        assertTrue(ret.valorString.contains("Demora total: 19"));
-
+        System.out.println("rutaMasRapida");
+        int zonaOrigen = 0;
+        int zonaDestino = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.rutaMasRapida(zonaOrigen, zonaDestino);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of informeZonas method, of class ISistema.
+     */
     @Test
     public void testInformeZonas() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        sis.registrarMovil("MATADOR0011", 1);
-        sis.registrarMovil("CEBOLLA0007", 3);
-        sis.registrarMovil("MAN1891", 1);
-        sis.registrarMovil("GOD0003", 1);
-        sis.registrarMovil("MUS0001", 1);
-        sis.registrarMovil("LUCHO0009", 2);
-
-        sis.deshabilitarMovil("GOD0003");
-        sis.deshabilitarMovil("CEBOLLA0007");
-
-        sis.agregarRuta(1, 2, 10);
-        sis.agregarRuta(2, 3, 15);
-
-        ret = sis.informeZonas();
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("1|2;10|MóvilesDisponibles:3|MóvilesNoDisponibles:1"));
-        assertTrue(ret.valorString.contains("2|1;10|3;15|MóvilesDisponibles:1|MóvilesNoDisponibles:0")
-                || ret.valorString.contains("2|3;15|1;10|MóvilesDisponibles:1|MóvilesNoDisponibles:0"));
-        assertTrue(ret.valorString.contains("3|2;15|MóvilesDisponibles:0|MóvilesNoDisponibles:1"));
-
+        System.out.println("informeZonas");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeZonas();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of zonasEnRadio method, of class ISistema.
+     */
     @Test
     public void testZonasEnRadio() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        sis.agregarRuta(1, 2, 10);
-        sis.agregarRuta(1, 3, 15);
-        sis.agregarRuta(2, 4, 10);
-        sis.agregarRuta(3, 4, 4);
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.zonasEnRadio(5, 50).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.zonasEnRadio(1, 0).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.zonasEnRadio(1, -1).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.zonasEnRadio(1, -5).resultado);
-
-        ret = sis.zonasEnRadio(1, 9);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("", ret.valorString);
-        ret = sis.zonasEnRadio(1, 10);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("Zona doh;10", ret.valorString);
-        ret = sis.zonasEnRadio(1, 14);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("Zona doh;10", ret.valorString);
-        ret = sis.zonasEnRadio(1, 15);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.equals("Zona doh;10|Zona treh;15")
-                || ret.valorString.equals("Zona treh;15|Zona doh;10"));
-        ret = sis.zonasEnRadio(1, 19);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("Zona doh;10")
-                || ret.valorString.contains("Zona treh;15")
-                || ret.valorString.contains("Zona kuatroh;19"));
-
+        System.out.println("zonasEnRadio");
+        int zonaID = 0;
+        int duracionViaje = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.zonasEnRadio(zonaID, duracionViaje);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of registrarChofer method, of class ISistema.
+     */
     @Test
     public void testRegistrarChofer() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarChofer("CEBOLLA0007", "Cebolla Rodríguez", "1234567-8").resultado);
-        sis.registrarMovil("CEBOLLA0007", 3);
-        assertEquals(Retorno.Resultado.OK, sis.registrarChofer("CEBOLLA0007", "Cebolla Rodríguez", "1234567-8").resultado);
+        System.out.println("registrarChofer");
+        String movilID = "";
+        String nombre = "";
+        String cedula = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.registrarChofer(movilID, nombre, cedula);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of eliminarChofer method, of class ISistema.
+     */
     @Test
     public void testEliminarChofer() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarChofer("CEBOLLA0007", "1234567-8").resultado);
-        sis.registrarMovil("CEBOLLA0007", 3);
-        sis.registrarChofer("CEBOLLA0007", "Cebolla Rodríguez", "1234567-8");
-        assertEquals(Retorno.Resultado.OK, sis.eliminarChofer("CEBOLLA0007", "1234567-8").resultado);
+        System.out.println("eliminarChofer");
+        String movilID = "";
+        String cedula = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.eliminarChofer(movilID, cedula);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of informeChoferes method, of class ISistema.
+     */
     @Test
     public void testInformeChoferes() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.informeChoferes("CEBOLLA0007").resultado);
-        sis.registrarMovil("CEBOLLA0007", 3);
-        sis.registrarChofer("CEBOLLA0007", "Cebolla Rodríguez", "1234567-8");
-        sis.registrarChofer("CEBOLLA0007", "Paolo Montero", "2345678-9");
-        sis.registrarChofer("CEBOLLA0007", "Gianluigi Buffon", "3456789-0");
-
-        ret = sis.informeChoferes("CEBOLLA0007");
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertTrue(ret.valorString.contains("Cebolla Rodríguez;1234567-8"));
-        assertTrue(ret.valorString.contains("Paolo Montero;2345678-9"));
-        assertTrue(ret.valorString.contains("Gianluigi Buffon;3456789-0"));
-
+        System.out.println("informeChoferes");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeChoferes(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of registrarAbonado method, of class ISistema.
+     */
     @Test
-    public void testRegistrarAbonadol() {
-        sis.agregarZona("Zona unoh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarAbonado(1, "Francisco Bouza", "Av. Fracaso 1234", "099123456", 2).resultado);
-        assertEquals(Retorno.Resultado.OK, sis.registrarAbonado(1, "Francisco Bouza", "Av. Fracaso 1234", "099123456", 1).resultado);
-        assertEquals(Retorno.Resultado.ERROR_2, sis.registrarAbonado(1, "Francisco Bouza", "Av. Fracaso 1234", "099123456", 1).resultado);
+    public void testRegistrarAbonado() {
+        System.out.println("registrarAbonado");
+        int abonadoID = 0;
+        String abonadoNombre = "";
+        String abonadoDireccion = "";
+        String abonadoTel = "";
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.registrarAbonado(abonadoID, abonadoNombre, abonadoDireccion, abonadoTel, zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of eliminarAbonado method, of class ISistema.
+     */
     @Test
     public void testEliminarAbonado() {
-        sis.agregarZona("Zona unoh");
-
-        assertEquals(Retorno.Resultado.ERROR_1, sis.eliminarAbonado(1).resultado);
-        sis.registrarAbonado(1, "Francisco Bouza", "Av. Fracaso 1234", "099123456", 1);
-        assertEquals(Retorno.Resultado.OK, sis.eliminarAbonado(1).resultado);
+        System.out.println("eliminarAbonado");
+        int abonadoID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.eliminarAbonado(abonadoID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of informeAbonadosZona method, of class ISistema.
+     */
     @Test
     public void testInformeAbonadosZona() {
-        sis.agregarZona("Zona unoh");
-        sis.agregarZona("Zona doh");
-        sis.agregarZona("Zona treh");
-        sis.agregarZona("Zona kuatroh");
+        System.out.println("informeAbonadosZona");
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeAbonadosZona(zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 
-        sis.registrarAbonado(1, "Francisco Bouza", "Av. Fracaso 1234", "099123456", 1);
-        sis.registrarAbonado(2, "Juan Manuel Sobral", "Av. Fracaso 5678", "099111111", 1);
-        sis.registrarAbonado(3, "Federico Sendra", "Av. Fracaso 9012", "099222222", 1);
-        sis.registrarAbonado(4, "Lucía Nemmer", "Av. Fracaso 3456", "099333333", 1);
-        sis.registrarAbonado(5, "Esteban Quito", "Av. Fracaso 7890", "099444444", 1);
-        sis.registrarAbonado(6, "Rigoberta Menchú", "Av. Fracaso 1111", "099555555", 1);
+    /**
+     * Test of viaje method, of class ISistema.
+     */
+    @Test
+    public void testViaje() {
+        System.out.println("viaje");
+        String movilID = "";
+        int zonaDestino = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.viaje(movilID, zonaDestino);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 
-        assertEquals(Retorno.Resultado.ERROR_1, sis.informeAbonadosZona(5).resultado);
+    /**
+     * Test of mostrarmapa method, of class ISistema.
+     */
+    @Test
+    public void testMostrarmapa() {
+        System.out.println("mostrarmapa");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.mostrarmapa();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 
-        ret = sis.informeAbonadosZona(1);
-        assertEquals(Retorno.Resultado.OK, ret.resultado);
-        assertEquals("1;Zona unoh|3|1|2|4|Total_abonados_disponibles: 4", ret.valorString);
+    public class ISistemaImpl implements ISistema {
 
+        public Retorno crearSistemaEmergencias(int cantzonas) {
+            return null;
+        }
+
+        public Retorno destruirSistemaEmergencias() {
+            return null;
+        }
+
+        public Retorno registrarMovil(String movilID, int zonaID) {
+            return null;
+        }
+
+        public Retorno deshabilitarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno habilitarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno eliminarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno buscarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno informeMovil() {
+            return null;
+        }
+
+        public Retorno informeMovil(int zonaID) {
+            return null;
+        }
+
+        public Retorno cambiarUbicacion(String movilID, int zonaID) {
+            return null;
+        }
+
+        public Retorno agregarZona(String zonaNombre) {
+            return null;
+        }
+
+        public Retorno listarZonas() {
+            return null;
+        }
+
+        public Retorno agregarRuta(int zonaOrigen, int zonaDestino, int minutosViaje) {
+            return null;
+        }
+
+        public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
+            return null;
+        }
+
+        public Retorno movilMasCercano(int zonaID) {
+            return null;
+        }
+
+        public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino) {
+            return null;
+        }
+
+        public Retorno informeZonas() {
+            return null;
+        }
+
+        public Retorno zonasEnRadio(int zonaID, int duracionViaje) {
+            return null;
+        }
+
+        public Retorno registrarChofer(String movilID, String nombre, String cedula) {
+            return null;
+        }
+
+        public Retorno eliminarChofer(String movilID, String cedula) {
+            return null;
+        }
+
+        public Retorno informeChoferes(String movilID) {
+            return null;
+        }
+
+        public Retorno registrarAbonado(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID) {
+            return null;
+        }
+
+        public Retorno eliminarAbonado(int abonadoID) {
+            return null;
+        }
+
+        public Retorno informeAbonadosZona(int zonaID) {
+            return null;
+        }
+
+        public Retorno viaje(String movilID, int zonaDestino) {
+            return null;
+        }
+
+        public Retorno mostrarmapa() {
+            return null;
+        }
     }
 
 }
+
+
