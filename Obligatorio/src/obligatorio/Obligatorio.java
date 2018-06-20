@@ -77,6 +77,7 @@ public class Obligatorio {
         p.ver(s.registrarMovil("A2", 3).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a zona que no existe ");
         p.ver(s.registrarMovil("A3", 3).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a zona que no existe ");
         p.ver(s.registrarMovil("A1", 3).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a zona que no existe ");
+        p.ver(s.deshabilitarMovil("A1").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Lista de Zonas");
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.OK, "Se deshabilita PCS123");
         p.ver(s.deshabilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se deshabilita PCS123 que ya estaba deshabilitado");
@@ -89,7 +90,7 @@ public class Obligatorio {
         p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "Muestro datos del movil PCS123");
         p.ver(s.buscarMovil("PCS1237").resultado, Retorno.Resultado.ERROR_1, "No obtengo ningun dato");
         p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Lista de Móviles");
-        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Lista de Móviles");
+        p.ver(s.informeMovil(3).resultado, Retorno.Resultado.OK, "Lista de Móviles");
         p.imprimirResultadosPrueba();
     }
 

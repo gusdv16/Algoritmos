@@ -212,36 +212,34 @@ public class Sistema implements ISistema {
     @Override
     public Retorno informeMovil(int zonaID) {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
         if (Lz.obtenerElementoPorId(zonaID) == null) {
             ret.resultado = Resultado.ERROR_1;
             ret.valorString = "La Zona no existe";
         } else {
-            NodoListaZona aux = Lz.getInicio();
-            int moviles = 0;
+            NodoListaMovil aux = Lm.getInicio();
+            int cont = 0;
             int movilesDisponibles = 0;
-            String separador = ";";
 
             while (aux != null) {
-                if (aux.idZona == zonaID && aux.getLm().cantElementos() > 0) {
-                    NodoListaMovil aux1 = aux.getLm().getInicio();
+                if (buscarZonaPorMovil(Lz, aux.getDato().toString()).getIdZona() == zonaID) {
+                    String separador = "";
+                    if (aux.isEstado()) {
+                        movilesDisponibles++;
+                    }
+                    if (cont > 0) {
+                        separador = ";";
+                    }
+                    System.out.print(separador + aux.getDato());
+                    cont++;
 
-                    while (aux1 != null) {
-                        if (aux1.getSig() == null) {
-                            separador = "";
-                        }
-                        System.out.print(aux1.getDato() + separador);
-                        if (aux1.isEstado()) {
-                            movilesDisponibles++;
-                        }
-                        moviles++;
-                        aux1 = aux1.getSig();
-                    }
-                    if (moviles > 0) {
-                        System.out.print("|Total Móviles disponibles: " + movilesDisponibles);
-                    }
                 }
                 aux = aux.getSig();
             }
+            if (cont > 0) {
+                System.out.print("|Total Móviles disponibles: " + movilesDisponibles);
+            }
+
             System.out.println();
             ret.resultado = Retorno.Resultado.OK;
         }
