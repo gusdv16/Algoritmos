@@ -16,6 +16,14 @@ public class ISistemaTest {
     ISistema sis;
     Retorno ret;
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
     @Before
     public void setUp() throws Exception {
         sis = new Sistema();
@@ -224,4 +232,498 @@ public class ISistemaTest {
         assertEquals(Retorno.Resultado.ERROR_1, sis.movilMasCercano(9).resultado);
     }
 
+    /**
+     * Test of destruirSistemaEmergencias method, of class ISistema.
+     */
+    @Test
+    public void testDestruirSistemaEmergencias() {
+        System.out.println("destruirSistemaEmergencias");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.destruirSistemaEmergencias();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of registrarMovil method, of class ISistema.
+     */
+    @Test
+    public void testRegistrarMovil() {
+        System.out.println("registrarMovil");
+        String movilID = "";
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.registrarMovil(movilID, zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of deshabilitarMovil method, of class ISistema.
+     */
+    @Test
+    public void testDeshabilitarMovil() {
+        System.out.println("deshabilitarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.deshabilitarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of habilitarMovil method, of class ISistema.
+     */
+    @Test
+    public void testHabilitarMovil() {
+        System.out.println("habilitarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.habilitarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of eliminarMovil method, of class ISistema.
+     */
+    @Test
+    public void testEliminarMovil() {
+        System.out.println("eliminarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.eliminarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of buscarMovil method, of class ISistema.
+     */
+    @Test
+    public void testBuscarMovil() {
+        System.out.println("buscarMovil");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.buscarMovil(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of informeMovil method, of class ISistema.
+     */
+    @Test
+    public void testInformeMovil_0args() {
+        System.out.println("informeMovil");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeMovil();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of informeMovil method, of class ISistema.
+     */
+    @Test
+    public void testInformeMovil_int() {
+        System.out.println("informeMovil");
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeMovil(zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of cambiarUbicacion method, of class ISistema.
+     */
+    @Test
+    public void testCambiarUbicacion() {
+        System.out.println("cambiarUbicacion");
+        String movilID = "";
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.cambiarUbicacion(movilID, zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of agregarZona method, of class ISistema.
+     */
+    @Test
+    public void testAgregarZona() {
+        System.out.println("agregarZona");
+        String zonaNombre = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.agregarZona(zonaNombre);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of listarZonas method, of class ISistema.
+     */
+    @Test
+    public void testListarZonas() {
+        System.out.println("listarZonas");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.listarZonas();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of agregarRuta method, of class ISistema.
+     */
+    @Test
+    public void testAgregarRuta() {
+        System.out.println("agregarRuta");
+        int zonaOrigen = 0;
+        int zonaDestino = 0;
+        int minutosViaje = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.agregarRuta(zonaOrigen, zonaDestino, minutosViaje);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of modificarDemora method, of class ISistema.
+     */
+    @Test
+    public void testModificarDemora() {
+        System.out.println("modificarDemora");
+        int zonaOrigen = 0;
+        int zonaDestino = 0;
+        int minutosViaje = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.modificarDemora(zonaOrigen, zonaDestino, minutosViaje);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of movilMasCercano method, of class ISistema.
+     */
+    @Test
+    public void testMovilMasCercano() {
+        System.out.println("movilMasCercano");
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.movilMasCercano(zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of rutaMasRapida method, of class ISistema.
+     */
+    @Test
+    public void testRutaMasRapida() {
+        System.out.println("rutaMasRapida");
+        int zonaOrigen = 0;
+        int zonaDestino = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.rutaMasRapida(zonaOrigen, zonaDestino);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of informeZonas method, of class ISistema.
+     */
+    @Test
+    public void testInformeZonas() {
+        System.out.println("informeZonas");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeZonas();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of zonasEnRadio method, of class ISistema.
+     */
+    @Test
+    public void testZonasEnRadio() {
+        System.out.println("zonasEnRadio");
+        int zonaID = 0;
+        int duracionViaje = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.zonasEnRadio(zonaID, duracionViaje);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of registrarChofer method, of class ISistema.
+     */
+    @Test
+    public void testRegistrarChofer() {
+        System.out.println("registrarChofer");
+        String movilID = "";
+        String nombre = "";
+        String cedula = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.registrarChofer(movilID, nombre, cedula);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of eliminarChofer method, of class ISistema.
+     */
+    @Test
+    public void testEliminarChofer() {
+        System.out.println("eliminarChofer");
+        String movilID = "";
+        String cedula = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.eliminarChofer(movilID, cedula);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of informeChoferes method, of class ISistema.
+     */
+    @Test
+    public void testInformeChoferes() {
+        System.out.println("informeChoferes");
+        String movilID = "";
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeChoferes(movilID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of registrarAbonado method, of class ISistema.
+     */
+    @Test
+    public void testRegistrarAbonado() {
+        System.out.println("registrarAbonado");
+        int abonadoID = 0;
+        String abonadoNombre = "";
+        String abonadoDireccion = "";
+        String abonadoTel = "";
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.registrarAbonado(abonadoID, abonadoNombre, abonadoDireccion, abonadoTel, zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of eliminarAbonado method, of class ISistema.
+     */
+    @Test
+    public void testEliminarAbonado() {
+        System.out.println("eliminarAbonado");
+        int abonadoID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.eliminarAbonado(abonadoID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of informeAbonadosZona method, of class ISistema.
+     */
+    @Test
+    public void testInformeAbonadosZona() {
+        System.out.println("informeAbonadosZona");
+        int zonaID = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.informeAbonadosZona(zonaID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of viaje method, of class ISistema.
+     */
+    @Test
+    public void testViaje() {
+        System.out.println("viaje");
+        String movilID = "";
+        int zonaDestino = 0;
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.viaje(movilID, zonaDestino);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of mostrarmapa method, of class ISistema.
+     */
+    @Test
+    public void testMostrarmapa() {
+        System.out.println("mostrarmapa");
+        ISistema instance = new ISistemaImpl();
+        Retorno expResult = null;
+        Retorno result = instance.mostrarmapa();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    public class ISistemaImpl implements ISistema {
+
+        public Retorno crearSistemaEmergencias(int cantzonas) {
+            return null;
+        }
+
+        public Retorno destruirSistemaEmergencias() {
+            return null;
+        }
+
+        public Retorno registrarMovil(String movilID, int zonaID) {
+            return null;
+        }
+
+        public Retorno deshabilitarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno habilitarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno eliminarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno buscarMovil(String movilID) {
+            return null;
+        }
+
+        public Retorno informeMovil() {
+            return null;
+        }
+
+        public Retorno informeMovil(int zonaID) {
+            return null;
+        }
+
+        public Retorno cambiarUbicacion(String movilID, int zonaID) {
+            return null;
+        }
+
+        public Retorno agregarZona(String zonaNombre) {
+            return null;
+        }
+
+        public Retorno listarZonas() {
+            return null;
+        }
+
+        public Retorno agregarRuta(int zonaOrigen, int zonaDestino, int minutosViaje) {
+            return null;
+        }
+
+        public Retorno modificarDemora(int zonaOrigen, int zonaDestino, int minutosViaje) {
+            return null;
+        }
+
+        public Retorno movilMasCercano(int zonaID) {
+            return null;
+        }
+
+        public Retorno rutaMasRapida(int zonaOrigen, int zonaDestino) {
+            return null;
+        }
+
+        public Retorno informeZonas() {
+            return null;
+        }
+
+        public Retorno zonasEnRadio(int zonaID, int duracionViaje) {
+            return null;
+        }
+
+        public Retorno registrarChofer(String movilID, String nombre, String cedula) {
+            return null;
+        }
+
+        public Retorno eliminarChofer(String movilID, String cedula) {
+            return null;
+        }
+
+        public Retorno informeChoferes(String movilID) {
+            return null;
+        }
+
+        public Retorno registrarAbonado(int abonadoID, String abonadoNombre, String abonadoDireccion, String abonadoTel, int zonaID) {
+            return null;
+        }
+
+        public Retorno eliminarAbonado(int abonadoID) {
+            return null;
+        }
+
+        public Retorno informeAbonadosZona(int zonaID) {
+            return null;
+        }
+
+        public Retorno viaje(String movilID, int zonaDestino) {
+            return null;
+        }
+
+        public Retorno mostrarmapa() {
+            return null;
+        }
+    }
+
 }
+
