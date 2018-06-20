@@ -178,26 +178,23 @@ public class Sistema implements ISistema {
     @Override
     public Retorno informeMovil() {
         Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
-        NodoListaZona aux = Lz.getInicio();
+        NodoListaMovil aux = Lm.getInicio();
         int cont = 0;
 
         while (aux != null) {
-            NodoListaMovil aux1 = aux.getLm().getInicio();
-            while (aux1 != null) {
-                String separador = "";
-                cont++;
-                if (cont > 1) {
-                    separador = ";";
-                }
-                String estado = "DISPONIBLE";
-                if (!aux1.isEstado()) {
-                    estado = "NO DISPONIBLE";
-                }
-                System.out.print(separador + aux1.getDato() + ";" + estado);
-                aux1 = aux1.getSig();
+            String separador = "";
+            cont++;
+            if (cont > 1) {
+                separador = ";";
             }
+            String estado = "DISPONIBLE";
+            if (!aux.isEstado()) {
+                estado = "NO DISPONIBLE";
+            }
+            System.out.print(separador + aux.getDato() + ";" + estado);
+
             if (cont > 0) {
-                System.out.print(";" + aux.getDato());
+                System.out.print(";" + buscarZonaPorMovil(Lz, aux.getDato().toString()).getDato());
                 System.out.print("|");
             }
             cont = 0;
@@ -226,8 +223,7 @@ public class Sistema implements ISistema {
 
             while (aux != null) {
                 if (aux.idZona == zonaID && aux.getLm().cantElementos() > 0) {
-                    ListaMovil aux0 = ordenarMoviles(aux.getLm());
-                    NodoListaMovil aux1 = aux0.getInicio();
+                    NodoListaMovil aux1 = aux.getLm().getInicio();
 
                     while (aux1 != null) {
                         if (aux1.getSig() == null) {
