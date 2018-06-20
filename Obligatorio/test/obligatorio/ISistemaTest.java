@@ -50,9 +50,11 @@ public class ISistemaTest {
 
     @Test
     public void testRegistrarMovil() {
-        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarMovil("MAN1891", 1).resultado);
+        sis = new Sistema();
+        sis.crearSistemaEmergencias(2);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.registrarMovil("MAN1891",1).resultado);
         sis.agregarZona("Zona 1");
-        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("MAN1891", 1).resultado);
+        assertEquals(Retorno.Resultado.OK, sis.registrarMovil("MAN1891",2).resultado);
         sis.agregarZona("Zona 2");
         assertEquals(Retorno.Resultado.ERROR_2, sis.registrarMovil("MAN1891", 2).resultado);
         assertEquals(Retorno.Resultado.OK, sis.registrarMovil("MUS0001", 2).resultado);

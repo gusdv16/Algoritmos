@@ -50,7 +50,7 @@ public interface ISistema {
 
     Retorno informeAbonadosZona(int zonaID);
 
-    Retorno viaje(int zonaDestino);
+    Retorno viaje(String movilID,int zonaDestino);
 
     Retorno mostrarmapa();
 }

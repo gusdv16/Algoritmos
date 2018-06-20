@@ -1,5 +1,6 @@
 package obligatorio;
 
+import com.sun.org.apache.bcel.internal.Constants;
 import static obligatorio.metodos.*;
 
 public class Obligatorio {
@@ -16,11 +17,11 @@ public class Obligatorio {
 //        prueba7(s, p);
 //        prueba8(s, p);
 //        prueba9(s, p);
-//        pruebax(s, p);
+        pruebax(s, p);
 //        prueba10(s, p);
 //        pruebaAbonados(s, p);
 //        pruebaChoferes(s, p);
-        pruebaRutas(s, p);
+//        pruebaRutas(s, p);
     }
 
     static void prueba1(Sistema s, Prueba p) {
@@ -460,18 +461,19 @@ public class Obligatorio {
 
         //UDF.ViajeEmergencia(7);
         p.imprimirComentario("emergencia asignada a la zona 7");
-
+        p.ver(s.viaje("PCS112",3).resultado, Retorno.Resultado.OK, "se realizo el viaje el 112 en emergencia");
         p.ver(s.habilitarMovil("PCS101").resultado, Retorno.Resultado.OK, "Habilito movil PCS101");
-        //NUNCA CAMBIA AL ESTADO EMERGENCIA//p.ver(s.habilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento habilitar movil PCS112 que esta en emergencia");
+        //NUNCA CAMBIA AL ESTADO EMERGENCIA
+        p.ver(s.habilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento habilitar movil PCS112 que esta en emergencia");
 
-        //p.ver(s.deshabilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento deshabilitar movil PCS112 que esta en emergencia");
+        p.ver(s.deshabilitarMovil("PCS112").resultado, Retorno.Resultado.ERROR_3, "Intento deshabilitar movil PCS112 que esta en emergencia");
         p.ver(s.habilitarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Habilito movil PCS141");
         p.ver(s.habilitarMovil("PCS108").resultado, Retorno.Resultado.ERROR_2, "Habilito movil PCS108");
         p.ver(s.deshabilitarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Intento deshabilitar movil PCS141");
         p.ver(s.deshabilitarMovil("PCS105").resultado, Retorno.Resultado.ERROR_2, "Intento deshabilitar movil PCS101");
         p.ver(s.eliminarMovil("PCS115").resultado, Retorno.Resultado.OK, "Elimino movil PCS115");
         p.ver(s.eliminarMovil("PCS141").resultado, Retorno.Resultado.ERROR_1, "Elimino movil PCS141");
-        //p.ver(s.eliminarMovil("PCS112").resultado, Retorno.Resultado.ERROR_2, "Elimino movil PCS112");
+        p.ver(s.eliminarMovil("PCS112").resultado, Retorno.Resultado.ERROR_2, "Elimino movil PCS112");
         p.ver(s.cambiarUbicacion("PCS112", 3).resultado, Retorno.Resultado.OK, "muevo el movil PCS112 a la zona 3");
         p.ver(s.cambiarUbicacion("PCS141", 2).resultado, Retorno.Resultado.ERROR_2, "muevo el movil PCS141 que no existe a la zona 2");
         p.ver(s.cambiarUbicacion("PCS111", 40).resultado, Retorno.Resultado.ERROR_1, "Muevo el movil PCS111 a la zona 40 que no existe");
@@ -503,161 +505,161 @@ public class Obligatorio {
 
     }
 
-    static void prueba10(Sistema s, Prueba p) {
-        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
-        p.ver(s.agregarZona("Zona 1").resultado, Retorno.Resultado.OK, "Se crea la zona 1");
-        p.ver(s.agregarZona("Zona 2").resultado, Retorno.Resultado.OK, "Se crea la zona 2");
-        p.ver(s.agregarZona("Zona 3").resultado, Retorno.Resultado.OK, "Se crea la zona 3");
-        p.ver(s.registrarMovil("MOMO1", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 1");
-        p.ver(s.registrarMovil("MOMO2", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 2");
-        p.ver(s.registrarMovil("MOMO0", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 0");
-        p.ver(s.registrarMovil("MOMO3", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 3");
-        p.ver(s.registrarMovil("MOMO4", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 4");
-        p.ver(s.registrarMovil("MOMO5", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 5");
-        p.ver(s.registrarMovil("MOMO6", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 6");
-        p.ver(s.registrarMovil("Z1OMO4", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 4");
-        p.ver(s.registrarMovil("Z1OMO5", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 5");
-        p.ver(s.registrarMovil("Z1OMO6", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 6");
-        p.ver(s.registrarMovil("Z3OMO16", 3).resultado, Retorno.Resultado.OK, "Se crea el movil 16");
-        p.ver(s.deshabilitarMovil("Z3OMO16").resultado, Retorno.Resultado.OK, "Se deshabilita el movil Z3OMO16");
-        p.ver(s.deshabilitarMovil("MOMO0").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
-//        p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
-
-        p.ver(s.cambiarUbicacion("MOMO1", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
-        p.ver(s.informeMovil(2).resultado, Retorno.Resultado.OK, "Info M 2.....");
-
-        p.ver(s.viaje(10).resultado, Retorno.Resultado.ERROR_1, "No existe zona");
-        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
-        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
-        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
-
-        p.ver(s.deshabilitarMovil("MOMO1").resultado, Retorno.Resultado.ERROR_3, "No se deshabilita el movil MOMO2 porque esta de viaje");
-
-        //p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
-        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
-        p.ver(s.buscarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Busco MOMO2");
-        p.ver(s.eliminarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Borro MOMO2");
-
-        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
-
-        p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Borro MOMO2");
-        p.ver(s.agregarRuta(1, 2, 10).resultado, Retorno.Resultado.OK, "Borro MOMO2");
-        p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Borro MOMO2");
-        p.ver(s.agregarRuta(3, 2, 7).resultado, Retorno.Resultado.OK, "Borro MOMO2");
-        p.ver(s.mostrarmapa().resultado, Retorno.Resultado.OK, "Borro MOMO2");
-        p.ver(s.movilMasCercano(3).resultado, Retorno.Resultado.OK, "Más cercano");
-        p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Más rapida");
-        p.ver(s.zonasEnRadio(1, 20).resultado, Retorno.Resultado.OK, "Más rapida");
-        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "Más rapida");
-        p.ver(s.registrarChofer("Z3OMO16", "Chofer 1", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
-        p.ver(s.registrarChofer("Z3OMO16", "Chofer 2", "2222222").resultado, Retorno.Resultado.OK, "registrarChofer");
-        p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
-
-        p.ver(s.cambiarUbicacion("Z3OMO16", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
-        p.ver(s.eliminarChofer("Z3OMO16", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
-        p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
-
-        p.ver(s.registrarAbonado(111, "Abonado 1", "Dir 1", "Tel 1", 1).resultado, Retorno.Resultado.OK, "registrarAbonado");
-        p.ver(s.registrarAbonado(222, "Abonado 2", "Dir 2", "Tel 2", 1).resultado, Retorno.Resultado.OK, "registrarAbonado");
-        p.ver(s.registrarAbonado(333, "Abonado 3", "Dir 3", "Tel 3", 3).resultado, Retorno.Resultado.OK, "registrarAbonado");
-        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "informeAbonadosZona");
-        p.ver(s.informeAbonadosZona(3).resultado, Retorno.Resultado.OK, "informeAbonadosZona");
-
-        p.imprimirResultadosPrueba();
-    }
-
-    static void pruebaAbonados(Sistema s, Prueba p) {
-        p.imprimirComentario("Aqui probamos las METODOS relacionados a los ABONADOS");
-        p.imprimirComentario("Creamos sistema para 5 zonas");
-        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de emergencias");
-        p.imprimirComentario("INGRESAMOS ZONAS");
-        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
-        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
-        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
-        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
-        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
-        p.ver(s.registrarAbonado(1, "Luis Rodriguez", "Mercedes 1111", "099 999 999", 1).resultado, Retorno.Resultado.OK, "Registro abonado Luis Rodiguez en zona 1 (Pocitos)");
-        p.ver(s.registrarAbonado(2, "Carlos Gutierrez", "Soriano 1111", "099 888 888", 9).resultado, Retorno.Resultado.ERROR_1, "Intento registrar abonado Carlos Gutierrez en zona que no existe (9)");
-        p.ver(s.registrarAbonado(1, "Miguel Lopez", "A. Diaz 1234", "099 111 111", 1).resultado, Retorno.Resultado.ERROR_2, "Intento registrar abonado Miguel Lopez con abonadoId (1) que ya existe en el sistema");
-        p.ver(s.registrarAbonado(3, "Miguel Lopez", "A. Diaz 1234", "099 111 111", 1).resultado, Retorno.Resultado.OK, "Registro abonado Miguel Lopez en zona 1 (Pocitos)");
-        p.ver(s.eliminarAbonado(5).resultado, Retorno.Resultado.ERROR_1, "Inteno eliminar abonadoId 5 que no existe en el sistema");
-        p.ver(s.eliminarAbonado(3).resultado, Retorno.Resultado.OK, "Elimino abonadoId 3");
-        p.ver(s.informeAbonadosZona(9).resultado, Retorno.Resultado.ERROR_1, "Intento generar informe abonados en zona 9 que no existe");
-        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "Genera informe abonados en zona 1 (Pocitos)");
-
-        p.imprimirResultadosPrueba();
-    }
-
-    static void pruebaChoferes(Sistema s, Prueba p) {
-        p.imprimirComentario("Aqui probamos las METODOS relacionados a los CHOFEREES");
-        p.imprimirComentario("Creamos sistema para 5 zonas");
-        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de emergencias");
-        p.imprimirComentario("INGRESAMOS ZONAS");
-        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
-        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
-        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
-        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
-        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
-        p.imprimirComentario("Ingresamos 2 móviles");
-        p.ver(s.registrarMovil("SAL1234", 1).resultado, Retorno.Resultado.OK, "Agrego movil SAL1234 a Pocitos");
-        p.ver(s.registrarMovil("SAL1235", 2).resultado, Retorno.Resultado.OK, "Agrego movil SAL1235 a Punta Carretas");
-        p.imprimirComentario("Registro chofer");
-        p.ver(s.registrarChofer("SAL0000", "Carlos Gomez", "1.111.111-1").resultado, Retorno.Resultado.ERROR_1, "Se intenta registrar un chofer Carlos Gomez (cédula 1.111.111-1) para conducir un móvil (SAL0000) que no existe en el sistema");
-        p.ver(s.registrarChofer("SAL1234", "Carlos Gomez", "1.111.111-1").resultado, Retorno.Resultado.OK, "Registro chofer Carlos Gomez (cédula 1.111.111-1) para conducir móvil SAL1234");
-        p.ver(s.registrarChofer("SAL1234", "Martin Sanchez", "2.222.222-2").resultado, Retorno.Resultado.OK, "Registro otro chofer, Martin Sanchez (cédula 2.222.222-2) para conducir móvil SAL1234");
-        p.ver(s.registrarChofer("SAL1235", "Nicolas Mendez", "3.333.333-3").resultado, Retorno.Resultado.OK, "Registro chofer Nicolas Mendez (cédula 3.333.333-3) para conducir móvil SAL1235");
-        //p.ver(s.eliminarChofer("SAL0000", "3.333.333-3").resultado, Retorno.Resultado.ERROR_1, "Intento eliminar un chofer cedula 3.333.333-3 cuyo móvil no existe en el sistema (SAL0000)");
-        p.ver(s.eliminarChofer("SAL1235", "3.333.333-3").resultado, Retorno.Resultado.OK, "Elimino el chofer 3.333.333-3 que estaba habilitado para conducir el móvil SAL1235");
-        p.ver(s.eliminarChofer("SAL1235", "9.999.999-9").resultado, Retorno.Resultado.ERROR_2, "Intento eliminar un chofer cuya cedula no existe en el sistema (Cedula 9.999.999-9) en el móvil SAL1235");
-        p.ver(s.informeChoferes("SAL0000").resultado, Retorno.Resultado.ERROR_1, "Intento emitir informe choferes con un móvil que no existe en el sistema (SAL0000)");
-        p.ver(s.informeChoferes("SAL1234").resultado, Retorno.Resultado.OK, "Emito informe choferes para el móvil SAL1234");
-
-        p.imprimirResultadosPrueba();
-    }
-
-    static void pruebaRutas(Sistema s, Prueba p) {
-        p.imprimirComentario("Creamos sistema para 5 zonas");
-        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
-        p.imprimirComentario("INGRESAMOS ZONAS");
-        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
-        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
-        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
-        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
-        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
-
-        p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a Pocitos");
-        p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se habilita movil PCS123");
-        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Se muestran los daatos de lo moviles");
-        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Se muestran los datos de los moviles de la zona");
-        p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "PCS123 se encuentra en: ");
-
-        p.ver(s.cambiarUbicacion("PCS123", 2).resultado, Retorno.Resultado.OK, "Se cambia la ubicación de PCS123");
-        p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "PCS123 se encuentra en: ");
-
-        p.ver(s.cambiarUbicacion("PCS123", 6).resultado, Retorno.Resultado.ERROR_1, "La zona 6 no existe");
-        p.ver(s.cambiarUbicacion("PCS", 2).resultado, Retorno.Resultado.ERROR_2, "El movil PCS no existe en el sistema");
-
-        p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Se crea correctamente la ruta");
-        p.ver(s.agregarRuta(6, 3, 15).resultado, Retorno.Resultado.ERROR_1, "La zona origen no existe");
-        p.ver(s.agregarRuta(3, 6, 15).resultado, Retorno.Resultado.ERROR_2, "La zona destino no existe");
-        p.ver(s.agregarRuta(4, 3, 0).resultado, Retorno.Resultado.ERROR_3, "La cantidad de minutos no puede ser menor o igual a 0");
-
-        p.ver(s.modificarDemora(1, 3, 10).resultado, Retorno.Resultado.OK, "Se modifico correctamente la demora");
-        p.ver(s.modificarDemora(9, 3, 10).resultado, Retorno.Resultado.ERROR_1, "La zona origen no existe");
-        p.ver(s.modificarDemora(3, 9, 10).resultado, Retorno.Resultado.ERROR_2, "La zona destino no existe");
-        p.ver(s.modificarDemora(4, 3, 0).resultado, Retorno.Resultado.ERROR_3, "La cantidad de minutos no puede ser menor o igual a 0");
-
-        p.ver(s.movilMasCercano(2).resultado, Retorno.Resultado.OK, "Se muestra el movil mas cercano");
-        p.ver(s.movilMasCercano(6).resultado, Retorno.Resultado.ERROR_1, "La zona 6 no existe");
-
-        p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Se añadió la ruta más rápida");
-        p.ver(s.rutaMasRapida(6, 1).resultado, Retorno.Resultado.ERROR_1, "La zona origen no existe");
-        p.ver(s.rutaMasRapida(1, 6).resultado, Retorno.Resultado.ERROR_2, "La zona destino no existe");
-
-        p.ver(s.zonasEnRadio(1, 5).resultado, Retorno.Resultado.OK, "Se muestra la zona en radio");
-        p.ver(s.zonasEnRadio(6, 5).resultado, Retorno.Resultado.ERROR_1, "La zona 6 no existe");
-        p.ver(s.zonasEnRadio(2, 0).resultado, Retorno.Resultado.ERROR_2, "La duración es menor o igual a 0");
-
-        p.imprimirResultadosPrueba();
-    }
+//    static void prueba10(Sistema s, Prueba p) {
+//        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+//        p.ver(s.agregarZona("Zona 1").resultado, Retorno.Resultado.OK, "Se crea la zona 1");
+//        p.ver(s.agregarZona("Zona 2").resultado, Retorno.Resultado.OK, "Se crea la zona 2");
+//        p.ver(s.agregarZona("Zona 3").resultado, Retorno.Resultado.OK, "Se crea la zona 3");
+//        p.ver(s.registrarMovil("MOMO1", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 1");
+//        p.ver(s.registrarMovil("MOMO2", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 2");
+//        p.ver(s.registrarMovil("MOMO0", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 0");
+//        p.ver(s.registrarMovil("MOMO3", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 3");
+//        p.ver(s.registrarMovil("MOMO4", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 4");
+//        p.ver(s.registrarMovil("MOMO5", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 5");
+//        p.ver(s.registrarMovil("MOMO6", 2).resultado, Retorno.Resultado.OK, "Se crea el movil 6");
+//        p.ver(s.registrarMovil("Z1OMO4", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 4");
+//        p.ver(s.registrarMovil("Z1OMO5", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 5");
+//        p.ver(s.registrarMovil("Z1OMO6", 1).resultado, Retorno.Resultado.OK, "Se crea el movil 6");
+//        p.ver(s.registrarMovil("Z3OMO16", 3).resultado, Retorno.Resultado.OK, "Se crea el movil 16");
+//        p.ver(s.deshabilitarMovil("Z3OMO16").resultado, Retorno.Resultado.OK, "Se deshabilita el movil Z3OMO16");
+//        p.ver(s.deshabilitarMovil("MOMO0").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
+////        p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
+//
+//        p.ver(s.cambiarUbicacion("MOMO1", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
+//        p.ver(s.informeMovil(2).resultado, Retorno.Resultado.OK, "Info M 2.....");
+//
+//        p.ver(s.viaje(10).resultado, Retorno.Resultado.ERROR_1, "No existe zona");
+//        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
+//        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
+//        p.ver(s.viaje(2).resultado, Retorno.Resultado.OK, "Se pide un viaje");
+//
+//        p.ver(s.deshabilitarMovil("MOMO1").resultado, Retorno.Resultado.ERROR_3, "No se deshabilita el movil MOMO2 porque esta de viaje");
+//
+//        //p.ver(s.deshabilitarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Se deshabilita el movil 0");
+//        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
+//        p.ver(s.buscarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Busco MOMO2");
+//        p.ver(s.eliminarMovil("MOMO2").resultado, Retorno.Resultado.OK, "Borro MOMO2");
+//
+//        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Info M 2.....");
+//
+//        p.ver(s.listarZonas().resultado, Retorno.Resultado.OK, "Borro MOMO2");
+//        p.ver(s.agregarRuta(1, 2, 10).resultado, Retorno.Resultado.OK, "Borro MOMO2");
+//        p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Borro MOMO2");
+//        p.ver(s.agregarRuta(3, 2, 7).resultado, Retorno.Resultado.OK, "Borro MOMO2");
+//        p.ver(s.mostrarmapa().resultado, Retorno.Resultado.OK, "Borro MOMO2");
+//        p.ver(s.movilMasCercano(3).resultado, Retorno.Resultado.OK, "Más cercano");
+//        p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Más rapida");
+//        p.ver(s.zonasEnRadio(1, 20).resultado, Retorno.Resultado.OK, "Más rapida");
+//        p.ver(s.informeZonas().resultado, Retorno.Resultado.OK, "Más rapida");
+//        p.ver(s.registrarChofer("Z3OMO16", "Chofer 1", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
+//        p.ver(s.registrarChofer("Z3OMO16", "Chofer 2", "2222222").resultado, Retorno.Resultado.OK, "registrarChofer");
+//        p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
+//
+//        p.ver(s.cambiarUbicacion("Z3OMO16", 2).resultado, Retorno.Resultado.OK, "cambia ubi ...");
+//        p.ver(s.eliminarChofer("Z3OMO16", "1111111").resultado, Retorno.Resultado.OK, "registrarChofer");
+//        p.ver(s.informeChoferes("Z3OMO16").resultado, Retorno.Resultado.OK, "informeChoferes");
+//
+//        p.ver(s.registrarAbonado(111, "Abonado 1", "Dir 1", "Tel 1", 1).resultado, Retorno.Resultado.OK, "registrarAbonado");
+//        p.ver(s.registrarAbonado(222, "Abonado 2", "Dir 2", "Tel 2", 1).resultado, Retorno.Resultado.OK, "registrarAbonado");
+//        p.ver(s.registrarAbonado(333, "Abonado 3", "Dir 3", "Tel 3", 3).resultado, Retorno.Resultado.OK, "registrarAbonado");
+//        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "informeAbonadosZona");
+//        p.ver(s.informeAbonadosZona(3).resultado, Retorno.Resultado.OK, "informeAbonadosZona");
+//
+//        p.imprimirResultadosPrueba();
+//    }
+//
+//    static void pruebaAbonados(Sistema s, Prueba p) {
+//        p.imprimirComentario("Aqui probamos las METODOS relacionados a los ABONADOS");
+//        p.imprimirComentario("Creamos sistema para 5 zonas");
+//        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de emergencias");
+//        p.imprimirComentario("INGRESAMOS ZONAS");
+//        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+//        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
+//        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
+//        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
+//        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
+//        p.ver(s.registrarAbonado(1, "Luis Rodriguez", "Mercedes 1111", "099 999 999", 1).resultado, Retorno.Resultado.OK, "Registro abonado Luis Rodiguez en zona 1 (Pocitos)");
+//        p.ver(s.registrarAbonado(2, "Carlos Gutierrez", "Soriano 1111", "099 888 888", 9).resultado, Retorno.Resultado.ERROR_1, "Intento registrar abonado Carlos Gutierrez en zona que no existe (9)");
+//        p.ver(s.registrarAbonado(1, "Miguel Lopez", "A. Diaz 1234", "099 111 111", 1).resultado, Retorno.Resultado.ERROR_2, "Intento registrar abonado Miguel Lopez con abonadoId (1) que ya existe en el sistema");
+//        p.ver(s.registrarAbonado(3, "Miguel Lopez", "A. Diaz 1234", "099 111 111", 1).resultado, Retorno.Resultado.OK, "Registro abonado Miguel Lopez en zona 1 (Pocitos)");
+//        p.ver(s.eliminarAbonado(5).resultado, Retorno.Resultado.ERROR_1, "Inteno eliminar abonadoId 5 que no existe en el sistema");
+//        p.ver(s.eliminarAbonado(3).resultado, Retorno.Resultado.OK, "Elimino abonadoId 3");
+//        p.ver(s.informeAbonadosZona(9).resultado, Retorno.Resultado.ERROR_1, "Intento generar informe abonados en zona 9 que no existe");
+//        p.ver(s.informeAbonadosZona(1).resultado, Retorno.Resultado.OK, "Genera informe abonados en zona 1 (Pocitos)");
+//
+//        p.imprimirResultadosPrueba();
+//    }
+//
+//    static void pruebaChoferes(Sistema s, Prueba p) {
+//        p.imprimirComentario("Aqui probamos las METODOS relacionados a los CHOFEREES");
+//        p.imprimirComentario("Creamos sistema para 5 zonas");
+//        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de emergencias");
+//        p.imprimirComentario("INGRESAMOS ZONAS");
+//        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+//        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
+//        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
+//        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
+//        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
+//        p.imprimirComentario("Ingresamos 2 móviles");
+//        p.ver(s.registrarMovil("SAL1234", 1).resultado, Retorno.Resultado.OK, "Agrego movil SAL1234 a Pocitos");
+//        p.ver(s.registrarMovil("SAL1235", 2).resultado, Retorno.Resultado.OK, "Agrego movil SAL1235 a Punta Carretas");
+//        p.imprimirComentario("Registro chofer");
+//        p.ver(s.registrarChofer("SAL0000", "Carlos Gomez", "1.111.111-1").resultado, Retorno.Resultado.ERROR_1, "Se intenta registrar un chofer Carlos Gomez (cédula 1.111.111-1) para conducir un móvil (SAL0000) que no existe en el sistema");
+//        p.ver(s.registrarChofer("SAL1234", "Carlos Gomez", "1.111.111-1").resultado, Retorno.Resultado.OK, "Registro chofer Carlos Gomez (cédula 1.111.111-1) para conducir móvil SAL1234");
+//        p.ver(s.registrarChofer("SAL1234", "Martin Sanchez", "2.222.222-2").resultado, Retorno.Resultado.OK, "Registro otro chofer, Martin Sanchez (cédula 2.222.222-2) para conducir móvil SAL1234");
+//        p.ver(s.registrarChofer("SAL1235", "Nicolas Mendez", "3.333.333-3").resultado, Retorno.Resultado.OK, "Registro chofer Nicolas Mendez (cédula 3.333.333-3) para conducir móvil SAL1235");
+//        //p.ver(s.eliminarChofer("SAL0000", "3.333.333-3").resultado, Retorno.Resultado.ERROR_1, "Intento eliminar un chofer cedula 3.333.333-3 cuyo móvil no existe en el sistema (SAL0000)");
+//        p.ver(s.eliminarChofer("SAL1235", "3.333.333-3").resultado, Retorno.Resultado.OK, "Elimino el chofer 3.333.333-3 que estaba habilitado para conducir el móvil SAL1235");
+//        p.ver(s.eliminarChofer("SAL1235", "9.999.999-9").resultado, Retorno.Resultado.ERROR_2, "Intento eliminar un chofer cuya cedula no existe en el sistema (Cedula 9.999.999-9) en el móvil SAL1235");
+//        p.ver(s.informeChoferes("SAL0000").resultado, Retorno.Resultado.ERROR_1, "Intento emitir informe choferes con un móvil que no existe en el sistema (SAL0000)");
+//        p.ver(s.informeChoferes("SAL1234").resultado, Retorno.Resultado.OK, "Emito informe choferes para el móvil SAL1234");
+//
+//        p.imprimirResultadosPrueba();
+//    }
+//
+//    static void pruebaRutas(Sistema s, Prueba p) {
+//        p.imprimirComentario("Creamos sistema para 5 zonas");
+//        p.ver(s.crearSistemaEmergencias(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+//        p.imprimirComentario("INGRESAMOS ZONAS");
+//        p.ver(s.agregarZona("Pocitos").resultado, Retorno.Resultado.OK, "Se ingresa Pocitos");
+//        p.ver(s.agregarZona("Punta Carretas").resultado, Retorno.Resultado.OK, "Se ingresa Punta Carretas");
+//        p.ver(s.agregarZona("Parque Rodo").resultado, Retorno.Resultado.OK, "Se ingresa Parque Rodo");
+//        p.ver(s.agregarZona("Buceo").resultado, Retorno.Resultado.OK, "Se ingresa Buceo");
+//        p.ver(s.agregarZona("Malvin").resultado, Retorno.Resultado.OK, "Se ingresa Malvin");
+//
+//        p.ver(s.registrarMovil("PCS123", 1).resultado, Retorno.Resultado.OK, "Agrego movil PCS123 a Pocitos");
+//        p.ver(s.habilitarMovil("PCS123").resultado, Retorno.Resultado.ERROR_2, "Se habilita movil PCS123");
+//        p.ver(s.informeMovil().resultado, Retorno.Resultado.OK, "Se muestran los daatos de lo moviles");
+//        p.ver(s.informeMovil(1).resultado, Retorno.Resultado.OK, "Se muestran los datos de los moviles de la zona");
+//        p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "PCS123 se encuentra en: ");
+//
+//        p.ver(s.cambiarUbicacion("PCS123", 2).resultado, Retorno.Resultado.OK, "Se cambia la ubicación de PCS123");
+//        p.ver(s.buscarMovil("PCS123").resultado, Retorno.Resultado.OK, "PCS123 se encuentra en: ");
+//
+//        p.ver(s.cambiarUbicacion("PCS123", 6).resultado, Retorno.Resultado.ERROR_1, "La zona 6 no existe");
+//        p.ver(s.cambiarUbicacion("PCS", 2).resultado, Retorno.Resultado.ERROR_2, "El movil PCS no existe en el sistema");
+//
+//        p.ver(s.agregarRuta(1, 3, 15).resultado, Retorno.Resultado.OK, "Se crea correctamente la ruta");
+//        p.ver(s.agregarRuta(6, 3, 15).resultado, Retorno.Resultado.ERROR_1, "La zona origen no existe");
+//        p.ver(s.agregarRuta(3, 6, 15).resultado, Retorno.Resultado.ERROR_2, "La zona destino no existe");
+//        p.ver(s.agregarRuta(4, 3, 0).resultado, Retorno.Resultado.ERROR_3, "La cantidad de minutos no puede ser menor o igual a 0");
+//
+//        p.ver(s.modificarDemora(1, 3, 10).resultado, Retorno.Resultado.OK, "Se modifico correctamente la demora");
+//        p.ver(s.modificarDemora(9, 3, 10).resultado, Retorno.Resultado.ERROR_1, "La zona origen no existe");
+//        p.ver(s.modificarDemora(3, 9, 10).resultado, Retorno.Resultado.ERROR_2, "La zona destino no existe");
+//        p.ver(s.modificarDemora(4, 3, 0).resultado, Retorno.Resultado.ERROR_3, "La cantidad de minutos no puede ser menor o igual a 0");
+//
+//        p.ver(s.movilMasCercano(2).resultado, Retorno.Resultado.OK, "Se muestra el movil mas cercano");
+//        p.ver(s.movilMasCercano(6).resultado, Retorno.Resultado.ERROR_1, "La zona 6 no existe");
+//
+//        p.ver(s.rutaMasRapida(1, 3).resultado, Retorno.Resultado.OK, "Se añadió la ruta más rápida");
+//        p.ver(s.rutaMasRapida(6, 1).resultado, Retorno.Resultado.ERROR_1, "La zona origen no existe");
+//        p.ver(s.rutaMasRapida(1, 6).resultado, Retorno.Resultado.ERROR_2, "La zona destino no existe");
+//
+//        p.ver(s.zonasEnRadio(1, 5).resultado, Retorno.Resultado.OK, "Se muestra la zona en radio");
+//        p.ver(s.zonasEnRadio(6, 5).resultado, Retorno.Resultado.ERROR_1, "La zona 6 no existe");
+//        p.ver(s.zonasEnRadio(2, 0).resultado, Retorno.Resultado.ERROR_2, "La duración es menor o igual a 0");
+//
+//        p.imprimirResultadosPrueba();
+//    }
 }
