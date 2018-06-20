@@ -222,9 +222,10 @@ public class Sistema implements ISistema {
             int movilesDisponibles = 0;
 
             while (aux != null) {
-                if (buscarZonaPorMovil(Lz, aux.getDato().toString()).getIdZona() == zonaID) {
+                NodoListaZona zona = buscarZonaPorMovil(Lz, aux.getDato().toString());
+                if (zona.getIdZona() == zonaID) {
                     String separador = "";
-                    if (aux.isEstado()) {
+                    if (zona.getLm().obtenerElemento(aux.getDato().toString()).isEstado()) {
                         movilesDisponibles++;
                     }
                     if (cont > 0) {

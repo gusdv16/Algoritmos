@@ -10,14 +10,14 @@ public class Obligatorio {
         Prueba p = new Prueba();
 //        prueba1(s, p);
 //        prueba2(s, p);
-        prueba3(s, p);
+//        prueba3(s, p);
 //        prueba4(s, p);
 //        prueba5(s, p);
 //        prueba6(s, p);
 //        prueba7(s, p);
 //        prueba8(s, p);
 //        prueba9(s, p);
-//        pruebax(s, p);
+        pruebax(s, p);
 //        prueba10(s, p);
 //        pruebaAbonados(s, p);
 //        pruebaChoferes(s, p);
